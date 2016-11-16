@@ -8,5 +8,6 @@ public class Entrance {
 		System.out.println(EncriptUtil.encriptSHA1("admin123456"));
 		System.out.println(EncriptUtil.encriptSHA1("admin1232456"));
 		System.out.println(EncriptUtil.encriptSHA1("admin3123456"));
+		
 	}
 }
