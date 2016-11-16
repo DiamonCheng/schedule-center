@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script type="text/javascript" src="${ctx}/resources/js/common/angular-1.5.8.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/common/angular-animate-1.5.8.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/common/common.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/common/aes.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/account/login.js"></script>
+<link href="${ctx}/resources/css/common/decorator.css" rel="stylesheet"/>
+<link href="${ctx}/resources/css/account/login.css" rel="stylesheet"/>
+</head>
+<body ng-app="frame" ng-controller="loginController" ng-init="message='${message!''?js_string}';user={userLoginVerification:'${userLoginVerification!''?js_string}'}">
+<div class="head-wrap">
+	<div class="head-dashboard">
+		<div class="head-dashboard-content">
+			<div class="board-title">FRAME DASHBOARD</div>
+		</div>
+	</div>
+</div>
+<div class="login-wrapper" >
+	<form id="login-from" action="" method="post" name="loginForm">
+	<div class="login-inputs">
+		<div class="login-input">
+			<input ng-keydown="keydown($event)" ng-model="user.userLoginVerification" name="userLoginVerification" type="text" placeholder="Account" autocomplete="off"" ng-keyup="validate()" required maxlength="31"/>
+		</div>
+		<div class="login-input">
+			<input ng-keydown="keydown($event)" ng-model="user.userPassword" name="userPassword" type="password" placeholder="Password" required ng-keyup="validate()" />
+		</div>
+	</div>
+	<div class="login-buttons">
+		<div id="loginSubmit" ng-click="submit()">登陆</div>
+		<div id="loginRegist" ng-click="regist()">注册</div>
+	</div>
+	</form>
+</div>
+	<div class="login-message">{{messageDictionary[message]}}</div>
+</body>
+</html>

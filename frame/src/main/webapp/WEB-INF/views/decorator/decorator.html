@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script type="text/javascript" src="${ctx}/resources/js/common/angular-1.5.8.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/common/angular-animate-1.5.8.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/common/common.js"></script>
+<link href="${ctx}/resources/css/common/decorator.css" rel="stylesheet"/>
+<sitemesh:write property='head' />
+</head>
+<body ng-app="frame" ng-controller="decorator">
+<div class="page-head">
+	<#include "page-head.html"/>
+</div>
+<div class="page-body">
+	<div class="page-body-wrapper">
+		<div class="right-wrap"><!-- 右边背景色 -->
+			<div class="content-wrap"> <!-- 中间背景色  -->
+				<div class="left-wrap"><!-- 左边背景色 -->
+					<div class="page-body-menu">
+						<#include "page-body-menu.html"/>
+					</div>
+					<div class="page-body-content">
+						<sitemesh:write property='body' />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="page-foot">
+	<#include "page-foot.html"/>
+</div>
+</body>
+</html>

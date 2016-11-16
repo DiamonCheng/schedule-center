@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+.head-wrap {
+}
+
+.head-dashboard {
+}
+.head-dashboard-content {
+    height: 100px;
+    line-height: 100px;
+    width: 1100px;
+    margin: 0 auto;
+}
+.board-title {
+    font-size: 48px;
+    font-family: "黑体";
+    font-weight: bolder;
+}
+.navigation-bar-wrap{
+	background-color: #252626;
+}
+.navigation-bar {
+    width: 1100px;
+    margin: 0 auto;
+    background-color: #252626;
+}
+.navigation-bar::after { content: " "; clear: both;display: block;}
+ul.navigations {
+    float: left;
+}
+ul.tools{
+	float: right;
+}
+ul.navigations::after,ul.tools::after  { content: " "; clear: both;display: block;}
+ul.navigations>*,ul.tools>*{
+	float:left;
+	padding: 8px 10px;
+}
+ul.navigations>li:hover,ul.tools>li:hover{
+	cursor: pointer;
+	background: #888;
+    font-weight: lighter;
+}
+ul.navigations>split{
+    width: 20px;
+    text-align: left;
+    padding-left: 10px;
+}
+ul.navigations>split::after{
+	content:">";
+}

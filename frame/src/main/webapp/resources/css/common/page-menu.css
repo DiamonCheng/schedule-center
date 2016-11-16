@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+.menu-wrapper{
+	padding-left: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #252626;
+	color:#fbfdff;
+}
+.menu-wrapper ul ul li{
+	padding-left: 20px;
+	transition: all linear 0.2s;
+	overflow: hidden;
+	height:28px;
+}
+.menu-wrapper ul ul li.ng-hide{
+	height:0;
+}
+.menu-wrapper ul div{
+	padding-top:3px;
+	padding-bottom: 4px;
+	padding-left: 20px;
+}
+.menu-wrapper ul div.current{
+	background-color: #494b4c;
+}
+.menu-wrapper>ul>div>li{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.menu-wrapper ul div:hover {
+    cursor: pointer;
+    background-color: #3e4042;
+}

@@ -1,0 +1,64 @@
+@CHARSET "UTF-8";
+
+
+body,ul,li{
+	padding:0;
+	margin:0;
+}
+body{
+	background-color: #494b4c;
+	color:#fbfdff;
+	font-family: "微软雅黑","Arial";
+}
+ul{
+	list-style: none;
+}
+.page-body-wrapper{
+	width: 1100px;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+.page-body-wrapper::after{
+	content:" ";
+	display:block;
+	clear: both;
+}
+.page-body-menu {
+    float: left;
+    width: 200px;
+    overflow: hidden;
+    position: relative;
+    left: 900px;
+}
+.page-body-content {
+    width: 900px;
+    color: #494b4c;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    left: 910px;
+}
+.ng-hide{
+	height:0;
+}
+.right-wrap {
+    float: left;
+    background: #f7fbff;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+.content-wrap {
+    float: left;
+    background: #494b4c;
+    width: 100%;
+    position: relative;
+    right: 890px;
+}
+.left-wrap {
+    width: 100%;
+    background: #252626;
+    float: left;
+    position: relative;
+    right: 10px;
+}

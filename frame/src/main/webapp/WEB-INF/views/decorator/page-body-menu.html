@@ -1,0 +1,10 @@
+<link rel="stylesheet" href="${ctx}/resources/css/common/page-menu.css"/>
+<script src="${ctx}/resources/js/common/angular-page-menu.js"></script>
+<div class="menu-wrapper" ng-controller="menuController" >
+	<menutree id="menutreetemplate" current="menuTree" currentnode="currentMenuNode">
+		<ul>
+			<div ng-if="!!current.name" ng-class="{true: 'current', false: ''}[currentnode.id==current.id]" ng-click="click(current)">{{current.name}}</div>
+			<li ng-show="!!current.opened" ng-repeat="node in current.children"><menutree current="node"  currentnode="currentnode"/></li>
+		</ul>
+	</menutree>
+</div>

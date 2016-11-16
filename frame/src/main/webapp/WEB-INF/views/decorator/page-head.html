@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="${ctx}/resources/css/common/page-head.css"/>
+<script src="${ctx}/resources/js/common/angular-page-head.js"></script>
+<div class="head-wrap" ng-controller="pageHead">
+	<div class="head-dashboard">
+		<div class="head-dashboard-content">
+			<div class="board-title">FRAME DASHBOARD</div>
+		</div>
+	</div>
+	<div class="navigation-bar-wrap">
+		<div class="navigation-bar">
+			<ul class="navigations" ng-repeat="item in navigation">
+				<li ng-click="navigation.click($index)">{{item.text}}</li>
+				<split ng-if="!$last"></split>
+			</ul>
+			<ul class="tools" ng-repeat="item in options">
+				<li ng-click="options.click($index)">{{item.text}}</li>
+			</ul>
+		</div>
+	</div>
+</div>

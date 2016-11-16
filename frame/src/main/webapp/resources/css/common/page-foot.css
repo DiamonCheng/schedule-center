@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+.foot-wrap {
+	width:1100px;
+	margin: 0 auto;
+}
+.foot-content{
+	text-align: center;
+	height: 60px;
+	line-height: 60px;
+}
+.anchored-foot{
+	position: fixed;
+    bottom: 0;
+    width: 100%;
+}
