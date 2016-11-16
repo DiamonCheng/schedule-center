@@ -21,4 +21,5 @@ public class IndexController {
 	public Object decorator(){
 		return "decorator/decorator";
 	}
+	  
 }
