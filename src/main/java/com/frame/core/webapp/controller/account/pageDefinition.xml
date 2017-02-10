@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageDefinition  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../core/query/xml/definition/pageDefinition.xsd">
+	<queryDefinition showIndex="序号">
+		<mappedClass mappedClass="com.frame.core.entity.UserEntity"
+			alias="u" >
+		</mappedClass>
+		<where></where>
+		<sort>
+			<by field="id" fromAlias="u" order="ASC"></by>
+		</sort>
+		<columns>
+			<column header="用户名" field="userLoginVerification" fromAlias="u" width="40%" sortable="true" hidden="false"></column>
+			<column header="昵称" field="nickName" fromAlias="u" width="40%" sortable="true" hidden="false"></column>
+		</columns>
+		<searchDefinition>
+			<condition alias="u" field="userLoginVerification" operator="LIKE" displayText="用户名" inputType="TEXT"></condition>
+			<condition alias="u" field="nickName" operator="LIKE" displayText="昵称" inputType="TEXT"></condition>
+		</searchDefinition>
+		<pageSize>10</pageSize>
+	</queryDefinition>
+	<delete beforeDelete="beforeDelete"></delete>
+</pageDefinition>

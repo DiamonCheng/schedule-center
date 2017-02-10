@@ -38,3 +38,8 @@
     color: #252526;
     background-color: #fff;
 }
+.frame-message>img.close-ico{
+	right: 10px;
+    position: absolute;
+    top: 10px;
+}

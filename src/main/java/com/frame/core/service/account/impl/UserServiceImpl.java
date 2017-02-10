@@ -1,4 +1,4 @@
-package com.frame.service.account.impl;
+package com.frame.core.service.account.impl;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ import org.springframework.util.StringUtils;
 import com.frame.core.components.UserAuthoritySubject;
 import com.frame.core.utils.AesEncryptUtils;
 import com.frame.core.utils.EncriptUtil;
-import com.frame.dao.GeneralDao;
-import com.frame.service.account.UserService;
+import com.frame.core.dao.GeneralDao;
+import com.frame.core.service.account.UserService;
 @Service
 @Transactional(value=TxType.REQUIRED)
 @org.springframework.transaction.annotation.Transactional(propagation=Propagation.REQUIRED)
@@ -43,5 +43,4 @@ public class UserServiceImpl implements UserService{
 		}
 		return 1;
 	}
-
 }

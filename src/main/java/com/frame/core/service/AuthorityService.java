@@ -1,4 +1,4 @@
-package com.frame.service;
+package com.frame.core.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.frame.dao.GeneralDao;
-import com.frame.entity.MenuEntity;
+import com.frame.core.dao.GeneralDao;
+import com.frame.core.entity.MenuEntity;
 
 @Service
 @Transactional
@@ -53,5 +53,9 @@ public class AuthorityService {
 			Collections.reverse(menuList);
 		}
 		return menuList;
+	}
+	public boolean isAllowedWithUrl(String url){
+		long count=dao.getUnique("select count(0) from MenuEntity where requestURI=?", url);
+		return count>0;
 	}
 }

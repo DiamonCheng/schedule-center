@@ -41,7 +41,7 @@
 				data:{id:selectedId},
 				method:"POST",
 				success:function(data){
-					frame.toast("操作成功！(点击刷新)",function(){submitQuery();});
+					submitQuery();
 				}
 			});
 		}

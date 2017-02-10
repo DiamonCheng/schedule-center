@@ -1,6 +1,4 @@
-package com.frame.service.account;
-
-import javax.transaction.Transactional;
+package com.frame.core.service.account;
 
 /**
  * 

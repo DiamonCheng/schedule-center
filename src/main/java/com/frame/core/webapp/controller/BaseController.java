@@ -1,4 +1,4 @@
-package com.frame.webapp.controller;
+package com.frame.core.webapp.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

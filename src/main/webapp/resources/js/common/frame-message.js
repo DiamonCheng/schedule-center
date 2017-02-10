@@ -28,5 +28,16 @@
         // $(document).on("click","div.frame-message",function(){
         //     $(this).remove();
         // });
+        $(document).on("mouseenter","div.frame-message",function(){
+        	var $this=$(this);
+        	var $img=$("<img class='close-ico' src='"+ctx+"/resources/img/delete.png' />").appendTo(this);
+        	$img.click(function(){
+        		$this.remove();
+        	});
+        });
+        $(document).on("mouseleave","div.frame-message",function(){
+        	$(this).find("img.close-ico").remove();
+        });
     });
+    
 })();

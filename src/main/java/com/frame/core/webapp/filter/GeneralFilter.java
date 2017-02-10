@@ -1,4 +1,4 @@
-package com.frame.webapp.filter;
+package com.frame.core.webapp.filter;
 
 import java.io.IOException;
 

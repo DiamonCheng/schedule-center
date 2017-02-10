@@ -1,6 +1,6 @@
-package com.frame.webapp.controller.menu;
+package com.frame.core.webapp.controller.menu;
 
-import com.frame.entity.MenuEntity;
+import com.frame.core.entity.MenuEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,7 +16,7 @@ public class MenuController extends GeneralController <MenuEntity>{
 	}
 
 	@Override
-	protected boolean beforeDelete(MenuEntity entity) {
+	public boolean beforeDelete(MenuEntity entity) {
 		System.out.println("beforeDelete MenuEntity id："+entity.getId());
 		return true;
 	}

@@ -10,7 +10,7 @@
 		<div class="navigation-bar">
 			<ul id="navigations" class="navigations">
 				<#list navigation as menuEntity>
-				<li url="${menuEntity.requestURI!''}">${menuEntity.displayName}</li>
+				<li url="${menuEntity.requestURI!''}">${menuEntity.displayName!''}</li>
 				<#if menuEntity_has_next><split></split></#if>
 				</#list>
 			</ul>

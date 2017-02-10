@@ -1,20 +1,17 @@
-package com.frame.webapp.interceptor;
+package com.frame.core.webapp.interceptor;
 
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.frame.core.components.AjaxResult;
-import com.frame.core.utils.HttpContextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.frame.core.components.ThreadBinder;
+import com.frame.core.components.AjaxResult;
 import com.frame.core.components.UserAuthoritySubject;
-import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.view.RedirectView;
+import com.frame.core.utils.HttpContextUtil;
 
 public class GeneralIntercepter implements HandlerInterceptor {
 	private final static Logger LOGGER=LoggerFactory.getLogger(GeneralIntercepter.class);
@@ -47,13 +44,12 @@ public class GeneralIntercepter implements HandlerInterceptor {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		/*if (modelAndView!=null) {
-			String viewName = modelAndView.getViewName();
-			if (viewName.startsWith("redirect:")){
-				viewName=viewName.substring(9);
-				UserAuthoritySubject.getSession().setAttribute(REQUEST_URI_SESSION_KEY,viewName);
+		if (modelAndView!=null) {
+			if (request.getSession().getAttribute("success")!=null){
+				modelAndView.addObject("success", request.getSession().getAttribute("success"));
+				request.getSession().removeAttribute("success");
 			}
-		}*/
+		}
 	}
 
 	@Override

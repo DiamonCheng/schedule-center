@@ -1,4 +1,4 @@
-package com.frame.webapp.listener;
+package com.frame.core.webapp.listener;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;

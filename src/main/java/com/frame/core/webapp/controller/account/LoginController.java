@@ -1,4 +1,4 @@
-package com.frame.webapp.controller.account;
+package com.frame.core.webapp.controller.account;
 
 import com.frame.core.components.UserAuthoritySubject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,10 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.frame.core.components.ThreadBinder;
-import com.frame.service.account.UserService;
-import com.frame.webapp.controller.BaseController;
-import com.frame.webapp.interceptor.GeneralIntercepter;
+import com.frame.core.service.account.UserService;
+import com.frame.core.webapp.controller.BaseController;
+import com.frame.core.webapp.interceptor.GeneralIntercepter;
 
 @Controller
 @RequestMapping({"/"})

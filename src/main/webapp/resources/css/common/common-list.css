@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 .data-panel>table{
 	width:100%;
+	cursor: default;
 }
 .data-panel>table td,.data-panel>table th{
 	

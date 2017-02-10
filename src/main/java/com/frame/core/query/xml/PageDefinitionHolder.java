@@ -9,20 +9,17 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
-import com.frame.core.components.BaseEntity;
-import com.frame.core.query.xml.definition.JoinEntry;
-import com.frame.core.query.xml.definition.MappedClassEntry;
-import com.frame.core.query.xml.definition.QueryConditionDefine;
-import com.frame.core.query.xml.service.XmlQueryDefineService;
-import com.frame.core.utils.ReflectUtil;
-import com.frame.webapp.controller.menu.MenuController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-
-import com.frame.core.query.xml.definition.PageDefinition;
 import org.springframework.util.StringUtils;
+
+import com.frame.core.query.xml.definition.JoinEntry;
+import com.frame.core.query.xml.definition.MappedClassEntry;
+import com.frame.core.query.xml.definition.PageDefinition;
+import com.frame.core.query.xml.definition.QueryConditionDefine;
+import com.frame.core.utils.ReflectUtil;
 
 /**
  * 用于承载页面定义的配置类
@@ -113,6 +110,12 @@ public class PageDefinitionHolder {
 					break;
 				}
 			}
+			if (beforeDeleteMethod==null) for(Method method:c.getClass().getMethods()){
+				if (method.getName().equals(beforeDeleteMethodName)){
+					beforeDeleteMethod=method;
+					break;
+				}
+			}
 			if (beforeDeleteMethod==null) throw new NoSuchMethodException(c.getClass().getName()+"."+beforeDeleteMethodName);
 			else page.getDelete().setBeforeDeleteMethod(beforeDeleteMethod);
 			Class<?>[] paramTypes=beforeDeleteMethod.getParameterTypes();
@@ -132,6 +135,12 @@ public class PageDefinitionHolder {
                     break;
                 }
             }
+            if (beforeManageMethod==null) for(Method method:c.getClass().getMethods()){
+				if (method.getName().equals(beforeManageMethodName)){
+					beforeManageMethod=method;
+					break;
+				}
+			}
             if (beforeManageMethod==null) throw new NoSuchMethodException(c.getClass().getName()+"."+beforeManageMethodName);
             else page.getManage().setBeforeManageMethod(beforeManageMethod);
         }
@@ -148,12 +157,5 @@ public class PageDefinitionHolder {
 	}
 	public PageDefinition getPageDefinition(){
 		return page;
-	}
-	public static void main(String[] args) throws  Exception{
-		Resource resource= new ClassPathResource("pageDefinition.xml", MenuController.class);
-		JAXBContext context = JAXBContext.newInstance(PageDefinition.class);
-		Unmarshaller unmarshaller = context.createUnmarshaller();
-		PageDefinition page = (PageDefinition) unmarshaller.unmarshal(resource.getInputStream());
-		System.out.println();
 	}
 }

@@ -1,4 +1,4 @@
-package com.frame.dao;
+package com.frame.core.dao;
 
 import org.springframework.stereotype.Repository;
 

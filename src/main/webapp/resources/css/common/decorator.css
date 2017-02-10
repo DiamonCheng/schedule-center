@@ -43,14 +43,14 @@ ul{
 }
 .right-wrap {
     float: left;
-    background-color: #252526;;
+    background-color: transparent;;
     overflow: hidden;
     position: relative;
     width: 100%;
 }
 .content-wrap {
     float: left;
-    background: #494b4c;
+    background: transparent;
     width: 100%;
     position: relative;
     right: 890px;

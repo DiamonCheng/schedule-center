@@ -1,22 +1,13 @@
 package com.frame.core.query.xml;
 
-import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
-import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.frame.core.components.AjaxResult;
-import com.frame.core.components.BaseEntity;
-import com.frame.core.query.xml.definition.*;
-import com.frame.core.utils.HttpContextUtil;
-import com.frame.core.utils.ReflectUtil;
-import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +18,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.frame.core.components.AjaxResult;
+import com.frame.core.components.BaseEntity;
 import com.frame.core.components.NavigationOption;
-import com.frame.core.components.ThreadBinder;
+import com.frame.core.components.UserAuthoritySubject;
+import com.frame.core.query.xml.definition.ColumnDefinition;
+import com.frame.core.query.xml.definition.QueryConditions;
+import com.frame.core.query.xml.definition.SortEntry;
 import com.frame.core.query.xml.service.XmlQueryDefineService;
-import com.frame.service.AuthorityService;
-import com.google.gson.JsonSyntaxException;
+import com.frame.core.utils.HttpContextUtil;
+import com.frame.core.service.AuthorityService;
+import com.google.gson.Gson;
 @Controller
 public abstract class GeneralController <T extends BaseEntity>{
 	public static class GeneralControllerExcuteException extends RuntimeException{
@@ -103,7 +100,8 @@ public abstract class GeneralController <T extends BaseEntity>{
         }
         return mergedSort;
     }
-    @RequestMapping("/delete")
+    private static final String DELETE_MAPPED_URL="/delete";
+    @RequestMapping(DELETE_MAPPED_URL)
 	@ResponseBody
 	public Object delete(Long id){
 		if (pageHolder.getPageDefinition().getDelete().getBeforeDelete()!=null){
@@ -121,10 +119,10 @@ public abstract class GeneralController <T extends BaseEntity>{
 		}else{
             service.delete(id,targetClass);
         }
-
+		UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
 		return new AjaxResult();
 	}
-    protected boolean beforeDelete(T entity){return true;}
+    public boolean beforeDelete(T entity){return true;}
     @RequestMapping(value={"add","edit"},method = RequestMethod.GET)
     public Object managePage(Long id){
         ModelAndView mv=new ModelAndView("common/manage");
@@ -141,6 +139,7 @@ public abstract class GeneralController <T extends BaseEntity>{
     @ResponseBody
 	public Object saveManage(String paramString) throws NoSuchMethodException {
 	    service.saveManage(paramString,this);
+	    UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
     	return new AjaxResult();
 	}
 	public boolean beforeUpdate(T entity){return true;}

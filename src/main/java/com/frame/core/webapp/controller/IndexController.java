@@ -1,22 +1,18 @@
-package com.frame.webapp.controller;
+package com.frame.core.webapp.controller;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.frame.core.components.UserAuthoritySubject;
-import com.frame.core.utils.HttpContextUtil;
-import org.sitemesh.webapp.contentfilter.HttpServletRequestFilterable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.frame.core.components.NavigationOption;
-import com.frame.core.components.ThreadBinder;
-import com.frame.entity.MenuEntity;
-import com.frame.service.AuthorityService;
-import com.frame.webapp.interceptor.GeneralIntercepter;
+import com.frame.core.webapp.interceptor.GeneralIntercepter;
+import com.frame.core.entity.MenuEntity;
+import com.frame.core.service.AuthorityService;
 
 @Controller
 @RequestMapping({"/"})

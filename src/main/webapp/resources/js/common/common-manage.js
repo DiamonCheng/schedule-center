@@ -21,7 +21,7 @@
             });
             if (frame.manage.beforeSave(param)){
                 $.post("",{paramString:JSON.stringify(param)},function(data){
-                    frame.toast("操作成功（点我返回列表）",frame.manage.goBack);
+                   frame.manage.goBack();
                 },"JSON");
             }
         },goBack:function(){

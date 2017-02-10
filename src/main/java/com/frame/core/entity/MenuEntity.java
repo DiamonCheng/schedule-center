@@ -1,4 +1,4 @@
-package com.frame.entity;
+package com.frame.core.entity;
 
 import java.util.List;
 

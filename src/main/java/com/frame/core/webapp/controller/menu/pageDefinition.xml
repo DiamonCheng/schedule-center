@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageDefinition  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../core/query/xml/definition/pageDefinition.xsd">
 	<queryDefinition showIndex="序号">
-		<mappedClass mappedClass="com.frame.entity.MenuEntity"
+		<mappedClass mappedClass="com.frame.core.entity.MenuEntity"
 			alias="m" >
 			<join type="LEFT" field="parent" as="p" />
 		</mappedClass>
@@ -33,7 +33,7 @@
 		<field field="hidden" displayText="是否隐藏" inputType="SELECT" nullable="false">
 			<staticData>[{text:"是",value:"true"},{text:"否",value:"false"}]</staticData>
 		</field>
-		<field field="parent" displayText="父级菜单" inputType="SELECT" optionClass="com.frame.entity.MenuEntity" selectTextField="displayName" selectValeField="id">
+		<field field="parent" displayText="父级菜单" inputType="SELECT" optionClass="com.frame.core.entity.MenuEntity" selectTextField="displayName" selectValeField="id">
 		</field>
 	</manage>
 </pageDefinition>
