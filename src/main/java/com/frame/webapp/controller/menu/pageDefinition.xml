@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageDefinition  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../core/query/xml/definition/pageDefinition.xsd">
+	<queryDefinition showIndex="序号">
+		<mappedClass mappedClass="com.frame.entity.MenuEntity"
+			alias="m" >
+			<join type="LEFT" field="parent" as="p" />
+		</mappedClass>
+		<where></where>
+		<sort>
+			<by field="id" fromAlias="m" order="ASC"></by>
+		</sort>
+		<columns>
+			<column header="ID" field="id" fromAlias="m" width="10%" sortable="true" hidden="false"></column>
+			<column header="名称" field="displayName" fromAlias="m" width="20%" sortable="true" hidden="false"></column>
+			<column header="父级" field="displayName" fromAlias="p" width="20%" sortable="false" hidden="false"></column>
+			<column header="隐藏" field="hidden" fromAlias="m" width="10%" sortable="true" hidden="false"></column>
+			<column header="URI" field="requestURI" fromAlias="m" width="30%" sortable="true" hidden="false"></column>
+			<!-- <column header="操作" width="10%" sortable="false" hidden="false" staticColumnData="删除"></column> -->
+		</columns>
+		<searchDefinition>
+			<condition alias="m" field="id" operator="=" displayText="ID" inputType="NUMBER"></condition>
+			<condition alias="m" field="createDateTime" operator="&gt;" displayText="创建日期" inputType="DATEBOX"></condition>
+			<condition alias="p" field="id" operator="=" displayText="父级" selectTextField="displayName" inputType="SELECT"></condition>
+		</searchDefinition>
+		<pageSize>10</pageSize>
+		<js><path>/a/b/c</path></js>
+		<css><path>/a/b/c</path></css>
+	</queryDefinition>
+	<delete beforeDelete="beforeDelete"></delete>
+	<manage>
+		<field field="displayName" displayText="菜单标题"></field>
+		<field field="requestURI" displayText="指向地址"></field>
+		<field field="hidden" displayText="是否隐藏" inputType="SELECT" nullable="false">
+			<staticData>[{text:"是",value:"true"},{text:"否",value:"false"}]</staticData>
+		</field>
+		<field field="parent" displayText="父级菜单" inputType="SELECT" optionClass="com.frame.entity.MenuEntity" selectTextField="displayName" selectValeField="id">
+		</field>
+	</manage>
+</pageDefinition>

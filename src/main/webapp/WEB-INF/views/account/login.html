@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Expires" content="0"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<script type="text/javascript" src="${ctx}/resources/js/common/jquery.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/common/common.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/common/aes.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/account/login.js"></script>
+<script>
+	window.ctx="${ctx}";
+</script>
+<link href="${ctx}/resources/css/common/decorator.css" rel="stylesheet"/>
+<link href="${ctx}/resources/css/account/login.css" rel="stylesheet"/>
+<link href="${ctx}/resources/css/common/frame.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="bg" style="background-image: url('${ctx}/resources/img/bg-login-2.jpg');"></div>
+<div id="bgCover"></div>
+<div class="head-wrap">
+	<div class="head-dashboard">
+		<div class="head-dashboard-content">
+			<div class="board-title">FRAME DASHBOARD</div>
+		</div>
+	</div>
+</div>
+<div class="login-wrapper" >
+	<form id="login-from" action="" method="post" name="loginForm">
+	<div class="login-inputs">
+		<div class="login-input">
+			<input id="userLoginVerification" name="userLoginVerification" type="text" placeholder="Account" autocomplete="off"/>
+		</div>
+		<div class="login-input">
+			<input id="userPassword" name="userPassword" type="password" placeholder="Password" required />
+		</div>
+	</div>
+	<div class="login-buttons">
+		<div id="loginSubmit">登陆</div>
+		<div id="loginRegist">注册</div>
+	</div>
+	</form>
+</div>
+	<div class="login-message" id="loginMessage" message="${message!''?js_string}"></div>
+</body>
+</html>

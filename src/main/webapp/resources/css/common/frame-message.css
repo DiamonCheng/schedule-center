@@ -1,0 +1,40 @@
+/**
+ 关于消息框的CSS
+ */
+@keyframes frame-message {
+    0%{
+        right: 0;
+        opacity: 0;
+    }
+    25%{
+        right: 0;
+        opacity: 1;
+    }
+    60%{
+        right: 0;
+    }
+   /* 100%{
+        right:-500px;
+    }*/
+}
+.frame-message{
+    position: fixed;
+    width: 400px;
+    padding: 20px 40px;
+    bottom: 100px;
+    right:0px;
+    font-size: 18px;
+    line-height: 30px;
+    text-indent: 2em;
+    background-color: #252526;
+    border: 2px solid #252526;
+    animation: frame-message 1.5s linear;
+}
+.frame-message:hover{
+    border: 2px solid #fff;
+    animation-play-state: paused;
+}
+.frame-message.error{
+    color: #252526;
+    background-color: #fff;
+}

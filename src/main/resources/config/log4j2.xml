@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+  
+<Configuration status="OFF" monitorInterval="1800">  
+  
+    <Appenders>  
+        <Console name="console" target="SYSTEM_OUT">  
+        	<ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d %-5p (%F:%L) - %m%n" />  
+        </Console>  
+  
+        <RollingRandomAccessFile name="frame_log_error" 
+                                 fileName="${sys:catalina.base}/logs/frame_log_error.log"  
+                                 filePattern="${sys:catalina.base}/logs/frame_log_error%d{yyyy-MM-dd}.log">  
+           <!--  <PatternLayout pattern="%d %-5p (%F:%L) - %m%n"/>   -->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>  
+            <Policies>  
+                <TimeBasedTriggeringPolicy/>  
+                <SizeBasedTriggeringPolicy size="10 MB"/>  
+            </Policies>  
+            <DefaultRolloverStrategy max="20"/>  
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+        </RollingRandomAccessFile>  
+        <RollingRandomAccessFile name="frame_log_common" 
+                                 fileName="${sys:catalina.base}/logs/frame_log_common.log"  
+                                 filePattern="${sys:catalina.base}/logs/frame_log_common%d{yyyy-MM-dd}.log">  
+           <!--  <PatternLayout pattern="%d %-5p (%F:%L) - %m%n"/>   -->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>  
+            <Policies>  
+                <TimeBasedTriggeringPolicy/>  
+                <SizeBasedTriggeringPolicy size="10 MB"/>  
+            </Policies>  
+            <DefaultRolloverStrategy max="20"/>  
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+        </RollingRandomAccessFile>  
+  
+    </Appenders>  
+  
+    <Loggers>  
+        <!-- 3rdparty Loggers -->  
+        <logger name="org.springframework.core" level="info">  
+        </logger>  
+        <logger name="org.springframework.beans" level="info">  
+        </logger>  
+        <logger name="org.springframework.context" level="info">  
+        </logger>  
+        <logger name="org.springframework.web" level="info">  
+        </logger>  
+  
+     <!--    <logger name="com.meituan.gct.shop.promo" level="error" includeLocation="true" additivity="false">  
+            <appender-ref ref="ErrorLog"/>  
+            <appender-ref ref="Console"/>  
+        </logger>   -->
+  
+        <root level="DEBUG" includeLocation="true">  
+            <appender-ref ref="console" />  
+            <appender-ref ref="frame_log_error" />  
+            <appender-ref ref="frame_log_common" />  
+        </root>  
+    </Loggers>  
+</Configuration> 

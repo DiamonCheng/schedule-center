@@ -1,0 +1,38 @@
+[
+	{
+		"id": 1,
+		"displayName": "主页面",
+		"initId":1,
+		"requestURI": "/main",
+		"children": [{
+			"id": 2,
+			"displayName": "系统管理",
+			"initId":2,
+			"children": [{
+				"id": 3,
+				"initId":3,
+				"displayName": "菜单管理",
+				"requestURI": "/menu/",
+				"children": [{
+					"id": 4,
+					"initId":4,
+					"displayName": "添加",
+					"requestURI": "/menu/add",
+					"hidden":true
+				},{
+					"id": 5,
+					"initId":5,
+					"displayName": "修改",
+					"requestURI": "/menu/edit",
+					"hidden":true
+				},{
+					"id": 6,
+					"initId":6,
+					"displayName": "新增",
+					"requestURI": "/menu/add",
+					"hidden":true
+				}]
+			}]
+		}]
+	}
+]

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="${ctx}/resources/js/common/common-manage.js"></script>
+    <script type="text/javascript" src="${ctx}/resources/js/datePicker/WdatePicker.js"></script>
+</head>
+<body>
+<div class="main-panel entity-manage">
+<div class="head-title">
+    新增/修改
+</div>
+<#if entity.id??>
+    <input type="hidden" name="id" value="${entity.id}"/>
+</#if>
+<#list manageFields as c>
+<div class="row">
+    <label class="form-label" style="">${c.displayText}</label>
+    <#assign inputId=""/>
+    <#if c.inputId??>
+        <#assign inputId=c.inputId/>
+    </#if>
+    <#if c.inputType=="TEXT">
+        <input class="form-control" valuefield="${c.selectValueField}" ${(c.isEntity)?string('isentity="isentity"','')} nullable="${ c.nullable?string}" name="${c.field}" id="${inputId}" type="text" value="${c.value!''}"/>
+        <#elseif c.inputType=="NUMBER"/>
+        <input class="form-control" valuefield="${c.selectValueField}" ${(c.isEntity)?string('isentity="isentity"','')} nullable="${ c.nullable?string}" name="${c.field}" id="${inputId}" type="number" value="${c.value!''}"/>
+        <#elseif c.inputType=="SELECT"/>
+        <select class="form-control" valuefield="${c.selectValueField}" ${(c.isEntity)?string('isentity="isentity"','')} nullable="${ c.nullable?string}" name="${c.field}" id="${inputId}" type="text" >
+            <#if c.nullable>
+                <option value="" ${(c.value??)?string('selected','')}>-- 请选择 --</option>
+            </#if>
+            <#list c.parsedData as d>
+                <option value="${d.value}" ${(c.value??&&(c.value?string == d.value?string))?string('selected','')}>${d.text}</option>
+            </#list>
+        </select>
+        <#elseif c.inputType=="DATEBOX"/>
+        <input class="form-control datebox" valuefield="${c.selectValueField}" ${(c.isEntity)?string('isentity="isentity"','')} nullable="${ c.nullable?string}" name="${c.field}" id="${inputId}" type="text" value="${c.value!''}"/>
+    </#if>
+</div>
+</#list>
+<div class="foot-block"></div>
+</div>
+</body>
+</html>

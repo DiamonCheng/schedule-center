@@ -1,0 +1,150 @@
+@charset "UTF-8";
+.button-default {
+    background-color: #252526;
+    display: block;
+    padding: 5px 20px;
+}
+.button-default:hover{
+    background-color: #888;
+    cursor: default;
+}
+.button-group{
+    clear: both;
+}
+.align-left:after{
+    display: block;
+    clear: both;
+    content: "&nbsp";
+    height: 0;
+    visibility: hidden;
+}
+.align-left>*{
+    float: left;
+}
+.align-right:after{
+    display: block;
+    clear: both;
+    content: "&nbsp";
+    height: 0;
+    visibility: hidden;
+}
+.align-right>*{
+    float: right;
+}
+.col-half{
+    width: 50%;
+    float: left;
+}
+.col-half:after{
+    display: block;
+    clear: both;
+    content: "&nbsp";
+    height: 0;
+    visibility: hidden;
+}
+.form-label {
+    width: 35%;
+    float: left;
+    /* padding: 0 25px; */
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+}
+.clear:after{
+    display: block;
+    clear: both;
+    content: "&nbsp";
+    height: 0;
+    visibility: hidden;
+}
+.form-panel{
+}
+.main-panel{
+    background-color: #252526;
+    color: #fbfdff;
+}
+input.form-control,select.form-control {
+    border: none;
+    outline: none;
+    height: 20px;
+    padding: 0 14px;
+    margin: 3px 1px;
+    width: 50%;
+    border: solid 1px transparent;
+    box-sizing: content-box;
+    background-color: #fff;
+}
+input.form-control:focus,select.form-control:focus {
+    border: solid 2px #2196f3;
+    margin: 2px 0px;
+}
+select.form-control{
+    /*很关键：将默认的select选择框样式清除*/
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    /*在选择框的最右侧中间显示小箭头图片*/
+    background-image: url(../../img/arrow.png);
+    background-position-x: right;
+    background-position-y: center;
+    background-size: initial;
+    background-repeat:no-repeat;
+    background-repeat-x: no-repeat;
+    background-repeat-y: no-repeat;
+    /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+    padding-right: 14px;
+}
+div#bg {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    z-index: -1000;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    /* filter:blur(2px); */
+}
+div#bgCover {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: -999;
+    /* background-color: #252626; */
+    /* opacity: 0.5; */
+    background: linear-gradient(rgba(37,38,38,0.8),rgba(37,38,38,0.5));
+}
+.col-4-12{
+    overflow: hidden;
+    width: 33.33%;
+    float: left;
+}
+.col-8-12{
+    overflow: hidden;
+    width: 66.67%;
+    float: left;
+}
+.row{
+    width:100%;
+    overflow: hidden;
+}
+.row:after.col-4-12:after.col-8-12:after{
+    content: "&nbsp;";
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+.text-center{
+    text-align: center;
+    text-align: center !important;
+}
+.head-title{
+    padding: 0px 20px 5px;
+    border-bottom: solid 1px;
+    margin: 5px 50px 5px;
+}
+.foot-block{
+    height: 30px;
+    width:100%;
+}
