@@ -68,15 +68,18 @@
 		</plugins>
 		<resources>
 			<resource>
-				<directory>${project.basedir}/src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-			<resource>
 				<directory>src/main/java</directory>
                 <includes>
                     <include>**/*.xml</include>
                 </includes>
 				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+                    <include>**</include>
+                </includes>
 			</resource>
 		</resources>
 		<testResources>
