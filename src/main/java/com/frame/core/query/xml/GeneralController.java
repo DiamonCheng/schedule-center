@@ -22,6 +22,7 @@ import com.frame.core.components.AjaxResult;
 import com.frame.core.components.BaseEntity;
 import com.frame.core.components.NavigationOption;
 import com.frame.core.components.UserAuthoritySubject;
+import com.frame.core.query.xml.annoation.PageDefinition;
 import com.frame.core.query.xml.definition.ColumnDefinition;
 import com.frame.core.query.xml.definition.QueryConditions;
 import com.frame.core.query.xml.definition.SortEntry;
@@ -49,12 +50,16 @@ public abstract class GeneralController <T extends BaseEntity>{
         targetClass = (Class<T>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];
 		Class<?> loader=this.getClass();
-		String xmlFileName=loader.getAnnotation(com.frame.core.query.xml.annoation.PageDefinition.class).value();
+		PageDefinition df=loader.getAnnotation(com.frame.core.query.xml.annoation.PageDefinition.class);
+		if (df==null) throw new NullPointerException("请在Controller上定义@pageDefinition注解");
+		String xmlFileName=df.value();
 		pageHolder=new PageDefinitionHolder(xmlFileName, loader);
 		pageHolder.refresh(this);
 	}
 	@Autowired
 	private XmlQueryDefineService service;
+	@Autowired
+	private AuthorityService authorityService;
     @RequestMapping("/")
 	public Object list(QueryConditions queryConditions){
 		pageHolder.refresh(this);//根据配置是否更新刷新配置
@@ -72,11 +77,15 @@ public abstract class GeneralController <T extends BaseEntity>{
 		mv.addObject("queryConditions", service.prepareQueryCondition(queryConditions,pageHolder.getPageDefinition().getQueryDefinition()));//处理查询条件
 		mv.addObject("mergedSort",mergeSortCondition(pageHolder.getPageDefinition().getQueryDefinition().getColumns(),queryConditions.getSortEntries()));//处理排序的条件
 		List<NavigationOption> options=new ArrayList<NavigationOption>();
-        if(pageHolder.getPageDefinition().getManage()!=null) {
-            options.add(new NavigationOption("添加", "addRow()"));
-            options.add(new NavigationOption("修改", "manageRow()"));
+        String[] cRequestMapping=this.getClass().getAnnotation(RequestMapping.class).value();
+		if(pageHolder.getPageDefinition().getManage()!=null) {
+            if (authorityService.isAllowed(cRequestMapping,ADD_METHOD_URL))
+            	options.add(new NavigationOption("添加", "addRow()"));
+            if (authorityService.isAllowed(cRequestMapping,EDIT_METHOD_URL))
+            	options.add(new NavigationOption("修改", "manageRow()"));
         }
-		if(pageHolder.getPageDefinition().getDelete()!=null) options.add(new NavigationOption("删除", "deleteRow()"));//权限
+		if(pageHolder.getPageDefinition().getDelete()!=null&&authorityService.isAllowed(cRequestMapping,DELETE_MAPPED_URL)) 
+			options.add(new NavigationOption("删除", "deleteRow()"));//权限
 		HttpContextUtil.getCurrentRequest().setAttribute(AuthorityService.NAVIGATION_OPTIONS_KEY,options);
 		return mv;
 	}
@@ -113,17 +122,20 @@ public abstract class GeneralController <T extends BaseEntity>{
 			try {
                 toInvoke.setAccessible(true);
 				if ((Boolean)toInvoke.invoke(this,args)) service.delete(id,targetClass);
+				UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
 			} catch (Exception e) {
 				throw new GeneralControllerExcuteException(e);
 			}
 		}else{
             service.delete(id,targetClass);
+            UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
         }
-		UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
 		return new AjaxResult();
 	}
     public boolean beforeDelete(T entity){return true;}
-    @RequestMapping(value={"add","edit"},method = RequestMethod.GET)
+    private static final String ADD_METHOD_URL="/add";
+    private static final String EDIT_METHOD_URL="/edit";
+    @RequestMapping(value={ADD_METHOD_URL,EDIT_METHOD_URL},method = RequestMethod.GET)
     public Object managePage(Long id){
         ModelAndView mv=new ModelAndView("common/manage");
         mv.addAllObjects(service.prepareManage(id,pageHolder.getPageDefinition().getManage(),this.targetClass));
@@ -135,11 +147,11 @@ public abstract class GeneralController <T extends BaseEntity>{
     }
     @Autowired
     Gson gson;
-	@RequestMapping(value={"add","edit"},method = RequestMethod.POST)
+	@RequestMapping(value={ADD_METHOD_URL,EDIT_METHOD_URL},method = RequestMethod.POST)
     @ResponseBody
 	public Object saveManage(String paramString) throws NoSuchMethodException {
-	    service.saveManage(paramString,this);
-	    UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
+	    if (service.saveManage(paramString,this))
+	    	UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
     	return new AjaxResult();
 	}
 	public boolean beforeUpdate(T entity){return true;}

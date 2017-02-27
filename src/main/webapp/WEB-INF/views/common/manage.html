@@ -34,6 +34,8 @@
         </select>
         <#elseif c.inputType=="DATEBOX"/>
         <input class="form-control datebox" valuefield="${c.selectValueField}" ${(c.isEntity)?string('isentity="isentity"','')} nullable="${ c.nullable?string}" name="${c.field}" id="${inputId}" type="text" value="${c.value!''}"/>
+        <#elseif c.inputType=="TEXTAREA"/>
+        	<textarea class="form-control" valuefield="${c.selectValueField}" ${(c.isEntity)?string('isentity="isentity"','')} nullable="${ c.nullable?string}" name="${c.field}" id="${inputId}" >${c.value!''?html}</textarea>
     </#if>
 </div>
 </#list>

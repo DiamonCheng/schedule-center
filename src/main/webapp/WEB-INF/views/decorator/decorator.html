@@ -46,7 +46,10 @@
 </div>
 <script type="text/javascript">
 <#if success??>  
-	frame.toast("${(success=='')?string(success,'操作成功')}");
+	frame.toast("${(success=='')?string('操作成功',success)}");
+</#if>
+<#if error??>  
+frame.toastError("${(error=='')?string('操作失败',error)}");
 </#if>
 </script>
 </body>

@@ -168,6 +168,7 @@
       <xs:enumeration value="NUMBER"/>
       <xs:enumeration value="SELECT"/>
       <xs:enumeration value="DATEBOX"/>
+      <xs:enumeration value="TEXTAREA"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="deleteType">

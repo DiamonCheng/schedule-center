@@ -49,6 +49,10 @@ public class GeneralIntercepter implements HandlerInterceptor {
 				modelAndView.addObject("success", request.getSession().getAttribute("success"));
 				request.getSession().removeAttribute("success");
 			}
+			if (request.getSession().getAttribute("error")!=null){
+				modelAndView.addObject("error", request.getSession().getAttribute("error"));
+				request.getSession().removeAttribute("error");
+			}
 		}
 	}
 
@@ -61,7 +65,13 @@ public class GeneralIntercepter implements HandlerInterceptor {
 			if (HttpContextUtil.isAjaxRequest()) {
 				AjaxResult res = new AjaxResult();
 				res.setCode("-1");
-				res.setMessage("发生异常：" + e.getMessage());
+				String rootMessage=null;
+				Throwable root=e.getCause();
+				while (root!=null){
+					rootMessage=root.getMessage();
+					root=root.getCause();
+				}
+				res.setMessage(rootMessage);
 				res.setData(e);
 				response.setCharacterEncoding("UTF-8");
 				response.setStatus(500);

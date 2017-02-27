@@ -1,7 +1,14 @@
 package com.frame.core.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -16,6 +23,9 @@ public class UserEntity extends BaseEntity {
 	private String userPassword;
 	@Column(length=63)
 	private String nickName;
+	@ManyToMany(targetEntity=RoleEntity.class,fetch=FetchType.LAZY)
+	@JoinColumn(foreignKey = @ForeignKey(name="null"))
+	private Set<RoleEntity> roles;
 	public String getUserPassword() {
 		return userPassword;
 	}

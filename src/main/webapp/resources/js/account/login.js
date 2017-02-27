@@ -46,7 +46,7 @@
 		var $div=$('#loginMessage');
 		$div.text(messageDictionary[$div.attr("message")]);
 		$('#userLoginVerification').on("keyup",function(){
-			validate();
+//			validate();
 		}).on("keydown",function(e){
 			var keycode = window.event?e.keyCode:e.which;
 			if(keycode==13){
@@ -54,7 +54,7 @@
 			}
 		});
 		$('#userPassword').on("keyup",function(){
-			validate();
+//			validate();
 		}).on("keydown",function(e){
 			var keycode = window.event?e.keyCode:e.which;
 			if(keycode==13){

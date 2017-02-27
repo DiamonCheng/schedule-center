@@ -66,13 +66,16 @@
 	            window.location.href=ctx+"/login";
 	        }
         },error:function(xhr, status, e){
-			console.error("ajax请求出现异常:",xhr);
-			console.error("status:",status);
-			console.error(e);
 			if (xhr.status==500){
-				console.error(JSON.parse(xhr.responseText));
+				var e= JSON.parse(xhr.responseText);
+				console.error(e);
+				frame.toastError("操作失败 "+e.message);
+			}else{
+				console.error("ajax请求出现异常:",xhr);
+				console.error("status:",status);
+				console.error(e);
+				frame.toastError("操作失败，F12查看错误信息。");
 			}
-			frame.toastError("操作失败，F12查看错误信息。");
 		}
 	});
 

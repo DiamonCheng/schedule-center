@@ -18,5 +18,9 @@
 		</searchDefinition>
 		<pageSize>10</pageSize>
 	</queryDefinition>
+	<manage beforeManage="beforeUpdate">
+		<field field="userLoginVerification" displayText="用户名"></field>
+		<field field="nickName" displayText="昵称"></field>
+	</manage>
 	<delete beforeDelete="beforeDelete"></delete>
 </pageDefinition>

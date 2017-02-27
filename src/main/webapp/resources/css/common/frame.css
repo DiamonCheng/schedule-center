@@ -74,7 +74,7 @@ input.form-control,select.form-control {
     box-sizing: content-box;
     background-color: #fff;
 }
-input.form-control:focus,select.form-control:focus {
+input.form-control:focus,select.form-control:focus,textarea.form-control:focus {
     border: solid 2px #2196f3;
     margin: 2px 0px;
 }
@@ -93,6 +93,16 @@ select.form-control{
     background-repeat-y: no-repeat;
     /*为下拉小箭头留出一点位置，避免被文字覆盖*/
     padding-right: 14px;
+}
+textarea.form-control{
+	outline: none;
+    height: 70px;
+    padding: 5px 14px;
+    margin: 3px 1px;
+    width: 50%;
+    border: 1px solid transparent;
+    box-sizing: content-box;
+    background-color: rgb(255, 255, 255);
 }
 div#bg {
     position: fixed;

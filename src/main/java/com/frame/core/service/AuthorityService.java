@@ -54,8 +54,16 @@ public class AuthorityService {
 		}
 		return menuList;
 	}
-	public boolean isAllowedWithUrl(String url){
-		long count=dao.getUnique("select count(0) from MenuEntity where requestURI=?", url);
+	public boolean isAllowed(String[] parent,String child){
+		Object[] urls=new String[parent.length];
+		int index=0;
+		StringBuilder hql=new StringBuilder("select count(0) from MenuEntity where  ");
+		for (String string : parent) {
+			urls[index]=string+child;
+			if (index!=0) hql.append("or ");
+			hql.append("requestURI=? ");
+		}
+		long count=dao.getUnique(hql.toString(), urls);
 		return count>0;
 	}
 }

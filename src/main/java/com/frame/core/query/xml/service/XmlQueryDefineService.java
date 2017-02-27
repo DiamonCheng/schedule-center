@@ -184,7 +184,7 @@ public class XmlQueryDefineService {
 	    return models;
     }
     @SuppressWarnings("unchecked")
-    public <T extends BaseEntity> void saveManage(String paramString,GeneralController<T> c){
+    public <T extends BaseEntity> boolean saveManage(String paramString,GeneralController<T> c){
 	    Class<? extends BaseEntity> targetClass=c.getTargetClass();
         PageDefinitionHolder pageHolder=c.getPageHolder();
         BaseEntity entity =gson.fromJson(paramString,targetClass);
@@ -195,28 +195,22 @@ public class XmlQueryDefineService {
         }else{
             toSave=get(targetClass,entity.getId());
             for(ManageField manageField:manageFields){
-                if(BaseEntity.class.isAssignableFrom(ReflectUtil.resolveFieldClass(targetClass, manageField.getField()))){
-                    Object originalValue=null;
-                    BaseEntity originalFieldEntity=ReflectUtil.getValueByField(toSave,manageField.getField());
-                    if (originalFieldEntity!=null) originalValue=ReflectUtil.getValueByField(originalFieldEntity,manageField.getSelectValueField());
-                    Object updateValue=null;
-                    BaseEntity updateFieldEntity=ReflectUtil.getValueByField(entity,manageField.getField());
-                    if (updateFieldEntity!=null) updateValue=ReflectUtil.getValueByField(updateFieldEntity,manageField.getSelectValueField());
-                    if (updateValue==null&&originalValue!=null){
-                        ReflectUtil.setValueByField(toSave,manageField.getField(),null);
-                    }else if (updateValue!=null&&!updateValue.equals(originalValue)){
-                        ReflectUtil.setValueByField(toSave,manageField.getField(),updateFieldEntity);
-                    }
-                }else{
-                    ReflectUtil.setValueByField(toSave,manageField.getField(), ReflectUtil.getValueByField(entity,manageField.getField()));
-                }
+                ReflectUtil.setValueByField(toSave,manageField.getField(), ReflectUtil.getValueByField(entity,manageField.getField()));
             }
         }
         for(ManageField manageField:manageFields){
             Object fieldValue=ReflectUtil.getValueByField(toSave,manageField.getField());
             if(fieldValue!=null&&BaseEntity.class.isAssignableFrom(fieldValue.getClass())){
-                BaseEntity fieldEntity=(BaseEntity)fieldValue;
-                ReflectUtil.setValueByField(toSave,manageField.getField(),get((Class<? extends BaseEntity>) manageField.getOptionClass(),(Serializable) ReflectUtil.getValueByField(fieldValue,manageField.getSelectValueField())));
+                ReflectUtil.setValueByField(
+                		toSave,manageField.getField(),
+                		get(
+                				(Class<? extends BaseEntity>) manageField.getOptionClass(),
+                				(Serializable) ReflectUtil.getValueByField(
+                						fieldValue,
+                						manageField.getSelectValueField()
+                						)
+                				)
+                		);
             }
         }
         if (pageHolder.getPageDefinition().getManage().getBeforeManage()!=null){
@@ -230,13 +224,15 @@ public class XmlQueryDefineService {
             }
             try {
                 toInvoke.setAccessible(true);
-                if ((Boolean)toInvoke.invoke(this,args)) saveOrUpdate(toSave);
+                if ((Boolean)toInvoke.invoke(c,args)) saveOrUpdate(toSave);
+                else return false;
             } catch (Exception e) {
                 throw new GeneralController.GeneralControllerExcuteException(e);
             }
         }else{
             saveOrUpdate(toSave);
         }
+        return true;
     }
     public void saveOrUpdate(BaseEntity entity){
 	    if (entity.getId()==null){
