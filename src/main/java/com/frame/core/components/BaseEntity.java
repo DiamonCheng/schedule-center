@@ -91,4 +91,12 @@ public abstract class BaseEntity implements Serializable {
     public void setUpdateDateTime(Date updateDateTime) {
         this.updateDateTime = updateDateTime;
     }
+    @Override
+    public boolean equals(Object obj) {
+    	if (obj!=null&&obj instanceof BaseEntity){
+    		if (id==null) return ((BaseEntity)obj).getId()==null;
+    		return id.equals(((BaseEntity)obj).getId());
+    	}else
+    		return false;
+    }
 }

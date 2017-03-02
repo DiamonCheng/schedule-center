@@ -128,7 +128,7 @@ public class XmlQueryDefineService {
 		return queryConditions;
 	}
 	private void prepareSelectData(QueryConditionDefine q){
-        if ("SELECT".equals(q.getInputType())){
+        if ("SELECT".equals(q.getInputType())||"CHECKBOX".equals(q.getInputType())){
             if (!StringUtils.isEmpty(q.getStaticData())){
                 q.setParsedData(gson.fromJson(q.getStaticData(),new TypeToken<List<Map<String,String>>>(){}.getType()));
             }else{
@@ -170,14 +170,20 @@ public class XmlQueryDefineService {
             }
             for (ManageField manageField:manageFields) {
                 prepareSelectData(manageField);
-                if (BaseEntity.class.isAssignableFrom(ReflectUtil.resolveFieldClass(targetClass,manageField.getField()))){
+                Class<?> fieldClass=ReflectUtil.resolveFieldClass(targetClass,manageField.getField());
+                if (BaseEntity.class.isAssignableFrom(fieldClass)){
                     manageField.setIsEntity(true);
-                    if (manageField.getValue()!=null&&BaseEntity.class.isAssignableFrom(manageField.getValue().getClass()))
-                        manageField.setValue(ReflectUtil.getValueByField(manageField.getValue(),manageField.getSelectValueField()));
+//                    if (manageField.getValue()!=null&&BaseEntity.class.isAssignableFrom(manageField.getValue().getClass()))
+//                        manageField.setValue(ReflectUtil.getValueByField(manageField.getValue(),manageField.getSelectValueField()));
+                }else if(Collection.class.isAssignableFrom(fieldClass)){
+                	if (BaseEntity.class.isAssignableFrom(manageField.getOptionClass())){
+                		manageField.setIsEntity(true);
+                	}
                 }
             }
             models.put("entity",target);
             models.put("manageFields",manageFields);
+            models.put("manage", manage);
         }catch (Exception e) {
             throw new ManageExecuteException(e);
         }
@@ -200,7 +206,9 @@ public class XmlQueryDefineService {
         }
         for(ManageField manageField:manageFields){
             Object fieldValue=ReflectUtil.getValueByField(toSave,manageField.getField());
-            if(fieldValue!=null&&BaseEntity.class.isAssignableFrom(fieldValue.getClass())){
+            if (fieldValue==null){
+            	
+            }else if(fieldValue instanceof BaseEntity){//处理单个实体
                 ReflectUtil.setValueByField(
                 		toSave,manageField.getField(),
                 		get(
@@ -211,6 +219,23 @@ public class XmlQueryDefineService {
                 						)
                 				)
                 		);
+            }else if(fieldValue instanceof Collection){//处理实体集合的字段
+            	try {
+					Collection<BaseEntity> newCollectionValue=(Collection<BaseEntity>) fieldValue.getClass().newInstance();
+					for(Object oldEntity:(Collection<?>)fieldValue){
+						newCollectionValue.add(this.<BaseEntity>get(
+                				(Class<? extends BaseEntity>) manageField.getOptionClass(),
+                				(Serializable) ReflectUtil.getValueByField(
+                						oldEntity,
+                						manageField.getSelectValueField()
+                						)
+                				)
+                		);
+					}
+					ReflectUtil.setValueByField(toSave,manageField.getField(), newCollectionValue);
+				} catch (Exception e) {
+					throw new ManageExecuteException(e);
+				}
             }
         }
         if (pageHolder.getPageDefinition().getManage().getBeforeManage()!=null){
@@ -231,6 +256,22 @@ public class XmlQueryDefineService {
             }
         }else{
             saveOrUpdate(toSave);
+        }
+        if (pageHolder.getPageDefinition().getManage().getAfterManage()!=null){
+        	Method toInvoke=pageHolder.getPageDefinition().getManage().getAfterManageMethod();
+        	Class<?>[] argsType=toInvoke.getParameterTypes();
+            Object[] args=new Object[argsType.length];
+            for(int i=0;i<argsType.length;i++){
+                if (argsType[i].isAssignableFrom(targetClass)){
+                    args[i]=toSave;
+                }
+            }
+            try {
+                toInvoke.setAccessible(true);
+                toInvoke.invoke(c,args);
+            } catch (Exception e) {
+                throw new GeneralController.GeneralControllerExcuteException(e);
+            }
         }
         return true;
     }

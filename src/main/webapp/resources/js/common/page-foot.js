@@ -16,5 +16,8 @@
 		$(window).resize(function(){
 			anchor($foot);
 		})
+		$(document.body).on("click",function(){
+			anchor($foot);
+		});
 	});
 })();

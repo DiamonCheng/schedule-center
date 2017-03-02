@@ -18,6 +18,7 @@ public class MenuEntity extends BaseEntity {
 	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="parent_id",foreignKey =  @ForeignKey(name="null"))
 	private List<MenuEntity> children;
+	
 	public List<MenuEntity> getChildren() {
 		return children;
 	}

@@ -10,6 +10,8 @@ import java.lang.reflect.Method;
 public class Delete {
     private String beforeDelete;
     private Method beforeDeleteMethod;
+    private String afterDelete;
+    private Method afterDeleteMethod;
     private Integer injectIndex;
     @XmlAttribute
     public String getBeforeDelete() {
@@ -35,4 +37,20 @@ public class Delete {
     public void setInjectIndex(Integer injectIndex) {
         this.injectIndex = injectIndex;
     }
+
+	public String getAfterDelete() {
+		return afterDelete;
+	}
+	@XmlAttribute
+	public void setAfterDelete(String afterDelete) {
+		this.afterDelete = afterDelete;
+	}
+	@XmlTransient
+	public Method getAfterDeleteMethod() {
+		return afterDeleteMethod;
+	}
+
+	public void setAfterDeleteMethod(Method afterDeleteMethod) {
+		this.afterDeleteMethod = afterDeleteMethod;
+	}
 }

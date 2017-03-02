@@ -23,6 +23,14 @@
 		<field field="code" displayText="编码"></field>
 		<field field="name" displayText="名称"></field>
 		<field field="description" displayText="描述" inputType="TEXTAREA"></field>
+		<js>
+			<path>/resources/js/roleMenu/roleMenuManage.js</path>
+			<path>/resources/ztree/js/jquery.ztree.all.js</path>
+		</js>
+		<css>
+			<path>/resources/css/roleMenu/roleMenuManage.css</path>
+			<path>/resources/ztree/css/metroStyle/metroStyle.css</path>
+		</css>
 	</manage>
 	<delete beforeDelete="beforeDelete"></delete>
 </pageDefinition>

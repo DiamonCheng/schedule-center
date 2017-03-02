@@ -63,36 +63,36 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd
 
 	<!-- 注解方式配置事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
-	<context:annotation-config />
+	<!-- <context:annotation-config /> -->
 	<!-- 拦截器方式配置事务 -->
-	<!-- <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="*" read-only="false" />
 		</tx:attributes>
-	</tx:advice> -->
+	</tx:advice>
 	<!-- 一般只对service层添加事务即可 -->
-	<!-- <aop:config expose-proxy="true">
+	<aop:config expose-proxy="true">
 		<aop:pointcut id="transactionPointcut"
 			expression="execution(* com.*..*Service.*(..))" />
 		<aop:advisor pointcut-ref="transactionPointcut"
 			advice-ref="transactionAdvice" />
-	</aop:config> -->
+	</aop:config>
 
 	<!-- aop代理 -->
 	<!-- 开启AOP监听 只对当前配置文件有效 -->
-	<!-- <aop:aspectj-autoproxy /> -->
+	<aop:aspectj-autoproxy />
 	
 	<!-- 自定义数据库初始化脚本读取工具 -->
-	<bean id="classpathJsonInitDataProvider" class="com.frame.core.components.ClasspathJsonInitDataProvider">
-		<!-- 放在哪个类路径下 -->
+	<!-- <bean id="classpathJsonInitDataProvider" class="com.frame.core.components.ClasspathJsonInitDataProvider">
+		放在哪个类路径下
 		<property name="path" value="/initData"></property>
-		<!-- 使用哪个类来读取 -->
+		使用哪个类来读取
 		<property name="classToLoad" value="com.frame.core.components.ClasspathJsonInitDataProvider"></property>
 		<property name="gson" ref="defaultGson"></property>
-	</bean>
+	</bean> -->
 	<!-- 自定义数据库初始化脚本执行工具 -->
-	<bean class="com.frame.core.components.HibernateDataInitialiser">
+	<!-- <bean class="com.frame.core.components.HibernateDataInitialiser">
 		<constructor-arg index="0" name="sessionFactory" ref="sessionFactory"/>
 		<constructor-arg index="1" name="provider" ref="classpathJsonInitDataProvider"/>
-	</bean>
+	</bean> -->
 </beans>

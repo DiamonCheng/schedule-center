@@ -116,8 +116,27 @@
         <xs:element name="manage">
           <xs:complexType>
             <xs:attribute name="beforeManage" default="beforeManage"/>
+            <xs:attribute name="afterManage" default="afterManage"/>
             <xs:sequence >
               <xs:element  name="field" type="manageType"></xs:element>
+            </xs:sequence>
+            <xs:sequence maxOccurs="1" minOccurs="0">
+              <xs:element name="js">
+                <xs:complexType>
+                  <xs:sequence minOccurs="0">
+                    <xs:element name="path"></xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:sequence maxOccurs="1" minOccurs="0">
+              <xs:element name="css">
+                <xs:complexType>
+                  <xs:sequence minOccurs="0">
+                    <xs:element name="path"></xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -169,10 +188,12 @@
       <xs:enumeration value="SELECT"/>
       <xs:enumeration value="DATEBOX"/>
       <xs:enumeration value="TEXTAREA"/>
+      <xs:enumeration value="CHECKBOX"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:complexType name="deleteType">
     <xs:attribute name="beforeDelete" default="beforeDelete"></xs:attribute>
+    <xs:attribute name="afterDelete" default="afterDelete"></xs:attribute>
   </xs:complexType>
   <xs:complexType name="manageType">
     <xs:attribute name="field" use="required"></xs:attribute>

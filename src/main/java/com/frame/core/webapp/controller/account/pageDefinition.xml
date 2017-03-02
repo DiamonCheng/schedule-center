@@ -21,6 +21,7 @@
 	<manage beforeManage="beforeUpdate">
 		<field field="userLoginVerification" displayText="用户名"></field>
 		<field field="nickName" displayText="昵称"></field>
+		<field field="roles" displayText="拥有角色" inputType="CHECKBOX" optionClass="com.frame.core.entity.RoleEntity" selectTextField="name" selectValeField="id"></field>
 	</manage>
 	<delete beforeDelete="beforeDelete"></delete>
 </pageDefinition>

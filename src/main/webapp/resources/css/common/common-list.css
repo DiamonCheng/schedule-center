@@ -8,7 +8,7 @@
 }
 .data-panel>table th{
 	padding: 5px 0;
-	background-color: #252626;
+	background-color: #343434;
     color: #fbfdff;
 }
 .data-panel>table td{
@@ -43,7 +43,7 @@ div#pagerbar {
     font-family: "黑体";
     font-weight: bold;
     color: #fbfdff;
-    background-color: #252626;
+    background-color: #343434;
 }
 div#pagerbar>* {
 	border:none;

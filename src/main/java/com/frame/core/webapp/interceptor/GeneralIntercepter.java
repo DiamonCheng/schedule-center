@@ -66,7 +66,7 @@ public class GeneralIntercepter implements HandlerInterceptor {
 				AjaxResult res = new AjaxResult();
 				res.setCode("-1");
 				String rootMessage=null;
-				Throwable root=e.getCause();
+				Throwable root=e;
 				while (root!=null){
 					rootMessage=root.getMessage();
 					root=root.getCause();

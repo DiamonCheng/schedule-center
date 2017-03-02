@@ -27,8 +27,8 @@ import com.frame.core.query.xml.definition.ColumnDefinition;
 import com.frame.core.query.xml.definition.QueryConditions;
 import com.frame.core.query.xml.definition.SortEntry;
 import com.frame.core.query.xml.service.XmlQueryDefineService;
+import com.frame.core.service.account.AuthorityService;
 import com.frame.core.utils.HttpContextUtil;
-import com.frame.core.service.AuthorityService;
 import com.google.gson.Gson;
 @Controller
 public abstract class GeneralController <T extends BaseEntity>{
@@ -130,13 +130,29 @@ public abstract class GeneralController <T extends BaseEntity>{
             service.delete(id,targetClass);
             UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
         }
+		if (pageHolder.getPageDefinition().getDelete().getAfterDelete()!=null){
+			Method toInvoke=pageHolder.getPageDefinition().getDelete().getAfterDeleteMethod();
+			Object[] args=new Object[toInvoke.getParameterTypes().length];
+			for (int i=0;i<args.length;i++){
+				if (BaseEntity.class.isAssignableFrom(toInvoke.getParameterTypes()[i]))
+					args[i]=service.get(targetClass,id);
+			}
+			try {
+                toInvoke.setAccessible(true);
+				toInvoke.invoke(this,args);
+			} catch (Exception e) {
+				throw new GeneralControllerExcuteException(e);
+			}
+		}
 		return new AjaxResult();
 	}
     public boolean beforeDelete(T entity){return true;}
+    public void afterDelete(){}
     private static final String ADD_METHOD_URL="/add";
     private static final String EDIT_METHOD_URL="/edit";
     @RequestMapping(value={ADD_METHOD_URL,EDIT_METHOD_URL},method = RequestMethod.GET)
     public Object managePage(Long id){
+    	pageHolder.refresh(this);//根据配置是否更新刷新配置
         ModelAndView mv=new ModelAndView("common/manage");
         mv.addAllObjects(service.prepareManage(id,pageHolder.getPageDefinition().getManage(),this.targetClass));
         List<NavigationOption> options=new ArrayList<NavigationOption>();

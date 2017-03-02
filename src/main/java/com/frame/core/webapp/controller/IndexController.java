@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.frame.core.components.NavigationOption;
 import com.frame.core.webapp.interceptor.GeneralIntercepter;
 import com.frame.core.entity.MenuEntity;
-import com.frame.core.service.AuthorityService;
+import com.frame.core.service.account.AuthorityService;
 
 @Controller
 @RequestMapping({"/"})
@@ -34,7 +34,7 @@ public class IndexController extends BaseController{
 		String requestURI= (String) request.getAttribute(GeneralIntercepter.REQUEST_URI_REQUEST_KEY);
 //		UserAuthoritySubject.getSession().setAttribute(GeneralIntercepter.REQUEST_URI_SESSION_KEY, null);
 		List<MenuEntity> menuLocation=authorityService.getMenuLocation(requestURI);
-		List<MenuEntity> menuList=authorityService.getMenuList();
+		List<MenuEntity> menuList=authorityService.getMenuListWithRole();
 		List<NavigationOption> options= (List<NavigationOption>) request.getAttribute(AuthorityService.NAVIGATION_OPTIONS_KEY);
 		return new ModelAndView("decorator/decorator")
 				.addObject("navigation", menuLocation)

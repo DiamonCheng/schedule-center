@@ -8,7 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -43,6 +42,12 @@ public class UserEntity extends BaseEntity {
 	}
 	public void setUserLoginVerification(String userLoginVerification) {
 		this.userLoginVerification = userLoginVerification;
+	}
+	public Set<RoleEntity> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<RoleEntity> roles) {
+		this.roles = roles;
 	}
 	
 }

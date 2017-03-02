@@ -51,6 +51,7 @@ public class PageDefinitionHolder {
      * 调用此方法刷新配置
      * @param target GeneralController this 的引用，用于在加载xml之后初始化一些回调之类的。
      */
+	@SuppressWarnings("rawtypes")
 	public void refresh(GeneralController target){
 		try {
 			boolean isNeedLoad=false;
@@ -78,6 +79,7 @@ public class PageDefinitionHolder {
     /**
      * 初始化
      */
+	@SuppressWarnings("rawtypes")
 	private void initAfterLoad(GeneralController c) throws NoSuchMethodException {
 	    if (page.getQueryDefinition().getQueryConditionDefines()!=null)
 	        for (QueryConditionDefine q:page.getQueryDefinition().getQueryConditionDefines()) {
@@ -125,6 +127,25 @@ public class PageDefinitionHolder {
 					break;
 				}
 			}
+			
+		}
+		if (page.getDelete()!=null&&page.getDelete().getAfterDelete()!=null){
+			String afterDeleteMethodName=page.getDelete().getAfterDelete();
+			Method afterDeleteMethod=null;
+			for(Method method:c.getClass().getDeclaredMethods()){
+				if (method.getName().equals(afterDeleteMethodName)){
+					afterDeleteMethod=method;
+					break;
+				}
+			}
+			if (afterDeleteMethod==null) for(Method method:c.getClass().getMethods()){
+				if (method.getName().equals(afterDeleteMethodName)){
+					afterDeleteMethod=method;
+					break;
+				}
+			}
+			if (afterDeleteMethod==null) throw new NoSuchMethodException(c.getClass().getName()+"."+afterDeleteMethodName);
+			else page.getDelete().setAfterDeleteMethod(afterDeleteMethod);
 		}
 		if (page.getManage()!=null&&page.getManage().getBeforeManage()!=null){
             String beforeManageMethodName=page.getManage().getBeforeManage();
@@ -144,6 +165,24 @@ public class PageDefinitionHolder {
             if (beforeManageMethod==null) throw new NoSuchMethodException(c.getClass().getName()+"."+beforeManageMethodName);
             else page.getManage().setBeforeManageMethod(beforeManageMethod);
         }
+		if (page.getManage()!=null&&page.getManage().getAfterManage()!=null){
+			String afterManageMethodName=page.getManage().getAfterManage();
+            Method afterManageMethod=null;
+            for(Method method:c.getClass().getDeclaredMethods()){
+            	if (method.getName().equals(afterManageMethodName)){
+            		afterManageMethod=method;
+            		break;
+            	}
+            }
+            if (afterManageMethod==null) for(Method method:c.getClass().getMethods()){
+            	if (method.getName().equals(afterManageMethodName)){
+            		afterManageMethod=method;
+            		break;
+            	}
+            }
+            if (afterManageMethod==null) throw new NoSuchMethodException(c.getClass().getName()+"."+afterManageMethodName);
+            else page.getManage().setAfterManageMethod(afterManageMethod);
+		}
 	}
 	/**
 	 * 如果不是文件永远不过期

@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <#if manage.requiredCssPath??><#list manage.requiredCssPath as path>
+	<link rel="stylesheet" href="${ctx}${path}"/>
+	</#list></#if>
     <script src="${ctx}/resources/js/common/common-manage.js"></script>
     <script type="text/javascript" src="${ctx}/resources/js/datePicker/WdatePicker.js"></script>
+    <#if manage.requiredJsPath??><#list manage.requiredJsPath as path>
+	<script type="text/javascript" src="${ctx}${path}"></script>
+	</#list></#if>
 </head>
 <body>
 <div class="main-panel entity-manage">
@@ -24,7 +30,7 @@
         <#elseif c.inputType=="NUMBER"/>
         <input class="form-control" valuefield="${c.selectValueField}" ${(c.isEntity)?string('isentity="isentity"','')} nullable="${ c.nullable?string}" name="${c.field}" id="${inputId}" type="number" value="${c.value!''}"/>
         <#elseif c.inputType=="SELECT"/>
-        <select class="form-control" valuefield="${c.selectValueField}" ${(c.isEntity)?string('isentity="isentity"','')} nullable="${ c.nullable?string}" name="${c.field}" id="${inputId}" type="text" >
+        <select class="form-control" valuefield="${c.selectValueField}" ${(c.isEntity)?string('isentity="isentity"','')} nullable="${ c.nullable?string}" name="${c.field}" id="${inputId}" >
             <#if c.nullable>
                 <option value="" ${(c.value??)?string('selected','')}>-- 请选择 --</option>
             </#if>
@@ -36,6 +42,16 @@
         <input class="form-control datebox" valuefield="${c.selectValueField}" ${(c.isEntity)?string('isentity="isentity"','')} nullable="${ c.nullable?string}" name="${c.field}" id="${inputId}" type="text" value="${c.value!''}"/>
         <#elseif c.inputType=="TEXTAREA"/>
         	<textarea class="form-control" valuefield="${c.selectValueField}" ${(c.isEntity)?string('isentity="isentity"','')} nullable="${ c.nullable?string}" name="${c.field}" id="${inputId}" >${c.value!''?html}</textarea>
+        <#elseif c.inputType=="CHECKBOX"/>
+        	<#list c.parsedData as d>
+	        	<label class="form-checkbox-label" on>${d.text}
+	        		<input type="checkbox" class="form-control" valuefield="${c.selectValueField}" 
+	        		${(c.isEntity)?string('isentity="isentity"','')} nullable="${ c.nullable?string}" 
+	        		name="${c.field}" id="${inputId}" value="${d.value}" <#if c.value??><#list c.value as v>
+	        		 <#if v[c.selectValueField] == d.value>checked</#if>
+	        		</#list></#if>/><label class="form-checkbox-appearance"></label>
+	        	</label>
+        	</#list>
     </#if>
 </div>
 </#list>

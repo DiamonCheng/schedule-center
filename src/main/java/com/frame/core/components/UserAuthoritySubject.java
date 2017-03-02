@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 public class UserAuthoritySubject {
 	private static final String ACCOUNT_SUBJECY_KEY=UserAuthoritySubject.class.getName()+".ACCOUNT_SUBJECY_KEY";
 	private static final String AUTHORITY_SUBJECY_KEY=UserAuthoritySubject.class.getName()+".AUTHORITY_SUBJECY_KEY";
+	private static final String USER_MENUS_KEY=UserAuthoritySubject.class.getName()+".USER_MENUS_KEY";
 	public static HttpSession getSession(){
 		return (HttpSession)ThreadBinder.get(ThreadBinder.SESSION);
 	}

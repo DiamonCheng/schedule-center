@@ -1,4 +1,4 @@
-package com.frame.core.service;
+package com.frame.core.service.account;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,8 +18,8 @@ public class AuthorityService {
 	public static final String NAVIGATION_OPTIONS_KEY="NAVIGATION_OPTIONS_KEY";
 	@Autowired
 	GeneralDao dao;
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public List<MenuEntity> getMenuList(){
+	@SuppressWarnings({ "unchecked", "rawtypes" }) 
+	public List<MenuEntity> getMenuListWithRole(){
 		//List.size()=0 list.get0 =mainpage
 		List list=dao.getHibernateTemplate().find("select child from MenuEntity p join p.children as child where p.parent is null");
 		return filtMenu(list);

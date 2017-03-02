@@ -63,7 +63,7 @@
     background-color: #252526;
     color: #fbfdff;
 }
-input.form-control,select.form-control {
+input:not([type='checkbox']).form-control,select.form-control {
     border: none;
     outline: none;
     height: 20px;
@@ -74,7 +74,7 @@ input.form-control,select.form-control {
     box-sizing: content-box;
     background-color: #fff;
 }
-input.form-control:focus,select.form-control:focus,textarea.form-control:focus {
+input:not([type='checkbox']).form-control:focus,select.form-control:focus,textarea.form-control:focus {
     border: solid 2px #2196f3;
     margin: 2px 0px;
 }
@@ -103,6 +103,39 @@ textarea.form-control{
     border: 1px solid transparent;
     box-sizing: content-box;
     background-color: rgb(255, 255, 255);
+}
+label.form-checkbox-label{
+    position: relative;
+    z-index: 2;
+    user-select: none;
+    height: 30px;
+    display: inline-block;
+    line-height: 30px;
+    padding: 0 10px;
+}
+label.form-checkbox-label:hover{
+ 	border: solid 2px #2196f3;
+    padding: 0 8px;
+    height: 26px;
+    line-height: 26px;
+}
+input[type=checkbox].form-control{
+	/* display: none; */
+}
+input[type=checkbox].form-control+label.form-checkbox-appearance{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: block;
+	left: 0;
+	top: 0;
+	background-color: #b5b5b5;
+	z-index: -1;
+}
+input[type=checkbox]:checked.form-control+label.form-checkbox-appearance{
+	background-color: #363636;
+}
+label.form-checkbox-label:hover input[type=checkbox].form-control+label.form-checkbox-appearance{
 }
 div#bg {
     position: fixed;

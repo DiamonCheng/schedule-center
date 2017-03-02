@@ -74,7 +74,7 @@
 				console.error("ajax请求出现异常:",xhr);
 				console.error("status:",status);
 				console.error(e);
-				frame.toastError("操作失败，F12查看错误信息。");
+				frame.toastError("出现异常，F12查看错误信息。");
 			}
 		}
 	});
