@@ -1,7 +1,5 @@
 package com.frame.core.components;
 
-import java.util.Set;
-
 import javax.servlet.http.HttpSession;
 
 public class UserAuthoritySubject {
@@ -18,7 +16,7 @@ public class UserAuthoritySubject {
 	public static <T> void setAccountSubject(T subject){
 		getSession().setAttribute(ACCOUNT_SUBJECY_KEY, subject);
 	}
-	@SuppressWarnings("rawtypes")
+	/*@SuppressWarnings("rawtypes")
 	public static void setAuthorities(Set authorities){
 		getSession().setAttribute(AUTHORITY_SUBJECY_KEY, authorities);
 	}
@@ -26,7 +24,7 @@ public class UserAuthoritySubject {
 	public static <T> boolean isContainAuthority(T authority){
 		Set authorities=(Set) getSession().getAttribute(AUTHORITY_SUBJECY_KEY);
 		return authorities==null?false:authorities.contains(authority);
-	}
+	}*/
 	public static boolean isUserVerify(){
 		return getAccountSubject()!=null;
 	}

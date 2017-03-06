@@ -2,6 +2,7 @@ package com.frame.core.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,7 +23,7 @@ public class UserEntity extends BaseEntity {
 	private String userPassword;
 	@Column(length=63)
 	private String nickName;
-	@ManyToMany(targetEntity=RoleEntity.class,fetch=FetchType.LAZY)
+	@ManyToMany(targetEntity=RoleEntity.class,fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(foreignKey = @ForeignKey(name="null"))
 	private Set<RoleEntity> roles;
 	public String getUserPassword() {

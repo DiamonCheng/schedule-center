@@ -54,12 +54,13 @@ public class RoleServiceImpl implements RoleService {
 				currentTarget.setParent(null);
 				currentTarget.setChildren(null);
 				boolean isContains=false;
-				for(MenuEntity m : role.getAlowMenus()){
+				isContains=role.getAlowMenus().contains(currentSource);
+				/*for(MenuEntity m : role.getAlowMenus()){
 					if (currentSource.getId().equals(m.getId())){
 						isContains=true;
 						break;
 					}
-				}
+				}*/
 				currentTarget.setChecked(isContains);
 			}
 		});

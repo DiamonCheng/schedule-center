@@ -22,6 +22,7 @@ import com.frame.core.components.AjaxResult;
 import com.frame.core.components.BaseEntity;
 import com.frame.core.components.NavigationOption;
 import com.frame.core.components.UserAuthoritySubject;
+import com.frame.core.entity.UserEntity;
 import com.frame.core.query.xml.annoation.PageDefinition;
 import com.frame.core.query.xml.definition.ColumnDefinition;
 import com.frame.core.query.xml.definition.QueryConditions;
@@ -79,12 +80,12 @@ public abstract class GeneralController <T extends BaseEntity>{
 		List<NavigationOption> options=new ArrayList<NavigationOption>();
         String[] cRequestMapping=this.getClass().getAnnotation(RequestMapping.class).value();
 		if(pageHolder.getPageDefinition().getManage()!=null) {
-            if (authorityService.isAllowed(cRequestMapping,ADD_METHOD_URL))
+            if (authorityService.isAllowed(cRequestMapping,ADD_METHOD_URL,UserAuthoritySubject.<UserEntity>getAccountSubject()))
             	options.add(new NavigationOption("添加", "addRow()"));
-            if (authorityService.isAllowed(cRequestMapping,EDIT_METHOD_URL))
+            if (authorityService.isAllowed(cRequestMapping,EDIT_METHOD_URL,UserAuthoritySubject.<UserEntity>getAccountSubject()))
             	options.add(new NavigationOption("修改", "manageRow()"));
         }
-		if(pageHolder.getPageDefinition().getDelete()!=null&&authorityService.isAllowed(cRequestMapping,DELETE_MAPPED_URL)) 
+		if(pageHolder.getPageDefinition().getDelete()!=null&&authorityService.isAllowed(cRequestMapping,DELETE_MAPPED_URL,UserAuthoritySubject.<UserEntity>getAccountSubject())) 
 			options.add(new NavigationOption("删除", "deleteRow()"));//权限
 		HttpContextUtil.getCurrentRequest().setAttribute(AuthorityService.NAVIGATION_OPTIONS_KEY,options);
 		return mv;

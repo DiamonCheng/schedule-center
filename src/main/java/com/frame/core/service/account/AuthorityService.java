@@ -2,7 +2,9 @@ package com.frame.core.service.account;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.frame.core.dao.GeneralDao;
 import com.frame.core.entity.MenuEntity;
+import com.frame.core.entity.RoleEntity;
+import com.frame.core.entity.UserEntity;
 
 @Service
 @Transactional
@@ -19,20 +23,27 @@ public class AuthorityService {
 	@Autowired
 	GeneralDao dao;
 	@SuppressWarnings({ "unchecked", "rawtypes" }) 
-	public List<MenuEntity> getMenuListWithRole(){
+	public List<MenuEntity> getMenuListWithRole(UserEntity user){
 		//List.size()=0 list.get0 =mainpage
+		dao.getHibernateTemplate().refresh(user);
+		Set<RoleEntity> roleSet=user.getRoles();
+		Set<MenuEntity> menuSet=new HashSet<MenuEntity>();
+		for (RoleEntity roleEntity : roleSet) {
+			menuSet.addAll(roleEntity.getAlowMenus());
+		}
 		List list=dao.getHibernateTemplate().find("select child from MenuEntity p join p.children as child where p.parent is null");
-		return filtMenu(list);
+		return filtMenu(list,menuSet);
 	}
-	private List<MenuEntity> filtMenu(List<MenuEntity> list){
+	private List<MenuEntity> filtMenu(List<MenuEntity> list,Set<MenuEntity> menuSet){
 		if (list==null||list.size()==0) return null;
 		List<MenuEntity> resList=new ArrayList<MenuEntity>();
 		for (MenuEntity menuEntity : list) {
-			//TODO 如果含有权限
-			MenuEntity menuCopy=new MenuEntity();
-			BeanUtils.copyProperties(menuEntity,menuCopy,"children","parent");
-			menuCopy.setChildren(filtMenu(menuEntity.getChildren()));
-			resList.add(menuCopy);
+			if (menuSet.contains(menuEntity)){
+				MenuEntity menuCopy=new MenuEntity();
+				BeanUtils.copyProperties(menuEntity,menuCopy,"children","parent");
+				menuCopy.setChildren(filtMenu(menuEntity.getChildren(),menuSet));
+				resList.add(menuCopy);
+			}
 		}
 		return resList;
 	}
@@ -54,16 +65,18 @@ public class AuthorityService {
 		}
 		return menuList;
 	}
-	public boolean isAllowed(String[] parent,String child){
-		Object[] urls=new String[parent.length];
+	public boolean isAllowed(String[] parent,String child,UserEntity user){
+		Object[] params=new Object[parent.length+1];
+		params[0]=user.getId();
 		int index=0;
-		StringBuilder hql=new StringBuilder("select count(0) from MenuEntity where  ");
+		StringBuilder hql=new StringBuilder("select count(m) from UserEntity u join u.roles r join r.alowMenus m where u.id=? and ( ");
 		for (String string : parent) {
-			urls[index]=string+child;
+			params[index+1]=string+child; 
 			if (index!=0) hql.append("or ");
-			hql.append("requestURI=? ");
+			hql.append("m.requestURI=? ");
 		}
-		long count=dao.getUnique(hql.toString(), urls);
+		hql.append(')');
+		long count=dao.getUnique(hql.toString(), params);
 		return count>0;
 	}
 }

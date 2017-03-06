@@ -24,7 +24,7 @@ import com.google.gson.reflect.TypeToken;
 public class RoleController extends GeneralController<RoleEntity> {
 	@Override
 	public boolean beforeDelete(RoleEntity entity) {
-		throw new RuntimeException("未知原因。");
+		return true;
 	}
 	@Override
 	public boolean beforeUpdate(RoleEntity entity) {

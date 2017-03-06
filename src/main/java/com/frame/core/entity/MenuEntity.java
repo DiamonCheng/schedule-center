@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.frame.core.components.BaseEntity;
+import com.google.gson.annotations.Expose;
 @Table(name="sys_menu")
 @Entity
 public class MenuEntity extends BaseEntity {

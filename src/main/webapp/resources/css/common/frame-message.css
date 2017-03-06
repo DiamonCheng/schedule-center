@@ -29,6 +29,7 @@
     background-color: #252526;
     border: 2px solid #252526;
     animation: frame-message 1.5s linear;
+    z-index: 233;
 }
 .frame-message:hover{
     border: 2px solid #fff;
