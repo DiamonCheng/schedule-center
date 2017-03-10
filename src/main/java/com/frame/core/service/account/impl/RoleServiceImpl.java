@@ -15,7 +15,6 @@ import com.frame.core.entity.UserEntity;
 import com.frame.core.service.account.RoleService;
 import com.frame.core.utils.TraverseUtil;
 @Service
-@org.springframework.transaction.annotation.Transactional
 public class RoleServiceImpl implements RoleService {
 	
 	@Autowired

@@ -9,7 +9,6 @@ import java.util.Set;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.frame.core.dao.GeneralDao;
 import com.frame.core.entity.MenuEntity;
@@ -17,7 +16,6 @@ import com.frame.core.entity.RoleEntity;
 import com.frame.core.entity.UserEntity;
 
 @Service
-@Transactional
 public class AuthorityService {
 	public static final String NAVIGATION_OPTIONS_KEY="NAVIGATION_OPTIONS_KEY";
 	@Autowired

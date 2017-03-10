@@ -160,7 +160,7 @@ public class XmlQueryDefineService {
             if (id == null) {
                 target = targetClass.newInstance();
                 for (ManageField manageField:manageFields) {
-                    manageField.setValue(manageField.getDefaultValue());
+                	manageField.setValue(manageField.getDefaultValue());
                 }
             }else{
                 target=this.get(targetClass,id);
@@ -173,9 +173,15 @@ public class XmlQueryDefineService {
                 Class<?> fieldClass=ReflectUtil.resolveFieldClass(targetClass,manageField.getField());
                 if (BaseEntity.class.isAssignableFrom(fieldClass)){
                     manageField.setIsEntity(true);
+                    if (manageField.getValue()!=null&&!BaseEntity.class.isAssignableFrom(manageField.getValue().getClass())){
+                    	manageField.setValue(null);
+                    }
 //                    if (manageField.getValue()!=null&&BaseEntity.class.isAssignableFrom(manageField.getValue().getClass()))
 //                        manageField.setValue(ReflectUtil.getValueByField(manageField.getValue(),manageField.getSelectValueField()));
                 }else if(Collection.class.isAssignableFrom(fieldClass)){
+                	if (manageField.getValue()!=null&&!Collection.class.isAssignableFrom(manageField.getValue().getClass())){
+                    	manageField.setValue(null);
+                    }
                 	if (BaseEntity.class.isAssignableFrom(manageField.getOptionClass())){
                 		manageField.setIsEntity(true);
                 	}

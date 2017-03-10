@@ -3,18 +3,21 @@ package com.frame.core.components;
 import javax.servlet.http.HttpSession;
 
 public class UserAuthoritySubject {
-	private static final String ACCOUNT_SUBJECY_KEY=UserAuthoritySubject.class.getName()+".ACCOUNT_SUBJECY_KEY";
-	private static final String AUTHORITY_SUBJECY_KEY=UserAuthoritySubject.class.getName()+".AUTHORITY_SUBJECY_KEY";
+	private static final String ACCOUNT_SUBJECT_KEY=UserAuthoritySubject.class.getName()+".ACCOUNT_SUBJECT_KEY";
+	private static final String AUTHORITY_SUBJECT_KEY=UserAuthoritySubject.class.getName()+".AUTHORITY_SUBJECT_KEY";
 	private static final String USER_MENUS_KEY=UserAuthoritySubject.class.getName()+".USER_MENUS_KEY";
 	public static HttpSession getSession(){
 		return (HttpSession)ThreadBinder.get(ThreadBinder.SESSION);
 	}
 	@SuppressWarnings("unchecked")
 	public static <T> T getAccountSubject(){
-		return (T) getSession().getAttribute(ACCOUNT_SUBJECY_KEY);
+		return (T) getSession().getAttribute(ACCOUNT_SUBJECT_KEY);
 	}
 	public static <T> void setAccountSubject(T subject){
-		getSession().setAttribute(ACCOUNT_SUBJECY_KEY, subject);
+		getSession().setAttribute(ACCOUNT_SUBJECT_KEY, subject);
+	}
+	public static void clear(){
+		getSession().removeAttribute(ACCOUNT_SUBJECT_KEY);
 	}
 	/*@SuppressWarnings("rawtypes")
 	public static void setAuthorities(Set authorities){

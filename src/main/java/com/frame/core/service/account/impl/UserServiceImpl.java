@@ -2,9 +2,6 @@ package com.frame.core.service.account.impl;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-import javax.transaction.Transactional.TxType;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +10,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.util.StringUtils;
 
 import com.frame.core.components.UserAuthoritySubject;
+import com.frame.core.dao.GeneralDao;
+import com.frame.core.service.account.UserService;
 import com.frame.core.utils.AesEncryptUtils;
 import com.frame.core.utils.EncriptUtil;
-import com.frame.core.dao.GeneralDao;
-import com.frame.core.entity.UserEntity;
-import com.frame.core.service.account.UserService;
 @Service
-@Transactional(value=TxType.REQUIRED)
 @org.springframework.transaction.annotation.Transactional(propagation=Propagation.REQUIRED)
 public class UserServiceImpl implements UserService{
 	private final static Logger LOGGER=LoggerFactory.getLogger(UserServiceImpl.class);

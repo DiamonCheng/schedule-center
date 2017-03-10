@@ -27,9 +27,9 @@ public abstract class BaseController {
 	protected final Logger LOGGER=LoggerFactory.getLogger(this.getClass()); 
 	
 	@ExceptionHandler(value=Throwable.class)
-	public Object handleException(Throwable e,HttpServletRequest request,HttpServletResponse response){
+	public Object handleException(Throwable e,HttpServletRequest request,HttpServletResponse response) throws Throwable{
 		LOGGER.error("Control层捕获到异常。",e);
-		return null;
+		throw e;
 	}
 	SimpleDateFormat dateFormat1=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	SimpleDateFormat dateFormat2=new SimpleDateFormat("yyyy-MM-dd");

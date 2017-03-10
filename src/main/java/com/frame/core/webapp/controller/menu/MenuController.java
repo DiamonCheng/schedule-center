@@ -10,11 +10,6 @@ import com.frame.core.query.xml.annoation.PageDefinition;
 @RequestMapping("/menu")
 @PageDefinition("pageDefinition.xml")
 public class MenuController extends GeneralController <MenuEntity>{
-	public static void main(String[] args) {
-		MenuController m=new MenuController();
-		System.out.println(m);
-	}
-
 	@Override
 	public boolean beforeDelete(MenuEntity entity) {
 		System.out.println("beforeDelete MenuEntity id："+entity.getId());
