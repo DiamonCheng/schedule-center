@@ -70,6 +70,8 @@ public abstract class GeneralController <T extends BaseEntity>{
 				queryConditions.getSortEntries().add(sortEntry);
 			}
 		}
+		if (queryConditions.getPageSize()==null) 
+			queryConditions.setPageSize(pageHolder.getPageDefinition().getQueryDefinition().getPageSize());
 		ModelAndView mv=new ModelAndView("/common/list");
 		Object list= service.list(pageHolder.getPageDefinition(), queryConditions);//查询得到的结果
 		mv.addObject("totalPageCount", service.totalPageCount(pageHolder.getPageDefinition(), queryConditions));//查询页数准备分页
@@ -167,9 +169,12 @@ public abstract class GeneralController <T extends BaseEntity>{
 	@RequestMapping(value={ADD_METHOD_URL,EDIT_METHOD_URL},method = RequestMethod.POST)
     @ResponseBody
 	public Object saveManage(String paramString) throws NoSuchMethodException {
-	    if (service.saveManage(paramString,this))
+		T entity;
+	    if (null!=(entity=service.saveManage(paramString,this)))
 	    	UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
-    	return new AjaxResult();
+	    AjaxResult res=new AjaxResult();
+	    res.setData(entity.getId());
+    	return res;
 	}
 	public boolean beforeUpdate(T entity){return true;}
 	//TODO 这里做这可Controller能够出现的异常。

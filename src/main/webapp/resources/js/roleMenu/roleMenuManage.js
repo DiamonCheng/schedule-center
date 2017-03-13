@@ -14,8 +14,7 @@
 			}, zNodes);
 		},"json");
 	});
-	window.frame.manage.afterSave=function(){
-		var id=$('input[name=id]').val();
+	window.frame.manage.afterSave=function(id){
 		$.ajax(ctx+"/role/saveMenuTree",{
 			dataType:"json",
 			method:"POST",

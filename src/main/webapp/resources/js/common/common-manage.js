@@ -39,14 +39,14 @@
             });
             if (frame.manage.beforeSave(param)){
                 $.post("",{paramString:JSON.stringify(param)},function(data){
-                	if (frame.manage.afterSave()) frame.manage.goBack();
+                	if (frame.manage.afterSave(data.data)) frame.manage.goBack();
                 },"JSON");
             }
         },goBack:function(){
             window.location.href=window.location.href.substr(0,window.location.href.lastIndexOf("/")+1);
         },beforeSave:function(obj){
             return true;
-        },afterSave:function(){return true;}
+        },afterSave:function(id){return true;}
     };
     $(document).ready(function () {
         $('.datebox').addClass("Wdate");

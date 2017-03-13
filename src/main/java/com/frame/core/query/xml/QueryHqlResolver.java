@@ -64,9 +64,9 @@ public class QueryHqlResolver {
 		}
 	}
 	public static  void appendWhere(StringBuilder sb, QueryDefinition definition, List<QueryCondition> conditions){
-		if (conditions==null||conditions.size()==0) return;
 		sb.append(" where 1=1 ");
 		if (!StringUtils.isEmpty(definition.getWhere())) sb.append("and ").append(definition.getWhere()).append(" ");
+		if (conditions==null||conditions.size()==0) return;
 		for (QueryCondition condition : conditions) {
 			if (StringUtils.isEmpty(condition.getValue())) continue;
 			sb.append("and ");

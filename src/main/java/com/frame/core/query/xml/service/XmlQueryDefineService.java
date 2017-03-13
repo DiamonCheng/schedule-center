@@ -196,11 +196,11 @@ public class XmlQueryDefineService {
 	    return models;
     }
     @SuppressWarnings("unchecked")
-    public <T extends BaseEntity> boolean saveManage(String paramString,GeneralController<T> c){
-	    Class<? extends BaseEntity> targetClass=c.getTargetClass();
+    public <T extends BaseEntity> T saveManage(String paramString,GeneralController<T> c){
+	    Class<T> targetClass=c.getTargetClass();
         PageDefinitionHolder pageHolder=c.getPageHolder();
-        BaseEntity entity =gson.fromJson(paramString,targetClass);
-        BaseEntity toSave=null;
+        T entity =gson.fromJson(paramString,targetClass);
+        T toSave=null;
         List<ManageField> manageFields=pageHolder.getPageDefinition().getManage().getField();
         if (entity.getId()==null){
             toSave=entity;
@@ -256,7 +256,7 @@ public class XmlQueryDefineService {
             try {
                 toInvoke.setAccessible(true);
                 if ((Boolean)toInvoke.invoke(c,args)) saveOrUpdate(toSave);
-                else return false;
+                else return null;
             } catch (Exception e) {
                 throw new GeneralController.GeneralControllerExcuteException(e);
             }
@@ -279,7 +279,7 @@ public class XmlQueryDefineService {
                 throw new GeneralController.GeneralControllerExcuteException(e);
             }
         }
-        return true;
+        return toSave;
     }
     public void saveOrUpdate(BaseEntity entity){
 	    if (entity.getId()==null){

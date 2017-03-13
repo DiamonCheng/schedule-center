@@ -19,7 +19,7 @@ public class QueryConditions {
 	private static final Gson gson=GsonFactory.buildDefaultGson();
 	private List<QueryCondition> conditions;
 	private int page=1;
-	private int pageSize=10;
+	private Integer pageSize=10;
 	private List<SortEntry> sortEntries=new ArrayList<SortEntry>();
 
 	/**
@@ -50,7 +50,7 @@ public class QueryConditions {
 	public void setPage(int page) {
 		this.page = page;
 	}
-	public int getPageSize() {
+	public Integer getPageSize() {
 		return pageSize;
 	}
 	public void setPageSize(int pageSize) {
