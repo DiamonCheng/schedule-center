@@ -1,5 +1,7 @@
 package com.frame.core.service.account;
 
+import com.frame.core.entity.UserEntity;
+
 /**
  * 
  * @author Defferson.Cheng
@@ -13,4 +15,11 @@ public interface UserService {
 	 * @return 0 登陆成功 1 登录失败
 	 */
 	int login(String userLoginVerification,String userPassword);
+	/**
+	 *  注册
+	 * @param user 用户实体
+	 * @return 
+	 * @throws Exception 
+	 */
+	void registerUser(UserEntity user) throws Exception;
 }

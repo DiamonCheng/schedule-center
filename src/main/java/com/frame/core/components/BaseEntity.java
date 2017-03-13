@@ -60,7 +60,15 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "init_id")
     private Long initId;
     
-    public Long getId() {
+    public Long getInitId() {
+		return initId;
+	}
+
+	public void setInitId(Long initId) {
+		this.initId = initId;
+	}
+
+	public Long getId() {
         return id;
     }
 

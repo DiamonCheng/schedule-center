@@ -19,11 +19,7 @@ import com.frame.core.service.account.AuthorityService;
 @Controller
 @RequestMapping({"/"})
 public class IndexController extends BaseController{
-	@RequestMapping({"/","/index"})
-	public Object main(){
-		return "redirect:/main";
-	}
-	@RequestMapping({"/main"})
+	@RequestMapping({"/admin/main"})
 	public Object main(HttpServletRequest request){
 		request.setAttribute("a", "123");
 		return "main.jsp";
@@ -34,7 +30,6 @@ public class IndexController extends BaseController{
 	@RequestMapping({"/decorator"})
 	public Object decorator(HttpServletRequest request){
 		String requestURI= (String) request.getAttribute(GeneralIntercepter.REQUEST_URI_REQUEST_KEY);
-//		UserAuthoritySubject.getSession().setAttribute(GeneralIntercepter.REQUEST_URI_SESSION_KEY, null);
 		List<MenuEntity> menuLocation=authorityService.getMenuLocation(requestURI);
 		List<MenuEntity> menuList=authorityService.getMenuListWithRole(UserAuthoritySubject.<UserEntity>getAccountSubject());
 		List<NavigationOption> options= (List<NavigationOption>) request.getAttribute(AuthorityService.NAVIGATION_OPTIONS_KEY);

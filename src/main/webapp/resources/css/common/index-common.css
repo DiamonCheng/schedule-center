@@ -1,0 +1,98 @@
+/* 自带start */
+.body {
+	backgroud-color: #c2c2c2;
+}
+
+.header-index {
+	background-color: #0C1206;
+	border: none;
+}
+
+.header {
+	height: 59px;
+	border-bottom: 1px solid #404553;
+	background-color: #393D49;
+}
+
+.header .layui-nav {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: 0;
+	background: none;
+}
+
+.component {
+	position: absolute;
+	width: 200px;
+	left: 120px;
+	top: 16px;
+}
+
+.logo {
+	position: absolute;
+	left: 0;
+	top: 16px;
+}
+
+.logo img {
+	width: 82px;
+	height: 31px;
+}
+
+.component .layui-input {
+	height: 30px;
+	line-height: 30px;
+	padding-left: 12px;
+	background-color: #424652;
+	background-color: rgba(255, 255, 255, .05);
+	border: none 0;
+	color: #fff;
+	font-size: 12px;
+}
+/* 自带end */
+.index-nav {
+	margin: 0px 15px;
+}
+
+.layui-elem-quote-black-index {
+	margin-left: 0px;
+	color: #ccc;
+	font-size: 16px;
+	margin-top: 0px;
+	padding: 11px 10px;
+	line-height: 36px;
+	border-left: 6px solid #009688;
+	border-radius: 0 2px 2px 0;
+	background-color: #393D49;
+}
+
+.index-user {
+	margin: auto;
+	width: 8%;
+	position: absolute;
+	top: 20px;
+	left: 25px;
+}
+
+.index-user-a {
+	font-size: 14px;
+	font-variant-numeric: inherit;
+	font-weight: 700;
+	color: #ccc;
+}
+
+.index-body {
+	background-image: url(/resources/img/bg/bg-54.jpg);
+    -webkit-filter: blur(10px);
+    filter: blur(8px);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    z-index: -1000;
+    background-size: cover;
+    -webkit-background-size: cover;
+	/* filter: blur(2px); */
+}

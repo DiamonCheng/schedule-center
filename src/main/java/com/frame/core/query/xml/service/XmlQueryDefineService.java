@@ -2,14 +2,13 @@ package com.frame.core.query.xml.service;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
-import com.frame.core.components.BaseEntity;
-import com.frame.core.query.xml.*;
-import com.frame.core.query.xml.definition.*;
-import com.frame.core.utils.ReflectUtil;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import org.hibernate.Query;
 import org.hibernate.transform.Transformers;
 import org.slf4j.Logger;
@@ -17,9 +16,27 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.frame.core.dao.GeneralDao;
 import org.springframework.util.StringUtils;
+
+import com.frame.core.components.BaseEntity;
+import com.frame.core.dao.GeneralDao;
+import com.frame.core.entity.UserEntity;
+import com.frame.core.query.xml.DataFilter;
+import com.frame.core.query.xml.DefaultDataFilter;
+import com.frame.core.query.xml.GeneralController;
+import com.frame.core.query.xml.PageDefinitionHolder;
+import com.frame.core.query.xml.QueryHqlResolver;
+import com.frame.core.query.xml.definition.ColumnDefinition;
+import com.frame.core.query.xml.definition.Manage;
+import com.frame.core.query.xml.definition.ManageField;
+import com.frame.core.query.xml.definition.PageDefinition;
+import com.frame.core.query.xml.definition.QueryCondition;
+import com.frame.core.query.xml.definition.QueryConditionDefine;
+import com.frame.core.query.xml.definition.QueryConditions;
+import com.frame.core.query.xml.definition.QueryDefinition;
+import com.frame.core.utils.ReflectUtil;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 @Transactional
 @Service
@@ -196,11 +213,11 @@ public class XmlQueryDefineService {
 	    return models;
     }
     @SuppressWarnings("unchecked")
-    public <T extends BaseEntity> boolean saveManage(String paramString,GeneralController<T> c){
-	    Class<? extends BaseEntity> targetClass=c.getTargetClass();
+    public <T extends BaseEntity> T saveManage(String paramString,GeneralController<T> c){
+	    Class<T> targetClass=c.getTargetClass();
         PageDefinitionHolder pageHolder=c.getPageHolder();
-        BaseEntity entity =gson.fromJson(paramString,targetClass);
-        BaseEntity toSave=null;
+        T entity =gson.fromJson(paramString,targetClass);
+        T toSave=null;
         List<ManageField> manageFields=pageHolder.getPageDefinition().getManage().getField();
         if (entity.getId()==null){
             toSave=entity;
@@ -245,6 +262,7 @@ public class XmlQueryDefineService {
             }
         }
         if (pageHolder.getPageDefinition().getManage().getBeforeManage()!=null){
+        	//toInvoke：是从XML配置中已经读取完毕的BeforeManage方法。
             Method toInvoke=pageHolder.getPageDefinition().getManage().getBeforeManageMethod();
             Class<?>[] argsType=toInvoke.getParameterTypes();
             Object[] args=new Object[argsType.length];
@@ -256,7 +274,7 @@ public class XmlQueryDefineService {
             try {
                 toInvoke.setAccessible(true);
                 if ((Boolean)toInvoke.invoke(c,args)) saveOrUpdate(toSave);
-                else return false;
+                else return null;
             } catch (Exception e) {
                 throw new GeneralController.GeneralControllerExcuteException(e);
             }
@@ -279,7 +297,7 @@ public class XmlQueryDefineService {
                 throw new GeneralController.GeneralControllerExcuteException(e);
             }
         }
-        return true;
+        return toSave;
     }
     public void saveOrUpdate(BaseEntity entity){
 	    if (entity.getId()==null){

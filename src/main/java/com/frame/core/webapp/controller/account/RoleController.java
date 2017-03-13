@@ -1,10 +1,8 @@
 package com.frame.core.webapp.controller.account;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +17,7 @@ import com.frame.core.service.account.RoleService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 @Controller
-@RequestMapping("/role")
+@RequestMapping("/admin/role")
 @PageDefinition("rolePageDefinition.xml")
 public class RoleController extends GeneralController<RoleEntity> {
 	@Override

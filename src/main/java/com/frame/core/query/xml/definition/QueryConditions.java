@@ -15,11 +15,11 @@ import com.google.gson.reflect.TypeToken;
 import javax.servlet.http.HttpServletRequest;
 
 public class QueryConditions {
-	private String paramString;
+	private String paramString;//json格式的参数。
 	private static final Gson gson=GsonFactory.buildDefaultGson();
 	private List<QueryCondition> conditions;
 	private int page=1;
-	private int pageSize=10;
+	private Integer pageSize;
 	private List<SortEntry> sortEntries=new ArrayList<SortEntry>();
 
 	/**
@@ -50,7 +50,7 @@ public class QueryConditions {
 	public void setPage(int page) {
 		this.page = page;
 	}
-	public int getPageSize() {
+	public Integer getPageSize() {
 		return pageSize;
 	}
 	public void setPageSize(int pageSize) {

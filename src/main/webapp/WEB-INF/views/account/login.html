@@ -2,47 +2,103 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Cache-Control" content="no-cache"/>
-<meta http-equiv="Pragma" content="no-cache"/>
-<meta http-equiv="Expires" content="0"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>登录</title>
 <script type="text/javascript" src="${ctx}/resources/js/common/jquery.js"></script>
+<script type="text/javascript" src="${ctx}/resources/layer-v3.0.3/layer/layer.js"></script>
+<script type="text/javascript" src="${ctx}/resources/layui/layui.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/common/common.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/common/aes.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/account/login.js"></script>
+
 <script>
 	window.ctx="${ctx}";
 </script>
-<link href="${ctx}/resources/css/common/decorator.css" rel="stylesheet"/>
-<link href="${ctx}/resources/css/account/login.css" rel="stylesheet"/>
-<link href="${ctx}/resources/css/common/frame.css" rel="stylesheet"/>
+<link href="${ctx}/resources/layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/resources/css/common/decorator.css" rel="stylesheet" />
+<link href="${ctx}/resources/css/account/login.css" rel="stylesheet" />
+<link href="${ctx}/resources/css/common/frame.css" rel="stylesheet" />
+<link href="${ctx}/resources/css/account/app.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<div id="bg" style="background-image: url('${ctx}/resources/img/bg-login-2.jpg');"></div>
-<div id="bgCover"></div>
-<div class="head-wrap">
-	<div class="head-dashboard">
-		<div class="head-dashboard-content">
-			<div class="board-title">FRAME DASHBOARD</div>
+	<div id="bg" clsss="bg-big" style="background-image: url('${ctx}/resources/img/bg-23.PNG');"></div>
+	<div id="bgCover"></div>
+	<ul class="layui-nav">
+		<li class="layui-nav-itemed layui-inline">
+			<blockquote class="layui-elem-quote-black ">COMMEMORATE SOFTWARE ENGINEERING 14 CLASS</blockquote>
+		</li>
+		<li class="layui-nav-item btn-right"><a id="btnOPenSubmit" href="javascript:void(0)">登录</a></li>
+		<li class="layui-clear "></li>
+	</ul>
+
+	<script>
+//注意：导航 依赖 element 模块，否则无法进行功能性操作
+layui.use('element', function(){
+  var element = layui.element();
+});
+</script>
+	<div class="login-wrapper">
+		<div id="timeBox" class="time">
+			<div class="inner">
+				<span id="hours" class="hours">00</span> <span id="seperator" class="seperator">:</span> <span id="minutes" class="minutes">00</span> <span id="meridiem" class="meridiem"></span>
+			</div>
+		</div>
+		<div id="formOpen" style="display: none">
+			<form id="login-from" action="" method="post" name="loginForm">
+				<div class="login-inputs">
+					<div class="login-input">
+						<input id="userLoginVerification" name="userLoginVerification" type="text" placeholder="Account" autocomplete="off" />
+					</div>
+					<div class="login-input">
+						<input id="userPassword" name="userPassword" type="password" placeholder="Password" required />
+					</div>
+				</div>
+				<div id="btn-submit" class="login-buttons">
+					<div id="loginSubmit">登陆</div>
+					<div id="userloginRegist">注册</div>
+				</div>
+			</form>
+		</div>
+		<div id="formRegister" style="display: none">
+			<form id="register-from" action="" method="post" name="loginForm">
+				<div class="login-inputs">
+					<div class="login-input">
+						<input id="userRegisterVerification" name="userRegisterVerification" type="text" placeholder="Account" autocomplete="off" />
+					</div>
+					<div class="login-input">
+						<input id="userRegisterPassword" name="userRegisterPassword" type="password" placeholder="Password" required />
+					</div>
+					<div class="login-input">
+						<input id="userConfirmRegisterPassword" name="userConfirmRegisterPassword" type="password" placeholder="Confirm Password " required />
+					</div>
+				</div>
+				<div id="btn-submit" class="login-buttons">
+					<div id="userRegist">注册</div>
+					<div id="registerSubmit">登陆</div>
+				</div>
+			</form>
 		</div>
 	</div>
-</div>
-<div class="login-wrapper" >
-	<form id="login-from" action="" method="post" name="loginForm">
-	<div class="login-inputs">
-		<div class="login-input">
-			<input id="userLoginVerification" name="userLoginVerification" type="text" placeholder="Account" autocomplete="off"/>
-		</div>
-		<div class="login-input">
-			<input id="userPassword" name="userPassword" type="password" placeholder="Password" required />
-		</div>
+	<div id="imgContent" class="img-content layer-photos-demo">
+		<img style="display: none" layer-src="${ctx}/resources/img/bg-23.PNG" src="${ctx}/resources/img/bg-23.PNG"> <img id="bgBt1" class="login-bg" layer-src="${ctx}/resources/img/bg/bg-2458.jpg"
+			src="${ctx}/resources/img/bg/bg-2458.jpg"> <img style="display: none" layer-src="${ctx}/resources/img/bg/bg-2469.jpg" src="${ctx}/resources/img/bg/bg-2469.jpg"> <img
+			style="display: none" layer-src="${ctx}/resources/img/bg/bg-2714.jpg" src="${ctx}/resources/img/bg/bg-2714.jpg"> <img style="display: none" layer-src="${ctx}/resources/img/bg/bg-54.jpg"
+			src="${ctx}/resources/img/bg/bg-54.jpg"> <img style="display: none" layer-src="${ctx}/resources/img/bg/13.jpg" src="${ctx}/resources/img/bg/13.jpg"> <img style="display: none"
+			layer-src="${ctx}/resources/img/bg/27.jpg" src="${ctx}/resources/img/bg/27.jpg"> <img style="display: none" layer-src="${ctx}/resources/img/bg/45.jpg" src="${ctx}/resources/img/bg/45.jpg">
+		<img style="display: none" layer-src="${ctx}/resources/img/bg/61.jpg" src="${ctx}/resources/img/bg/61.jpg"> <img style="display: none" layer-src="${ctx}/resources/img/bg/67.jpg"
+			src="${ctx}/resources/img/bg/67.jpg"> <img style="display: none" layer-src="${ctx}/resources/img/bg-23.PNG" src="${ctx}/resources/img/bg-23.PNG">
 	</div>
-	<div class="login-buttons">
-		<div id="loginSubmit">登陆</div>
-		<div id="loginRegist">注册</div>
-	</div>
-	</form>
-</div>
-	<div class="login-message" id="loginMessage" message="${message!''?js_string}"></div>
+	<!-- 	<div class="login-message" id="loginMessage" message="  ${message!''?js_string} "></div> -->
+	<script>
+	var msg= '${message!''}';
+	if(msg =="0")
+		layer.msg("welcome!");
+	if(msg == "1")
+		layer.msg("用户名或密码错误！")
+	</script>
+
 </body>
 </html>

@@ -39,7 +39,7 @@ public abstract class GeneralController <T extends BaseEntity>{
 			super(e);
 		}
 	}
-	private Class<T> targetClass;
+	private Class<T> targetClass;//T.class
     public Class<T> getTargetClass() {
         return targetClass;
     }
@@ -49,11 +49,11 @@ public abstract class GeneralController <T extends BaseEntity>{
 	@SuppressWarnings("unchecked")
 	public GeneralController(){
         targetClass = (Class<T>) ((ParameterizedType) getClass()
-                .getGenericSuperclass()).getActualTypeArguments()[0];
+                .getGenericSuperclass()).getActualTypeArguments()[0];//得到泛型的类对象
 		Class<?> loader=this.getClass();
-		PageDefinition df=loader.getAnnotation(com.frame.core.query.xml.annoation.PageDefinition.class);
+		PageDefinition df=loader.getAnnotation(com.frame.core.query.xml.annoation.PageDefinition.class);//得到当前Controller的PageDefinition注解
 		if (df==null) throw new NullPointerException("请在Controller上定义@pageDefinition注解");
-		String xmlFileName=df.value();
+		String xmlFileName=df.value();//得到注解所配置的PageDefinition.xml的路径、
 		pageHolder=new PageDefinitionHolder(xmlFileName, loader);
 		pageHolder.refresh(this);
 	}
@@ -70,6 +70,8 @@ public abstract class GeneralController <T extends BaseEntity>{
 				queryConditions.getSortEntries().add(sortEntry);
 			}
 		}
+		if (queryConditions.getPageSize()==null) 
+			queryConditions.setPageSize(pageHolder.getPageDefinition().getQueryDefinition().getPageSize());
 		ModelAndView mv=new ModelAndView("/common/list");
 		Object list= service.list(pageHolder.getPageDefinition(), queryConditions);//查询得到的结果
 		mv.addObject("totalPageCount", service.totalPageCount(pageHolder.getPageDefinition(), queryConditions));//查询页数准备分页
@@ -145,7 +147,8 @@ public abstract class GeneralController <T extends BaseEntity>{
 				throw new GeneralControllerExcuteException(e);
 			}
 		}
-		return new AjaxResult();
+		AjaxResult aj=	new AjaxResult();
+		return aj;
 	}
     public boolean beforeDelete(T entity){return true;}
     public void afterDelete(){}
@@ -167,9 +170,12 @@ public abstract class GeneralController <T extends BaseEntity>{
 	@RequestMapping(value={ADD_METHOD_URL,EDIT_METHOD_URL},method = RequestMethod.POST)
     @ResponseBody
 	public Object saveManage(String paramString) throws NoSuchMethodException {
-	    if (service.saveManage(paramString,this))
+	    T saved=null;
+		if (null!=(saved=service.saveManage(paramString,this)))
 	    	UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
-    	return new AjaxResult();
+	    AjaxResult res=new AjaxResult();
+	    res.setData(saved.getId());
+    	return res;
 	}
 	public boolean beforeUpdate(T entity){return true;}
 	//TODO 这里做这可Controller能够出现的异常。

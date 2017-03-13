@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.frame.core.query.xml.GeneralController;
 import com.frame.core.query.xml.annoation.PageDefinition;
 @Controller
-@RequestMapping("/menu")
+@RequestMapping("/admin/menu")
 @PageDefinition("pageDefinition.xml")
 public class MenuController extends GeneralController <MenuEntity>{
 	@Override

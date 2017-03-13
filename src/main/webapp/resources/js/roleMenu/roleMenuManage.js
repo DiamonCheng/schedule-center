@@ -5,7 +5,7 @@
 	var zNodes;
 	$(document).ready(function(){
 		var id=$('input[name=id]').val();
-		$.post(ctx+"/role/loadMenuTree",{id:id},function(res){
+		$.post(ctx+"/admin/role/loadMenuTree",{id:id},function(res){
 			zNodes=res;
 			$('div.foot-block').before('<div class="row"><label class="form-label">菜单选项</label><div class="ztree-field-wrapper"><div id="roleMenuTree" class="ztree"></div></div></div>');
 			window.menuTree=$.fn.zTree.init($("#roleMenuTree"), {
@@ -14,9 +14,8 @@
 			}, zNodes);
 		},"json");
 	});
-	window.frame.manage.afterSave=function(){
-		var id=$('input[name=id]').val();
-		$.ajax(ctx+"/role/saveMenuTree",{
+	window.frame.manage.afterSave=function(id){
+		$.ajax(ctx+"/admin/role/saveMenuTree",{
 			dataType:"json",
 			method:"POST",
 			success:function(){

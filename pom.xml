@@ -1,10 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.dc</groupId>
-	<artifactId>frame</artifactId>
-	<version>1.0.release</version>
-	<name>frame</name>
+	<groupId>com.wowson</groupId>
+	<version>1.0.snapshot</version>
+	<name>sandwitch</name>
 	<packaging>war</packaging>
 	<properties>
 		<version>1.0-snapshot</version>
@@ -23,6 +22,20 @@
                 <db.driver>com.mysql.jdbc.Driver</db.driver>
                 <db.username>root</db.username>
                 <db.password></db.password>
+                <db.url>jdbc:mysql://127.0.0.1:3306/frame?useUnicode=true&amp;amp;characterEncoding=utf8</db.url>
+
+                <hibernate.dialect>org.hibernate.dialect.MySQL5Dialect</hibernate.dialect>
+                <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
+                <hibernate.format_sql>false</hibernate.format_sql>
+                <hibernate.show_sql>true</hibernate.show_sql>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev-wowson</id>
+            <properties>
+                <db.driver>com.mysql.jdbc.Driver</db.driver>
+                <db.username>root</db.username>
+                <db.password>202020</db.password>
                 <db.url>jdbc:mysql://127.0.0.1:3306/frame?useUnicode=true&amp;amp;characterEncoding=utf8</db.url>
 
                 <hibernate.dialect>org.hibernate.dialect.MySQL5Dialect</hibernate.dialect>
@@ -209,4 +222,5 @@
 			<version>5.1.40</version>
 		</dependency>
 	</dependencies>
+	<artifactId>sandwitch</artifactId>
 </project>
