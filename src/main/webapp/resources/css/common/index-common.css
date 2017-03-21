@@ -12,6 +12,7 @@
 	height: 59px;
 	border-bottom: 1px solid #404553;
 	background-color: #393D49;
+	opacity: 0.7;
 }
 
 .header .layui-nav {
@@ -56,7 +57,7 @@
 }
 
 .layui-elem-quote-black-index {
-	margin-left: 0px;
+	margin-left: 100px;
 	color: #ccc;
 	font-size: 16px;
 	margin-top: 0px;
@@ -69,30 +70,41 @@
 
 .index-user {
 	margin: auto;
-	width: 8%;
 	position: absolute;
-	top: 20px;
-	left: 25px;
 }
-
+.index-user:hover{
+	border-bottom: 4px solid #429086;
+	
+}
 .index-user-a {
-	font-size: 14px;
-	font-variant-numeric: inherit;
-	font-weight: 700;
-	color: #ccc;
+	    font-size: 10px;
+    font-variant-numeric: inherit;
+    font-weight: 700;
+    color: #ccc;
+    display: inline-block;
+    padding: 21px;
+    overflow: hidden;
+    width: 55px;
 }
 
 .index-body {
-	background-image: url(/resources/img/bg/bg-54.jpg);
-    -webkit-filter: blur(10px);
-    filter: blur(8px);
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-position-x: center;
-    z-index: -1000;
-    background-size: cover;
-    -webkit-background-size: cover;
+	background-image: url(/resources/img/bg/bg313.jpg);
+	/* -webkit-filter: blur(10px); */
+	/* filter: blur(8px); */
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-position-x: center;
+	z-index: -1000;
+	background-size: cover;
+	-webkit-background-size: cover;
 	/* filter: blur(2px); */
+	opacity: 0.8;
+}
+
+.index-main {
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
 }

@@ -26,7 +26,7 @@
 <body>
 	<div id="bg" clsss="bg-big" style="background-image: url('${ctx}/resources/img/bg-23.PNG');"></div>
 	<div id="bgCover"></div>
-	<ul class="layui-nav">
+	<ul class="layui-nav header">
 		<li class="layui-nav-itemed layui-inline">
 			<blockquote class="layui-elem-quote-black ">COMMEMORATE SOFTWARE ENGINEERING 14 CLASS</blockquote>
 		</li>
@@ -94,6 +94,22 @@ layui.use('element', function(){
 	<!-- 	<div class="login-message" id="loginMessage" message="  ${message!''?js_string} "></div> -->
 	<script>
 	var msg= '${message!''}';
+	var redirect ='${redirect !''}';
+	if(redirect == "1"){
+		var index=layer.open({
+				title:'tips',
+				content:'是否进入管理员界面！',
+				shade: [0.8, '#393D49'],
+				btn:['yes','no'],
+				yes:function(index,layero){
+						location.href="/admin/main";
+					},
+				btn2:function(index,layero){
+					location.href="/front/index";
+					}
+			});
+			layer.style(index,{background:'rgba(255,255,255,0.5)'});
+	}
 	if(msg =="0")
 		layer.msg("welcome!");
 	if(msg == "1")

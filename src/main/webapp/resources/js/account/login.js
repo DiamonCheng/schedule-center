@@ -155,12 +155,9 @@ function seperator() {
 	window.setTimeout(seperator, 1000);
 }
 
-// layer注册
 $(document).ready(function() {
 
 	var msg = $('#loginMessage').text();
-	// layer.msg('23333');
-	// message(msg);
 	// 表单隐藏
 	$('#formOpen').attr("style", "display:none");
 	// 时间框隐藏

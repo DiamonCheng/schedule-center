@@ -1,8 +1,13 @@
 package com.frame.entity.media;
 
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.frame.core.components.BaseEntity;
@@ -23,10 +28,34 @@ public class ImgEntity extends BaseEntity{
 	private String imgName;
 	@Column(length=20)
 	private Long createUserKey;
-	@Column(length=128)
 	private String  savePath;
+	private String  srcName;
 	@Column(length=20)
 	private Long imgGroupKey;
+	private Long count;
+	/*@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(foreignKey = @ForeignKey(name="null"))
+	private ImgGroupEntity imgGroupEntity;
+	
+	public ImgGroupEntity getImgGroupEntity() {
+		return imgGroupEntity;
+	}
+	public void setImgGroupEntity(ImgGroupEntity imgGroupEntity) {
+		this.imgGroupEntity = imgGroupEntity;
+	}*/
+	
+	public String getSrcName() {
+		return srcName;
+	}
+	public Long getCount() {
+		return count;
+	}
+	public void setCount(Long count) {
+		this.count = count;
+	}
+	public void setSrcName(String srcName) {
+		this.srcName = srcName;
+	}
 	public String getImgName() {
 		return imgName;
 	}

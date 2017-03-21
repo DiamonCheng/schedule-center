@@ -32,6 +32,7 @@
         	return e1.index-e2.index;
 		});
 		submitParams("","POST",{paramString:JSON.stringify(param)});
+		
 	};
 	window.deleteRow=function(){
 		var selectedId=$(".data-panel>table>tbody>tr.selected").attr("id");
@@ -39,9 +40,11 @@
 		if (!!selectedId){
 			$.ajax("delete",{
 				data:{id:selectedId},
+				dataType:'json',
 				method:"POST",
 				success:function(data){
 					submitQuery();
+					//setTimeout("",500);
 				}
 			});
 		}

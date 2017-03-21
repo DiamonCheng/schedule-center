@@ -49,3 +49,17 @@ ul.navigations>split{
 ul.navigations>split::after{
 	content:">";
 }
+.login-out{
+	    font-size: 18px;
+    font-family: "黑体";
+    position: absolute;
+    display: block;
+    right: 20px;
+    padding: 8px;
+    text-decoration: none;
+    color: #edf3f1;
+    background-color: rgba(25, 255, 255, .08);
+}
+.login-out:hover{
+	background-color: rgba(255, 255, 255, 0.3);
+}

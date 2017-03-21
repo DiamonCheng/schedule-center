@@ -1,5 +1,11 @@
 @CHARSET "UTF-8";
 
+.header {
+	border-bottom: 1px solid #404553;
+	background-color: #393D49;
+	opacity: 0.6;
+}
+
 .head-dashboard {
 	background-color: #202425;
 }
@@ -75,10 +81,10 @@
 .login-bg {
 	position: fixed;
 	right: 10px;
-	bottom: 10px;
-	height: 50px;
+	bottom: 30px;
+	height: 70px;
 	cursor: pointer;
-	opacity: 0.8;
+	opacity: 0.9;
 }
 
 .img-content {

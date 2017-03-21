@@ -9,6 +9,8 @@
 <script type="text/javascript" src="${ctx}/resources/js/common/jquery.js"></script>
 <script type="text/javascript" src="${ctx}/resources/layer-v3.0.3/layer/layer.js"></script>
 <script type="text/javascript" src="${ctx}/resources/layui/layui.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/index/aldum.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/fancybox/js/jquery.fancybox.js"></script>
 <script>
 	window.ctx="${ctx}";
 	//注意：导航 依赖 element 模块，否则无法进行功能性操作
@@ -17,35 +19,38 @@
 	});
 </script>
 <link href="${ctx}/resources/css/common/index-common.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/resources/css/account/index.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/resources/layui/css/layui.css" rel="stylesheet" type="text/css" />
-<link href="${ctx}/resources/css/account/index.css" rel="stylesheet" type="text/css"/>
+<link href="${ctx}/resources/css/account/album.css" rel="stylesheet" type="text/css"/>
+<link href="${ctx}/resources/js/fancybox/css/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
+<link href="/resources/bootstrap-3.3.5-dist/css/bootstrap.css" rel="stylesheet" type="text/css"/>
 <title><sitemesh:write property='title' /></title>
 </head>
 <body>
-	<div class="index-body">
-	</div>
+	<div class="index-body"></div>
+
 	<div class="layui-header header header-index">
-		<div class="index-user">
-		<a href="/" class = "index-user-a">WS</a>
-		</div>
-		<div class="layui-main">
-				<blockquote class="layui-elem-quote-black-index ">COMMEMORATE SOFTWARE ENGINEERING 14 CLASS</blockquote>
+		<div class="index-main ">
+			<div class="index-user">
+				<a id="user-a" href="#" class="index-user-a">${user.nickName}</a>
+			</div>
+			<blockquote class="layui-elem-quote-black-index ">CLASS 14</blockquote>
 			<div class="layui-form component">
 				<select lay-search lay-filter="component">
 					<option>2333</option>
 				</select>
 			</div>
 			<ul class="layui-nav" pc>
-				<li class="layui-nav-item index-nav"><a href="">班级动态</a></li>
-				<li class="layui-nav-item index-nav"><a href="">图片</a></li>
-				<li class="layui-nav-item index-nav" pc><a href="" >视频</a></li>
-				<li class="layui-nav-item index-nav" pc><a href="${ctx}/login" >注销</a></li>
+				<li class="layui-nav-item index-nav" pc><a href="">班级动态</a></li>
+				<li class="layui-nav-item index-nav" pc><a href="/front/album/index">相册</a></li>
+				<li class="layui-nav-item index-nav" pc><a href="">视频</a></li>
+				<li class="layui-nav-item index-nav" pc><a href="/loginOut">注销</a></li>
 			</ul>
 		</div>
 	</div>
-	<div class="layui-main">
+	<div class="index-main ">
 
-			<sitemesh:write property='body' />
-		</div>
+		<sitemesh:write property='body' />
+	</div>
 </body>
 </html>

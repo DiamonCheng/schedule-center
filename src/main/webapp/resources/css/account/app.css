@@ -49,7 +49,7 @@ body, html, .bg {
 	-webkit-backface-visibility: hidden;
 	font-size: 0;
 	transform: translateX(-50%);
-	opacity: 0.15;
+	opacity: 0.4;
 }
 
 .time span {

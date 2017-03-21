@@ -26,7 +26,6 @@ public class RoleController extends GeneralController<RoleEntity> {
 	}
 	@Override
 	public boolean beforeUpdate(RoleEntity entity) {
-//		UserAuthoritySubject.getSession().setAttribute("error", "未知原因2");
 		return true;
 	}
 	@Autowired

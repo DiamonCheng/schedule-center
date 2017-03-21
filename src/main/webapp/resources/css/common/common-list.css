@@ -12,9 +12,13 @@
     color: #fbfdff;
 }
 .data-panel>table td{
-    padding: 5px 0;
+   padding: 5px 0;
     text-align: center;
     /* margin: 0; */
+    overflow: auto;
+    border-bottom-left-radius: inherit;
+    border: 1px inset;
+    font-size: 14px;
 }
 .data-panel>table tr{
 	color: #494b4c;

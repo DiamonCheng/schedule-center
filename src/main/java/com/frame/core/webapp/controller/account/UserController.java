@@ -27,6 +27,7 @@ public class UserController extends GeneralController<UserEntity> {
 		if (entity.getId()==null){
 			entity.setUserPassword(EncriptUtil.encriptSHA1(entity.getUserLoginVerification()+DEFAULT_PASSWORD));
 		}
+			
 		return true;
 	}
 	@Override

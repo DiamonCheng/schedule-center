@@ -23,7 +23,7 @@ public class GeneralIntercepter implements HandlerInterceptor {
 		String requestURI=request.getServletPath();
 		if (requestURI.startsWith("/resources/")) return true;
 		boolean flag=false;
-		if (!UserAuthoritySubject.isUserVerify()&& !requestURI.contains("login")&& !requestURI.contains("regist")){//未登录 进入
+		if (!UserAuthoritySubject.isUserVerify()&& !requestURI.contains("login")&& !requestURI.contains("regist")&& !requestURI.contains("loginOut")){//未登录 进入
 			if (HttpContextUtil.isAjaxRequest()){
 				response.setHeader("SESSION_STATUS", "TIME_OUT");
 			}else if(request.getHeader("accept").matches(".*html.*")){
