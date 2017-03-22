@@ -2,26 +2,40 @@ package com.frame.core.query.xml.service;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
-import com.frame.core.components.BaseEntity;
-import com.frame.core.query.xml.*;
-import com.frame.core.query.xml.definition.*;
-import com.frame.core.utils.ReflectUtil;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import org.hibernate.Query;
 import org.hibernate.transform.Transformers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.frame.core.dao.GeneralDao;
 import org.springframework.util.StringUtils;
 
-@Transactional
+import com.frame.core.components.BaseEntity;
+import com.frame.core.dao.GeneralDao;
+import com.frame.core.query.xml.DataFilter;
+import com.frame.core.query.xml.DefaultDataFilter;
+import com.frame.core.query.xml.GeneralController;
+import com.frame.core.query.xml.PageDefinitionHolder;
+import com.frame.core.query.xml.QueryHqlResolver;
+import com.frame.core.query.xml.definition.ColumnDefinition;
+import com.frame.core.query.xml.definition.Manage;
+import com.frame.core.query.xml.definition.ManageField;
+import com.frame.core.query.xml.definition.PageDefinition;
+import com.frame.core.query.xml.definition.QueryCondition;
+import com.frame.core.query.xml.definition.QueryConditionDefine;
+import com.frame.core.query.xml.definition.QueryConditions;
+import com.frame.core.query.xml.definition.QueryDefinition;
+import com.frame.core.utils.ReflectUtil;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 @Service
 public class XmlQueryDefineService {
 	private final static Logger LOGGER = LoggerFactory.getLogger(XmlQueryDefineService.class);
@@ -42,6 +56,8 @@ public class XmlQueryDefineService {
 	private DataFilter defaultDataFilter=new DefaultDataFilter();
 	@Autowired
 	GeneralDao dao;
+	@Autowired
+	public Gson gson;
 	@SuppressWarnings("unchecked")
 	public Object list(PageDefinition pageDefinition,QueryConditions conditions){
 		String selectHql=QueryHqlResolver.generateSelect(pageDefinition.getQueryDefinition(), conditions);
@@ -98,8 +114,6 @@ public class XmlQueryDefineService {
 		if (totalPageCount<1) totalPageCount=1;
 		return totalPageCount;
 	}
-	@Autowired
-	public Gson gson;
 	/**
      * 准备查询条件
 	 * @param queryConditions 浏览器传送过来结构化之后的参数
@@ -140,8 +154,8 @@ public class XmlQueryDefineService {
         }
     }
 
-	public void delete(Long id,Class<?> cls){
-		dao.executeHql("delete from "+cls.getName()+" where id=?",id);
+	public void delete(BaseEntity entity){
+		dao.getHibernateTemplate().delete(entity);
 	}
 	@SuppressWarnings("unchecked")
 	public <T> T get(Class<? extends BaseEntity> cls, Serializable id){
@@ -165,10 +179,14 @@ public class XmlQueryDefineService {
             }else{
                 target=this.get(targetClass,id);
                 for (ManageField manageField:manageFields) {
-                    manageField.setValue(ReflectUtil.getValueByField(target,manageField.getField()));
+                    try {
+						manageField.setValue(ReflectUtil.getValueByField(target,manageField.getField()));
+					} catch (Exception e) {
+						LOGGER.warn("字段解析出现异常，值设置为默认空。class："+targetClass.getName()+",field:"+manageField.getField(),e);
+					}
                 }
             }
-            for (ManageField manageField:manageFields) {
+            for (ManageField manageField:manageFields) try {
                 prepareSelectData(manageField);
                 Class<?> fieldClass=ReflectUtil.resolveFieldClass(targetClass,manageField.getField());
                 if (BaseEntity.class.isAssignableFrom(fieldClass)){
@@ -186,6 +204,8 @@ public class XmlQueryDefineService {
                 		manageField.setIsEntity(true);
                 	}
                 }
+            }catch(Exception e){
+            	LOGGER.warn("字段解析出现异常，值设置为默认空。class："+targetClass.getName()+",field:"+manageField.getField(),e);
             }
             models.put("entity",target);
             models.put("manageFields",manageFields);
@@ -288,7 +308,4 @@ public class XmlQueryDefineService {
 	        dao.getHibernateTemplate().update(entity);
         }
     }
-	public static void main(String[] args) {
-		System.out.println(List.class.isAssignableFrom(ArrayList.class));
-	}
 }

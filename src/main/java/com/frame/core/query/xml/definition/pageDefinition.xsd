@@ -1,215 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema id="pageDefinition" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="pageDefinition" type="pageDefinitionType">
-    <xs:annotation>
-      <xs:documentation>
-        随便写写
-      </xs:documentation>
-    </xs:annotation>
-    </xs:element>
-    <xs:complexType name="pageDefinitionType">
-      <xs:sequence>
-        <xs:element name="queryDefinition" minOccurs="1" maxOccurs="1">
-          <xs:complexType>
-            <xs:attribute name="showIndex"></xs:attribute>
-            <xs:sequence minOccurs="1">
-              <xs:element name="mappedClass">
-                <xs:complexType>
-                  <xs:attribute name="mappedClass" use="required"></xs:attribute>
-                  <xs:attribute name="alias"></xs:attribute>
-                  <xs:sequence minOccurs="0">
-                    <xs:element name="join">
-                      <xs:complexType>
-                        <xs:attribute name="field" use="required"></xs:attribute>
-                        <xs:attribute name="as"></xs:attribute>
-                        <xs:attribute name="type">
-                          <xs:simpleType>
-                            <xs:restriction base="xs:NMTOKEN">
-                              <xs:enumeration value="LEFT"/>
-                              <xs:enumeration value="INNER"/>
-                            </xs:restriction>
-                          </xs:simpleType>
-                        </xs:attribute>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-            <xs:sequence minOccurs="0">
-              <xs:element name="where">
-              </xs:element>
-            </xs:sequence>
-            <xs:sequence minOccurs="0">
-              <xs:element name="sort">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="by">
-                      <xs:complexType>
-                        <xs:attribute name="field" use="required"></xs:attribute>
-                        <xs:attribute name="fromAlias"></xs:attribute>
-                        <xs:attribute name="order" use="required">
-                          <xs:simpleType>
-                            <xs:restriction base="xs:NMTOKEN">
-                              <xs:enumeration value="ASC"/>
-                              <xs:enumeration value="DESC"/>
-                            </xs:restriction>
-                          </xs:simpleType>
-                        </xs:attribute>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-            <xs:sequence minOccurs="1" maxOccurs="1">
-              <xs:element name="columns">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="column">
-                      <xs:complexType>
-                        <xs:attribute name="field" use="required"></xs:attribute>
-                        <xs:attribute name="header"></xs:attribute>
-                        <xs:attribute name="fromAlias"></xs:attribute>
-                        <xs:attribute name="width"></xs:attribute>
-                        <xs:attribute name="sortable" type="xs:boolean"></xs:attribute>
-                        <xs:attribute name="hidden" type="xs:boolean"></xs:attribute>
-                        <xs:attribute name="filter"></xs:attribute>
-                        <xs:attribute name="staticColumnData"></xs:attribute>
-                      </xs:complexType>
-                    </xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-            <xs:sequence minOccurs="0" maxOccurs="1">
-              <xs:element name="pageSize" type="xs:int">
-              </xs:element>
-            </xs:sequence>
-            <xs:sequence maxOccurs="1" minOccurs="0">
-              <xs:element name="js">
-                <xs:complexType>
-                  <xs:sequence minOccurs="0">
-                    <xs:element name="path"></xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-            <xs:sequence maxOccurs="1" minOccurs="0">
-              <xs:element name="css">
-                <xs:complexType>
-                  <xs:sequence minOccurs="0">
-                    <xs:element name="path"></xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-            <xs:sequence maxOccurs="1" minOccurs="1">
-              <xs:element name="searchDefinition" type="searchDefinitionType"></xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-      </xs:sequence>
-      <xs:sequence maxOccurs="1" minOccurs="0">
-        <xs:element name="delete" type="deleteType"></xs:element>
-      </xs:sequence>
-      <xs:sequence maxOccurs="1" minOccurs="0">
-        <xs:element name="manage">
-          <xs:complexType>
-            <xs:attribute name="beforeManage" default="beforeManage"/>
-            <xs:attribute name="afterManage" default="afterManage"/>
-            <xs:sequence >
-              <xs:element  name="field" type="manageType"></xs:element>
-            </xs:sequence>
-            <xs:sequence maxOccurs="1" minOccurs="0">
-              <xs:element name="js">
-                <xs:complexType>
-                  <xs:sequence minOccurs="0">
-                    <xs:element name="path"></xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-            <xs:sequence maxOccurs="1" minOccurs="0">
-              <xs:element name="css">
-                <xs:complexType>
-                  <xs:sequence minOccurs="0">
-                    <xs:element name="path"></xs:element>
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-      </xs:sequence>
-    </xs:complexType>
-  
-  <xs:complexType name="searchDefinitionType">
-    <xs:sequence minOccurs="1">
-      <xs:element name="condition">
-        <xs:complexType>
-          <xs:attribute name="field" use="required"></xs:attribute>
-          <xs:attribute name="alias"></xs:attribute>
-          <xs:attribute name="operator" use="required">
-            <xs:simpleType>
-              <xs:restriction base="xs:NMTOKEN">
-                <xs:enumeration value="="></xs:enumeration>
-                <xs:enumeration value="LIKE"></xs:enumeration>
-                <!--<xs:enumeration value="BETWEEN"></xs:enumeration>-->
-                <xs:enumeration value="&gt;"></xs:enumeration>
-                <xs:enumeration value="&lt;"></xs:enumeration>
-                <xs:enumeration value="&gt;="></xs:enumeration>
-                <xs:enumeration value="&lt;="></xs:enumeration>
-                <xs:enumeration value="!="></xs:enumeration>
-                <xs:enumeration value="&lt;&gt;"></xs:enumeration>
-              </xs:restriction>
-            </xs:simpleType>
-          </xs:attribute>
-          <xs:attribute name="defaultValue"></xs:attribute>
-          <xs:attribute name="inputType" type="editorType">
-          </xs:attribute>
-          <xs:attribute name="displayText" use="required"></xs:attribute>
-          <xs:attribute name="selectTextField"></xs:attribute>
-          <xs:attribute name="selectValeField"></xs:attribute>
-          <xs:attribute name="inputId"></xs:attribute>
-          <xs:attribute name="optionClass"></xs:attribute>
-          <xs:attribute name="nullable" type="xs:boolean">
-          </xs:attribute>
-          <xs:sequence minOccurs="0" maxOccurs="1">
-            <xs:element name="staticData"></xs:element>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:simpleType name="editorType">
-    <xs:restriction base="xs:NMTOKEN">
-      <xs:enumeration value="TEXT"/>
-      <xs:enumeration value="NUMBER"/>
-      <xs:enumeration value="SELECT"/>
-      <xs:enumeration value="DATEBOX"/>
-      <xs:enumeration value="TEXTAREA"/>
-      <xs:enumeration value="CHECKBOX"/>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:complexType name="deleteType">
-    <xs:attribute name="beforeDelete" default="beforeDelete"></xs:attribute>
-    <xs:attribute name="afterDelete" default="afterDelete"></xs:attribute>
-  </xs:complexType>
-  <xs:complexType name="manageType">
-    <xs:attribute name="field" use="required"></xs:attribute>
-    <xs:attribute name="defaultValue"></xs:attribute>
-    <xs:attribute name="inputType" type="editorType">
-    </xs:attribute>
-    <xs:attribute name="displayText" use="required"></xs:attribute>
-    <xs:attribute name="selectTextField"></xs:attribute>
-    <xs:attribute name="selectValeField"></xs:attribute>
-    <xs:attribute name="inputId"></xs:attribute>
-    <xs:attribute name="optionClass"></xs:attribute>
-    <xs:sequence minOccurs="0" maxOccurs="1">
-      <xs:element name="staticData"></xs:element>
-    </xs:sequence>
-    <xs:attribute name="nullable" type="xs:boolean">
-    </xs:attribute>
-  </xs:complexType>
+<xs:schema id="pageDefinition" attributeFormDefault="unqualified"
+	elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="pageDefinition" type="pageDefinitionType">
+		<xs:annotation>
+			<xs:documentation>
+				随便写写
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="pageDefinitionType">
+		<xs:sequence>
+			<xs:element name="queryDefinition" minOccurs="1"
+				maxOccurs="1" type="queryDefinitionType">
+			</xs:element>
+			<xs:element maxOccurs="1" minOccurs="0" name="delete" type="deleteType"/>
+			<xs:element name="manage" type="manageType" maxOccurs="1" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="searchDefinitionType">
+		<xs:sequence minOccurs="1">
+			<xs:element name="condition" type="conditionType">
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="conditionType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="staticData"/>
+		</xs:sequence>
+		<xs:attribute name="field" use="required"/>
+		<xs:attribute name="alias"/>
+		<xs:attribute name="operator" use="required" type="operatorType">
+		</xs:attribute>
+		<xs:attribute name="defaultValue"/>
+		<xs:attribute name="inputType" type="editorType">
+		</xs:attribute>
+		<xs:attribute name="displayText" use="required"/>
+		<xs:attribute name="selectTextField"/>
+		<xs:attribute name="selectValeField"/>
+		<xs:attribute name="inputId"/>
+		<xs:attribute name="optionClass"/>
+		<xs:attribute name="nullable" type="xs:boolean"/>
+	</xs:complexType>
+	<xs:simpleType name="operatorType">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="="/>
+			<xs:enumeration value="LIKE"/>
+			<!--<xs:enumeration value="BETWEEN"></xs:enumeration> -->
+			<xs:enumeration value="&gt;"/>
+			<xs:enumeration value="&lt;"/>
+			<xs:enumeration value="&gt;="/>
+			<xs:enumeration value="&lt;="/>
+			<xs:enumeration value="!="/>
+			<xs:enumeration value="&lt;&gt;"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="queryDefinitionType">
+		<xs:sequence>
+			<xs:element minOccurs="1" name="mappedClass" type="mappedClassType"/>
+			<xs:element name="where" minOccurs="0"/>
+			<xs:element minOccurs="0" name="sort" type="sortType"/>
+			<xs:element name="columns" minOccurs="1" maxOccurs="1" type="columnsType"/>
+			<xs:element minOccurs="0" maxOccurs="1" name="pageSize" type="xs:int"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="js" type="jscssType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="css" type="jscssType"/>
+			<xs:element maxOccurs="1" minOccurs="1" name="searchDefinition" type="searchDefinitionType"/>
+		</xs:sequence>
+		<xs:attribute name="showIndex"/>
+	</xs:complexType>
+	<xs:complexType name="sortType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="by" type="sortByType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="columnsType">
+		<xs:sequence>
+			<xs:element minOccurs="1" name="column" type="columnType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="sortByType">
+		<xs:attribute name="field" use="required"/>
+		<xs:attribute name="fromAlias"/>
+		<xs:attribute name="order" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="ASC" />
+					<xs:enumeration value="DESC" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="columnType">
+		<xs:attribute name="field" use="required"/>
+		<xs:attribute name="header"/>
+		<xs:attribute name="fromAlias"/>
+		<xs:attribute name="width"/>
+		<xs:attribute name="sortable" type="xs:boolean"/>
+		<xs:attribute name="hidden" type="xs:boolean"/>
+		<xs:attribute name="filter"/>
+		<xs:attribute name="staticColumnData"/>
+	</xs:complexType>
+	<xs:complexType name="mappedClassType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="join" type="joinType">
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="mappedClass" use="required"/>
+		<xs:attribute name="alias"/>
+	</xs:complexType>
+	<xs:complexType name="joinType">
+		<xs:attribute name="field" use="required"/>
+		<xs:attribute name="as"/>
+		<xs:attribute name="type">
+			<xs:simpleType>
+				<xs:restriction base="xs:NMTOKEN">
+					<xs:enumeration value="LEFT" />
+					<xs:enumeration value="INNER" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="manageType">
+		<xs:sequence>
+			<xs:element name="field" type="manageFieldType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="js" type="jscssType"/>
+			<xs:element maxOccurs="1" minOccurs="0" name="css" type="jscssType"/>
+		</xs:sequence>
+		<xs:attribute name="beforeManage" default="beforeManage" />
+		<xs:attribute name="afterManage" default="afterManage" />
+	</xs:complexType>
+	<xs:complexType name="jscssType">
+		<xs:sequence minOccurs="1">
+			<xs:element name="path"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="editorType">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="TEXT" />
+			<xs:enumeration value="NUMBER" />
+			<xs:enumeration value="SELECT" />
+			<xs:enumeration value="DATEBOX" />
+			<xs:enumeration value="TEXTAREA" />
+			<xs:enumeration value="CHECKBOX" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="deleteType">
+		<xs:attribute name="beforeDelete" default="beforeDelete"/>
+		<xs:attribute name="afterDelete" default="afterDelete"/>
+	</xs:complexType>
+	<xs:complexType name="manageFieldType">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" name="staticData"/>
+		</xs:sequence>
+		<xs:attribute name="field" use="required"/>
+		<xs:attribute name="defaultValue"/>
+		<xs:attribute name="inputType" type="editorType"/>
+		<xs:attribute name="displayText" use="required"/>
+		<xs:attribute name="selectTextField"/>
+		<xs:attribute name="selectValeField"/>
+		<xs:attribute name="inputId"/>
+		<xs:attribute name="optionClass"/>
+		<xs:attribute name="nullable" type="xs:boolean">
+		</xs:attribute>
+	</xs:complexType>
 </xs:schema>

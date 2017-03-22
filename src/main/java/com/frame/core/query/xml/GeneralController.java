@@ -30,7 +30,6 @@ import com.frame.core.query.xml.definition.SortEntry;
 import com.frame.core.query.xml.service.XmlQueryDefineService;
 import com.frame.core.service.account.AuthorityService;
 import com.frame.core.utils.HttpContextUtil;
-import com.google.gson.Gson;
 @Controller
 public abstract class GeneralController <T extends BaseEntity>{
 	public static class GeneralControllerExcuteException extends RuntimeException{
@@ -116,21 +115,22 @@ public abstract class GeneralController <T extends BaseEntity>{
     @RequestMapping(DELETE_MAPPED_URL)
 	@ResponseBody
 	public Object delete(Long id){
+    	T entity=service.get(targetClass,id);
 		if (pageHolder.getPageDefinition().getDelete().getBeforeDelete()!=null){
 			Method toInvoke=pageHolder.getPageDefinition().getDelete().getBeforeDeleteMethod();
 			Object[] args=new Object[toInvoke.getParameterTypes().length];
 			if (pageHolder.getPageDefinition().getDelete().getInjectIndex()!=null){
-				args[pageHolder.getPageDefinition().getDelete().getInjectIndex()]=service.get(targetClass,id);
+				args[pageHolder.getPageDefinition().getDelete().getInjectIndex()]=entity;
 			}
 			try {
                 toInvoke.setAccessible(true);
-				if ((Boolean)toInvoke.invoke(this,args)) service.delete(id,targetClass);
+				if ((Boolean)toInvoke.invoke(this,args)) service.delete(entity);
 				UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
 			} catch (Exception e) {
 				throw new GeneralControllerExcuteException(e);
 			}
 		}else{
-            service.delete(id,targetClass);
+            service.delete(entity);
             UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
         }
 		if (pageHolder.getPageDefinition().getDelete().getAfterDelete()!=null){
@@ -164,8 +164,6 @@ public abstract class GeneralController <T extends BaseEntity>{
         HttpContextUtil.getCurrentRequest().setAttribute(AuthorityService.NAVIGATION_OPTIONS_KEY,options);
         return mv;
     }
-    @Autowired
-    Gson gson;
 	@RequestMapping(value={ADD_METHOD_URL,EDIT_METHOD_URL},method = RequestMethod.POST)
     @ResponseBody
 	public Object saveManage(String paramString) throws NoSuchMethodException {

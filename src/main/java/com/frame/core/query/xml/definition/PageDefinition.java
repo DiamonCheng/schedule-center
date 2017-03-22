@@ -3,10 +3,7 @@ package com.frame.core.query.xml.definition;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
 
 @XmlRootElement()
 public class PageDefinition {
@@ -14,6 +11,27 @@ public class PageDefinition {
 	private QueryDefinition queryDefinition;
 	private Manage manage;
 	private Delete delete;
+	public QueryDefinition getQueryDefinition() {
+		return queryDefinition;
+	}
+	public void setQueryDefinition(QueryDefinition queryDefinition) {
+		this.queryDefinition = queryDefinition;
+	}
+	public Delete getDelete() {
+		return delete;
+	}
+
+	public void setDelete(Delete delete) {
+		this.delete = delete;
+	}
+
+	public Manage getManage() {
+		return manage;
+	}
+
+	public void setManage(Manage manage) {
+		this.manage = manage;
+	}
 //	public static void main(String[] args) throws JAXBException {
 //		JAXBContext context=JAXBContext.newInstance(Definition.class);
 //		Definition d=new Definition();
@@ -47,25 +65,4 @@ public class PageDefinition {
         }  
   
     } */
-	public QueryDefinition getQueryDefinition() {
-		return queryDefinition;
-	}
-	public void setQueryDefinition(QueryDefinition queryDefinition) {
-		this.queryDefinition = queryDefinition;
-	}
-	public Delete getDelete() {
-		return delete;
-	}
-
-	public void setDelete(Delete delete) {
-		this.delete = delete;
-	}
-
-	public Manage getManage() {
-		return manage;
-	}
-
-	public void setManage(Manage manage) {
-		this.manage = manage;
-	}
 }

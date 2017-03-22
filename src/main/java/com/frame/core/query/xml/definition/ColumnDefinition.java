@@ -12,8 +12,6 @@ public class ColumnDefinition {
 	private boolean hidden=false;
 	private String staticColumnData;
 	private Class<?> filter;
-	private String callback;
-	private String queryComparator;
 	@XmlAttribute
 	public String getHeader() {
 		return header;
@@ -57,13 +55,6 @@ public class ColumnDefinition {
 		this.hidden = hidden;
 	}
 	@XmlAttribute
-	public String getCallback() {
-		return callback;
-	}
-	public void setCallback(String callback) {
-		this.callback = callback;
-	}
-	@XmlAttribute
 	@XmlJavaTypeAdapter(value=MappedClassEntry.class)
 	public Class<?> getFilter() {
 		return filter;
@@ -77,12 +68,5 @@ public class ColumnDefinition {
 	}
 	public void setStaticColumnData(String staticColumnData) {
 		this.staticColumnData = staticColumnData;
-	}
-	@XmlAttribute(name="operator")
-	public String getQueryComparator() {
-		return queryComparator;
-	}
-	public void setQueryComparator(String queryComparator) {
-		this.queryComparator = queryComparator;
 	}
 }

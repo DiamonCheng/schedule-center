@@ -3,11 +3,10 @@ package com.frame.core.webapp.controller.account;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.frame.core.entity.UserEntity;
 import com.frame.core.query.xml.GeneralController;
 import com.frame.core.query.xml.annoation.PageDefinition;
 import com.frame.core.utils.EncriptUtil;
-import com.frame.core.components.UserAuthoritySubject;
-import com.frame.core.entity.UserEntity;
 
 @RequestMapping("/users")
 @Controller
@@ -23,8 +22,8 @@ public class UserController extends GeneralController<UserEntity> {
 	}
 	@Override
 	public boolean beforeDelete(UserEntity entity) {
-		if (entity.getId().equals(UserAuthoritySubject.<UserEntity>getAccountSubject().getId()))
-			throw new RuntimeException("自己不能删除自己");
+//		if (entity.getId().equals(UserAuthoritySubject.<UserEntity>getAccountSubject().getId()))
+//			throw new RuntimeException("自己不能删除自己");
 		return true;
 	}
 }

@@ -15,7 +15,7 @@ import javax.persistence.Version;
 import org.hibernate.annotations.CreationTimestamp;
 
 /**
- * @author bin
+ * @author DeffersonCheng
  *
  */
 @MappedSuperclass

@@ -31,8 +31,10 @@
         $(document).on("mouseenter","div.frame-message",function(){
         	var $this=$(this);
         	var $img=$("<img class='close-ico' src='"+ctx+"/resources/img/delete.png' />").appendTo(this);
-        	$img.click(function(){
+        	$img.click(function(e){
         		$this.remove();
+        		e.stopPropagation(); 
+        		return false;
         	});
         });
         $(document).on("mouseleave","div.frame-message",function(){

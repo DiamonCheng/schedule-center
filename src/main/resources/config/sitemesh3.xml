@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemesh xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://sitemesh.org/xml/config">
-	<!-- 指明满足“/*”的页面，将被“decorator.html”所装饰 -->
 	<mapping path="/**" decorator="/decorator" />
 
 	<!-- 指明满足“/exclude.jsp*”的页面，将被排除，不被装饰 -->

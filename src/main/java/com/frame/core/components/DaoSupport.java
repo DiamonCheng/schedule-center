@@ -33,7 +33,7 @@ public abstract class DaoSupport extends HibernateDaoSupport {
 		if (list.size()>0) return (T) list.get(0);
 		return null;
 	}
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "unchecked" })
 	public List<Map<String,Object>> findMap(String hql, Object... params){
 		Query query = this.getSessionFactory().getCurrentSession().createQuery(hql);
 		for (int i=0;i<params.length;i++) {

@@ -15,7 +15,6 @@ import com.frame.core.service.account.UserService;
 import com.frame.core.utils.AesEncryptUtils;
 import com.frame.core.utils.EncriptUtil;
 @Service
-@org.springframework.transaction.annotation.Transactional(propagation=Propagation.REQUIRED)
 public class UserServiceImpl implements UserService{
 	private final static Logger LOGGER=LoggerFactory.getLogger(UserServiceImpl.class);
 	@Autowired

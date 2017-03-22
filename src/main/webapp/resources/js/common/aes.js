@@ -61,7 +61,7 @@ CryptoJS.mode.ECB = (function () {
     return ECB;
 }());
 (function(){
-	window.ek="IwSe70Ts2IY9Xc+i";
+	var ek="IwSe70Ts2IY9Xc+i";
 	window.encrypt=function(word){
 		var key = CryptoJS.enc.Utf8.parse(ek);   
         var srcs = CryptoJS.enc.Utf8.parse(word);  

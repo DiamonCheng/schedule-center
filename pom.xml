@@ -66,6 +66,7 @@
 				<version>2.4</version>
 			</plugin>
 		</plugins>
+		<!-- 规定工程中哪几个为资源文件夹（source folder） -->
 		<resources>
 			<resource>
 				<directory>src/main/java</directory>
@@ -98,32 +99,32 @@
 		</testResources>
 	</build>
 	<dependencies>
-		<dependency>
+		<dependency><!-- JAVA EE API -->
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>
 		</dependency>
-		<dependency>
+		<dependency><!-- JSTL -->
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		<dependency>
+		<dependency><!-- 文件上传组件 -->
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.3.2</version>
 		</dependency>
-		<dependency>
+		<dependency><!-- AOP切片依赖 -->
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.8.9</version>
 		</dependency>
-		<dependency>
+		<dependency><!-- json处理 -->
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.8.0</version>
 		</dependency>
-		<dependency>
+		<dependency><!-- 模板渲染语言 -->
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
 			<version>2.3.23</version>
@@ -150,7 +151,7 @@
 			<artifactId>spring-orm</artifactId>
 			<version>${spring-version}</version>
 		</dependency>
-		<dependency>
+		<dependency><!-- 数据源 -->
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
 			<version>1.0.2</version>
@@ -164,8 +165,20 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate-version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.logging</groupId>
+					<artifactId>jboss-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
+		    <groupId>org.jboss.logging</groupId>
+		    <artifactId>jboss-logging</artifactId>
+		    <version>3.3.0.Final</version>
+		</dependency>
+		
+		<dependency><!-- 日志接口 -->
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j-version}</version>
@@ -192,18 +205,17 @@
 			<artifactId>log4j-web</artifactId>
 			<version>${log4j-version}</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
-		<dependency>
+		<dependency><!-- Junit单元测试框架 -->
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit-verison}</version>
 		</dependency>
-		<dependency>
+		<dependency><!-- 装饰器 -->
 			<groupId>org.sitemesh</groupId>
 			<artifactId>sitemesh</artifactId>
 			<version>3.0.1</version>
 		</dependency>
-		<dependency>
+		<dependency><!-- MySQL数据库连接驱动 -->
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.40</version>

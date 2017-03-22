@@ -52,6 +52,8 @@
 	        		</#list></#if>/><label class="form-checkbox-appearance"></label>
 	        	</label>
         	</#list>
+        <#else />
+        <input class="form-control" valuefield="${c.selectValueField}" ${(c.isEntity)?string('isentity="isentity"','')} nullable="${ c.nullable?string}" name="${c.field}" id="${inputId}" type="${c.inputType}" value="${c.value!''}"/>
     </#if>
 </div>
 </#list>

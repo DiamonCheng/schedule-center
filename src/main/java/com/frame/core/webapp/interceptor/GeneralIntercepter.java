@@ -6,24 +6,31 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.frame.core.components.AjaxResult;
 import com.frame.core.components.UserAuthoritySubject;
+import com.frame.core.dao.GeneralDao;
+import com.frame.core.entity.UserEntity;
 import com.frame.core.utils.HttpContextUtil;
 
 public class GeneralIntercepter implements HandlerInterceptor {
 	private final static Logger LOGGER=LoggerFactory.getLogger(GeneralIntercepter.class);
 	public static final String REQUEST_URI_REQUEST_KEY=GeneralIntercepter.class.getName()+".requestURI";
 	public static final String REQUEST_URI_BEFORE_LOGIN_THREAD_KEY=GeneralIntercepter.class.getName()+".REQUESTURI_BEFOTRLOGIN";
+	@Autowired
+	GeneralDao dao;
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		
 		String requestURI=request.getServletPath();
 		if (requestURI.startsWith("/resources/")) return true;
 		boolean flag=false;
-		if (!UserAuthoritySubject.isUserVerify()&& !requestURI.contains("login")){//未登录 进入
+		if (!checkUser()&& !requestURI.contains("login")){//未登录 进入
 			if (HttpContextUtil.isAjaxRequest()){
 				response.setHeader("SESSION_STATUS", "TIME_OUT");
 			}else if(request.getHeader("accept").matches(".*html.*")){
@@ -85,6 +92,17 @@ public class GeneralIntercepter implements HandlerInterceptor {
 			}
 		}
 
+	}
+	private boolean checkUser(){
+		UserEntity user=UserAuthoritySubject.getAccountSubject();
+		if (user==null) return false;
+		try {
+			dao.getHibernateTemplate().refresh(user);
+		} catch (DataAccessException e) {
+			LOGGER.error("用户已经失效！user:"+user.getNickName(),e);
+			return false;
+		}
+		return true;
 	}
 
 }
