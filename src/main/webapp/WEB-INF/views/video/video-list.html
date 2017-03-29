@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>视频</title>
+</head>
+<body>
+	<div class=" panel panel-self  panel-default">
+		<div class="panel-heading">
+			<ol class=" breadcrumb" style="padding: 2px 15px; margin-bottom: 0px">
+				<li><a href="/front/index">Home</a></li>
+				<li class="active">视频</li>
+				<li class="active">${nav}</li>
+			</ol>
+		</div>
+		<!-- <div class="panel-body">
+			<div style="clear: both; border-top: 1px solid #000"></div>
+			<div class="panel panel-default">
+				<div class="panel-heading">${nav}</div>
+				<div class="panel-body">
+					<div class="row">
+							<div class="thumbnail">
+								<#list video.list as video>
+									<div class="pull-left">
+								<div class="embed-responsive embed-responsive-16by9">
+									<#if nav=="自传视频">
+									 <video class="embed-responsive-item" controls="controls" poster="" src="${video.savePath}${video.videoNewName}">您的浏览器不支持 video 标签。
+									</video> <#else>
+									 <iframe class="embed-responsive-item" src="${video.httpLink}"></iframe>
+									 </#if>
+								</div>
+								<div class="caption">
+									<h3>${video.videoName}</h3>
+									<p>${video.createDateTime}</p>
+									<p>${video.description}</p>
+								</div>
+								</div>
+								</#list>
+							</div>
+					</div>
+		- -->
+		<div class="panel-body">
+			<div style="clear: both; border-top: 1px solid #000"></div>
+			<div class="panel panel-default">
+				<div class="panel-heading">${nav}</div>
+				<div class="panel-body">
+					<#list video.list as video>
+					<p>${video.videoName} &nbsp&nbsp ${video.createDateTime}</p>
+					<div class="embed-responsive embed-responsive-16by9">
+					 <#if nav=="自传视频">
+					  <video class="embed-responsive-item" controls="controls" poster="" src="${video.savePath}${video.videoNewName}">您的浏览器不支持
+						video 标签。
+						</video>
+						<#else>
+						 <iframe class="embed-responsive-item" src="${video.httpLink}"></iframe>
+						 </#if>
+						</div>
+						<div style="padding:10px;border-bottom:1px solid #e3e3e3"></div>
+					</#list>
+				</div>
+			</div>
+			<div class="clear-box"></div>
+		</div>
+	</div>
+</body>
+</html>

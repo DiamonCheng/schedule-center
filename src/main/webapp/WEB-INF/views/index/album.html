@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>相册</title>
+</head>
+<body>
+	<div class=" panel panel-self  panel-default">
+		<div class="panel-heading">
+			<ol class=" breadcrumb" style="padding: 2px 15px; margin-bottom: 0px">
+				<li><a href="/front/index">Home</a></li>
+				<li class="active">相册</li>
+			</ol>
+		</div>
+		<div class="panel-body">
+			<#list list as album>
+			<div class="box-body-detail">
+				<div class="box-body-img">
+					<input id="" type="hidden" value="${album.id}" /> <img src="${(album.previewPic)!""}" alt="${(album.previewPic)!"相册无相片"}" />
+				</div>
+				<div class="box-body-detail-header">
+					<p style="color: #fff;cursor:1 ;text-align: center;display:block;padding-top:10px;">${(album.imgGroupName)!""}</p>
+				</div>
+				<div class="box-body-detail-bottom">
+					<i class="layui-icon" style="font-size: 25px;">&#xe62c;${(album.countImg)!"0"}</i>
+				</div>
+				<div class="box-body-detail-bottom">
+					<i class="layui-icon" style="font-size: 25px;">&#xe63a;${(album.countMsg)!"0"}</i>
+				</div>
+			</div>
+			</#list>
+			<div class="clear-box"></div>
+		</div>
+	</div>
+</body>
+</html>

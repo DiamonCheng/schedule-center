@@ -14,7 +14,7 @@
                             <#assign isopen=true/>
                         </#if>
                     </#list>
-					<div class="menuItem ${isopen?string("open","")} ${(menuItem.id==currentLocation.id)?string('current','')}" url="${menuItem.requestURI!''}">${menuItem.displayName}</div>
+                    <div class="menuItem ${isopen?string("open","")} ${(menuItem.id??==currentLocation.id??)?string('current','')}" url="${menuItem.requestURI!''}">${menuItem.displayName!''}</div>
 					<#if menuItem.children??>
 						<@menu menuItem.children/>
 					</#if>

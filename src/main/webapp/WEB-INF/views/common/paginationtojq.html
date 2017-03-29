@@ -1,0 +1,25 @@
+
+<nav class="navigation paging" role="navigation">
+	<div>
+		<input id="pageNumber" type="hidden" name="pageNumber" class="page-no" value="" /> 
+		<input type="hidden" name="pageSize" class="page-size" value="" /> 
+		<input type="hidden" name="pageSize" class="page-size" value="" />
+	</div>
+	<!-- 	<button class="btn btn-primary" type="button">没有记录</button> -->
+	<ul class="pagination pull-right no-margin">
+		<button class="btn btn-primary" type="button">
+			共 <span id="totalCount" class="badge"> </span>条 / 共 <span id="totalPage" class="badge"> </span>页
+		</button>
+		<!-- 首页 -->
+		<li id="first" class="first" data-page-no="1"><a href="">首页</a></li>
+		<li id="previouspage" class="previous" data-page-no=""><a href=""><i class="layui-icon">&#xe603;</i></a></li>
+
+		<li id="predisabled" class="extend disabled" style="display: none"><a href="javascript:void(0)">...</a></li>
+
+		<!-- ... -->
+		<li id="nextdisabled" class="extend disabled" style="display: none"><a href="javascript:void(0)">...</a></li>
+		<li id="next" class="next" data-page-no=""><a href=""><i class="layui-icon">&#xe602;</i></a></li>
+		<!-- 尾页 -->
+		<li id="last" class="last" data-page-no=""><a href="">尾页</a></li>
+	</ul>
+</nav>

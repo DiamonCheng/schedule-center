@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../core/query/xml/definition/pageDefinition.xsd">
+	<queryDefinition showIndex="序号">
+		<mappedClass mappedClass="com.frame.entity.media.VideoUploadEntity" alias="v">
+			<!-- <join type="LEFT" field="parent" as="p" /> -->
+		</mappedClass>
+		<mappedClass mappedClass="com.frame.core.entity.UserEntity" alias="u">
+			<!-- <join type="LEFT" field="parent" as="p" /> -->
+		</mappedClass>
+		<where>u.id=v.createUserKey</where>
+		<sort>
+			<by field="id" fromAlias="v" order="ASC"></by>
+		</sort>
+
+		<columns>
+			<column header="ID" field="id" fromAlias="v" width="5%" sortable="true" hidden="false"></column>
+			<column header="视频名称" field="videoName" fromAlias="v" width="15%" sortable="false" hidden="false"></column>
+			<column header="视频链接" field="httpLink" fromAlias="v" width="20%" sortable="true" hidden="false"></column>
+			<column header="视频新名字" field="videoNewName" fromAlias="v" width="15%" sortable="false" hidden="false"></column>
+			<column header="上传人" field="nickName" fromAlias="u" width="10%" sortable="true" hidden="false"></column>
+			<column header="描述 " field="description" fromAlias="v" width="20%" sortable="true" hidden="false"></column>
+			<column header="上传日期" field="createDateTime" fromAlias="v" width="20%" sortable="true" hidden="false"></column>
+		</columns>
+		<searchDefinition>
+			<condition alias="v" field="videoName" operator="LIKE" displayText="视频名称" inputType="TEXT"></condition>
+			<condition alias="u" field="nickName" operator="LIKE" displayText="上传人" inputType="TEXT"></condition>
+			<condition alias="v" field="createDateTime" operator="&gt;" displayText="创建日期" inputType="DATEBOX"></condition>
+			<condition alias="v" field="createDateTime" operator="&lt;" displayText="至" inputType="DATEBOX"></condition>
+		</searchDefinition>
+		<pageSize>10</pageSize>
+		<js>
+			<path>/resources/layer-v3.0.3/layer/layer.js</path>
+			<path>/resources/js/video/video-upload.js</path>
+		</js>
+		<css>
+			<path>/resources/css/video/video-list.css</path>
+		</css>
+	</queryDefinition>
+	<delete beforeDelete="beforeDelete"></delete>
+	<manage beforeManage="beforeUpdate">
+		<field field="videoName" inputId="videoName" displayText="视频名称" ></field>
+		<field field="videoNewName" inputId="videoNewName" displayText="" ></field>
+		<field field="description" inputId="description" displayText="视频描述" inputType="TEXTAREA"></field>
+		<js>
+			<path>/resources/layer-v3.0.3/layer/layer.js</path>
+			<path>/resources/js/dropzone/dropzone.js</path>
+			<path>/resources/js/video/video-upload-add.js</path>
+		</js>
+		<css>
+				<path>/resources/js/dropzone/dropzone.css</path>
+		</css>
+	</manage>
+</pageDefinition>

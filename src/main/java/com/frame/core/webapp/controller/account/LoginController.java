@@ -36,7 +36,7 @@ public class LoginController extends BaseController {
 
 			if ((redirectFor = (String) UserAuthoritySubject.getSession().getAttribute(GeneralIntercepter.REQUEST_URI_BEFORE_LOGIN_THREAD_KEY)) != null) {
 				UserAuthoritySubject.getSession().removeAttribute(GeneralIntercepter.REQUEST_URI_BEFORE_LOGIN_THREAD_KEY);
-				return "redirect:" + redirectFor;
+				//return "redirect:" + redirectFor;
 			}
 			// TODO用户和管理员分流
 			for (RoleEntity en : user.getRoles()) {

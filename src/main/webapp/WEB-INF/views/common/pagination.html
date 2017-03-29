@@ -1,0 +1,56 @@
+<#macro pagination page url="/front/album/pic"> <#assign albumKey=(page.albumKey! "") pageNumber=(page.pageNumber)!1 pageSize=(page.pageSize)!9 totalPage=(page.totalPage)!0
+	totalRow=(page.totalRow)!0>
+<nav class="navigation paging" role="navigation">
+	<div>
+		<input type="hidden" name="pageNumber" class="page-no" value="${pageNumber}" /> <input type="hidden" name="pageSize" class="page-size" value="${pageSize}" /> <input type="hidden" name="pageSize"
+			class="page-size" value="${albumKey}" />
+	</div>
+	<#if totalPage==0>
+	<button class="btn btn-primary" type="button">没有记录</button>
+	<#else> <!--   <div class="page-info pull-left">共${totalRow}条 / 共${totalPage}页</div> -->
+	<ul class="pagination pull-right no-margin">
+		<button class="btn btn-primary" type="button">
+			共 <span class="badge">${totalRow} </span>条 / 共 <span class="badge">${totalPage} </span>页
+		</button>
+		<#assign pagingSize=7> <!-- 首页 -->
+		 <#if (totalPage> pagingSize)> 
+		 	<#if pageNumber==1>
+                    <li class="first disabled"><a href="javascript:void(0)">首页</a></li> 
+             <#else>
+                    <li class="first" data-page-no="1"><a href="${url}?page=1&id=${albumKey}">首页</a></li>
+                </#if> </#if> <!-- 上一页 --> <#if pageNumber==1>
+                <li class="previous disabled"><a href="javascript:void(0)"><i class="layui-icon">&#xe603;</i></a></li> 
+            <#else>
+                <li class="previous" data-page-no="${pageNumber-1}"><a href="${url}?page=${pageNumber-1}&id=${albumKey}"><i class="layui-icon">&#xe603;</i></a></li>
+            </#if> <!-- 不能全部显示 -->
+             <#if (totalPage>pagingSize)> <#assign startPage=pageNumber - (pagingSize / 2) ? floor> 
+            	 <#if (startPage< 1)> <#assign startPage=1></#if>
+             		 <#assign endPage=startPage+ pagingSize - 1>
+                 
+                <#if (endPage > totalPage)>
+                    <#assign endPage = totalPage startPage = totalPage - pagingSize + 1>
+                </#if>
+           		 <#else>
+                <#assign startPage = 1 endPage = totalPage>
+            </#if> <!-- ... -->
+		<#if (totalPage> pagingSize && startPage != 1)>
+		<li class="extend disabled"><a href="javascript:void(0)">...</a></li>
+		</#if> 
+			<#list startPage..endPage as i> 
+				<#if pageNumber== i> <!-- 当前页 -->
+						<li class="current active"><a href="javascript:void(0)">${i}</a></li>
+				<#else>
+				<li class="" data-page-no="${i}"><a href="${url}?page=${i}&id=${albumKey}">${i}</a></li>
+				</#if> 
+			</#list> <!-- ... --> 
+		<#if (totalPage> pagingSize && endPage != totalPage)>
+				<li class="extend disabled"><a href="javascript:void(0)">...</a></li>
+		</#if> <!-- 下一页 --> <#if pageNumber== totalPage>
+		<li class="next disabled"><a href="javascript:void(0)"><i class="layui-icon">&#xe602;</i> </a></li>
+		<#else>
+		<li class="next" data-page-no="${pageNumber+1}"><a href="${url}?page=${pageNumber+1}&id=${albumKey}"><i class="layui-icon">&#xe602;</i></a></li></#if> <!-- 尾页 --> <#if (totalPage> pagingSize)> <#if pageNumber== totalPage>
+		<li class="last disabled"><a href="javascript:void(0)">尾页</a></li>
+		<#else>
+		<li class="last" data-page-no="${totalPage}"><a href="${url}?page=${totalPage}&id=${albumKey}">尾页</a></li></#if> </#if>
+	</ul></#if>
+</nav></#macro>

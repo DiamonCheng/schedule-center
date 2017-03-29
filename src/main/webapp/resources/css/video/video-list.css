@@ -1,0 +1,20 @@
+.video-a {
+	text-decoration: none;
+}
+
+.uploadBox {
+	width: 320; !
+	important height: 180;
+	!
+	important
+}
+
+.embed-responsive-self {
+	position: relative;
+	display: block;
+	height: 180px;
+	width: 320px;
+	margin: px;
+	padding: 0;
+	overflow: hidden;
+}

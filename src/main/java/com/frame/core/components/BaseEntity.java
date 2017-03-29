@@ -14,6 +14,8 @@ import javax.persistence.Version;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * @author bin
  *

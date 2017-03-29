@@ -49,3 +49,21 @@
     padding-left: 90px;
     vertical-align: middle;
 }
+.index-body-intro{
+	position: fixed;
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    padding: 150px 280px;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    z-index: -1000;
+    -webkit-background-size: cover;
+   
+}
+  h2{
+	text-align: center;
+}
+.index-body-intro:hover{
+	background-color:rgba(4, 4, 2, 0.2);
+}

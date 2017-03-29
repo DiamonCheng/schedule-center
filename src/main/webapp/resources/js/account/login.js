@@ -70,7 +70,8 @@ var validation = function() {
 }
 var registSubmit = function() {
 	if (validation()) {
-		var u = $('#userRegisterVerification').val();
+		var u =$('#userRegisterVerification').val();
+		debugger;
 		var p = u + $('#userRegisterPassword').val();
 		var c = u + $('#userConfirmRegisterPassword').val();
 		$.ajax({
@@ -189,7 +190,7 @@ $(document).ready(function() {
 			tips : 1
 		});
 	})
-	// 点击图片注册
+	// 背景图片置换注册
 	$('#bgBt1').on('click', function() {
 		layer.photos({
 			photos : '#imgContent',

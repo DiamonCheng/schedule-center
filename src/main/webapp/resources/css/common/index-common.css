@@ -3,6 +3,10 @@
 	backgroud-color: #c2c2c2;
 }
 
+a:hover, a:focus {
+	text-decoration: none;
+}
+
 .header-index {
 	background-color: #0C1206;
 	border: none;
@@ -63,7 +67,7 @@
 	margin-top: 0px;
 	padding: 11px 10px;
 	line-height: 36px;
-	border-left: 6px solid #009688;
+	border-left: 6px solid #1d2329;
 	border-radius: 0 2px 2px 0;
 	background-color: #393D49;
 }
@@ -72,24 +76,21 @@
 	margin: auto;
 	position: absolute;
 }
-.index-user:hover{
+
+.index-user:hover {
 	border-bottom: 4px solid #429086;
-	
 }
+
 .index-user-a {
-	    font-size: 10px;
-    font-variant-numeric: inherit;
-    font-weight: 700;
-    color: #ccc;
-    display: inline-block;
-    padding: 21px;
-    overflow: hidden;
-    width: 55px;
+	float: left;
+	height: 56px;
+	padding: 18px 15px;
+	font-size: 18px;
+	line-height: 20px;
 }
 
 .index-body {
-	background-image: url(/resources/img/bg/bg313.jpg);
-	/* -webkit-filter: blur(10px); */
+	background-image: url(/resources/img/bg/bg-2458.jpg);
 	/* filter: blur(8px); */
 	position: fixed;
 	height: 100%;
@@ -99,12 +100,26 @@
 	z-index: -1000;
 	background-size: cover;
 	-webkit-background-size: cover;
-	/* filter: blur(2px); */
-	opacity: 0.8;
+	filter: blur(2px);
+}
+
+.index-body-mask {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-position-x: center;
+	z-index: -1000;
+	-webkit-background-size: cover;
+	background-color: rgba(210, 170, 24, 0.23);
 }
 
 .index-main {
 	position: relative;
 	width: 100%;
 	margin: 0 auto;
+}
+
+.msg-split {
+	position: relative;
 }

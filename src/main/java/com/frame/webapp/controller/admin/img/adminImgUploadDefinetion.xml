@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../core/query/xml/definition/pageDefinition.xsd">
+	<queryDefinition showIndex="序号">
+		<mappedClass mappedClass="com.frame.entity.media.ImgEntity" alias="i">
+			<!-- <join type="LEFT" field="parent" as="p" /> -->
+		</mappedClass>
+		<mappedClass mappedClass="com.frame.entity.media.ImgGroupEntity" alias="g">
+			<!-- <join type="LEFT" field="parent" as="p" /> -->
+		</mappedClass>
+		<mappedClass mappedClass="com.frame.core.entity.UserEntity" alias="u">
+			<!-- <join type="LEFT" field="parent" as="p" /> -->
+		</mappedClass>
+		<where>u.id=i.createUserKey and i.imgGroupKey=g.id</where>
+		<sort>
+			<by field="id" fromAlias="i" order="ASC"></by>
+		</sort>
+
+		<columns>
+			<column header="ID" field="id" fromAlias="i" width="10%" sortable="true" hidden="false"></column>
+			<column header="相册名称" field="imgGroupName" fromAlias="g" width="15%" sortable="false" hidden="false"></column>
+			<column header="新名字" field="imgName" fromAlias="i" width="10%" sortable="true" hidden="false"></column>
+			<column header="旧名字" field="imgOriginalName" fromAlias="i" width="10%" sortable="true" hidden="false"></column>
+<!-- 			<column header="域名或ip" field="srcName" fromAlias="i" width="10%" sortable="true" hidden="false"></column>
+ -->		<column header="相片预览" field="savePath" fromAlias="i" width="15%" sortable="true" hidden="false"></column>
+			<column header="上传人" field="nickName" fromAlias="u" width="10%" sortable="true" hidden="false"></column>
+			<column header="创建日期" field="createDateTime" fromAlias="i" width="20%" sortable="true" hidden="false"></column>
+			<!-- <column header="操作" width="10%" sortable="false" hidden="false" staticColumnData="删除"></column> -->
+		</columns>
+		<searchDefinition>
+			<condition alias="i" field="imgName" operator="LIKE" displayText="相片名称" inputType="TEXT"></condition>
+			<condition alias="u" field="nickName" operator="LIKE" displayText="上传人" inputType="TEXT"></condition>
+			<condition alias="i" field="createDateTime" operator="&gt;" displayText="创建日期" inputType="DATEBOX"></condition>
+			<condition alias="i" field="createDateTime" operator="&lt;" displayText="至" inputType="DATEBOX"></condition>
+			<condition alias="g" field="id" operator="LIKE" displayText="相册名称" inputType="SELECT" selectTextField="imgGroupName" selectValueField="id" optionClass="com.frame.entity.media.ImgGroupEntity"></condition>
+		</searchDefinition>
+		<pageSize>10</pageSize>
+		<js>
+			<path>/resources/layer-v3.0.3/layer/layer.js</path>
+			<path>/resources/js/fancybox/js/jquery.fancybox.js</path>
+			<path>/resources/js/img/img-list.js</path>
+		</js>
+		<css>
+			<path>/resources/js/fancybox/css/jquery.fancybox.css</path>
+			<path>/resources/css/img/img-list.css</path>
+		</css>
+	</queryDefinition>
+	<delete beforeDelete="beforeDelete"></delete>
+	<manage beforeManage="beforeUpdate">
+		<field field="imgGroupKey" inputId="imgGroupKey" displayText="选择上传相册" inputType="SELECT" optionClass="com.frame.entity.media.ImgGroupEntity" selectTextField="imgGroupName" selectValeField="id"></field>
+		<field field="imgOriginalName" inputId="imgOriginalName" displayText=""></field>
+		<field field="imgName" inputId="imgName" displayText=""></field>
+		<field field="srcName" inputId="imgupload" displayText="上传"></field>
+		<js>
+			<path>/resources/layer-v3.0.3/layer/layer.js</path>
+			<path>/resources/layui/layui.js</path>
+			<path>/resources/js/dropzone/dropzone.js</path>
+			<path>/resources/js/img/imgUpload.js</path>
+		</js>
+		<css>
+			<!-- <path>/resources/layui/css/layui.css</path> -->
+			<path>/resources/js/dropzone/dropzone.css</path>
+		</css>
+	</manage>
+</pageDefinition>

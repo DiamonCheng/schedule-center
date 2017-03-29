@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>相册-图片</title>
+</head>
+<body>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">回复</h4>
+				</div>
+				<div class="modal-body">
+					<div id="replybox">
+						<input id="messageId" type="hidden" />
+						<textarea id="replyContent" class="form-control" rows="2"></textarea>
+						<!-- 			<a id="reply-msg" style="cursor: pointer;" onclick="submitMsg()" class="btn btn-default btn-sm pull-right active" role="button">发送</a>
+				 -->
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="submitReply()">发送</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="/resources/js/img/album-pic.js"></script>
+	<!-- 相册 -->
+	<input type="hidden" id="albumId" value="${(entity.id)!" "}"/>
+	<div class=" panel panel-self  panel-default">
+		<div class="panel-heading">
+			<ol class=" breadcrumb" style="padding: 2px 15px; margin-bottom: 0px">
+				<li><a href="/front/index">Home</a></li>
+				<li><a href="/front/album/index">相册</a></li>
+				<li class="active">${(entity.imgGroupName)!""}</li>
+			</ol>
+		</div>
+		<div class="panel-body">
+			<#list listImg as list>
+			<div class="box-body-detail">
+				<div class="box-body-img-pic">
+					<input id="" type="hidden" value="" /> <a href="${list.srcName}/${list.savePath}${list.imgName}" data-fancybox="gallery"><img src="${list.srcName}/${list.savePath}${list.imgName}"   class="img-rounded img-responsive"/></a>
+				</div>
+				<!-- 	<div class="box-body-detail-header">
+					<p>${list.imgName}</p>
+				</div> -->
+			</div>
+			</#list>
+			<!-- 分页pagnition -->
+
+		</div>
+			<div class="clearfix">
+				<#include "../common/pagination.html"/>
+				<@pagination page!""/>
+			</div>
+		<div class="panel-footer">
+			<!--留言  -->
+		</div>
+		<div class="panel-body">
+			<div class="panel panel-default">
+				<div class="panel-heading">留言板</div>
+				<!-- 留言回复样例  start  -->
+				<div class="panel-body">
+					<textarea id="msgContent" class="form-control" rows="3"></textarea>
+					<a id="sub-msg" style="cursor: pointer;" onclick="submitMsg()" class="btn btn-default btn-sm pull-right active" role="button">说句话吧</a>
+					<div id="msgComment" class="panel-message">
+						<blockquote>
+							<p>username</p>
+							<footer>
+								<cite title="Source Title">createTime</cite>
+							</footer>
+						</blockquote>
+						<div class="panel-article">
+							<p>在 Bootstrap 2 中，我们对框架中的某些关键部分增加了对移动设备友好的样式。而在 Bootstrap 3 中，我们重写了整个框架，使其一开始就是对移动设备友好的。这次不是简单的增加一些可选的针对移动设备的样式，而是直接融合进了框架的内核中。也就是说，Bootstrap 是移动设备优先的。针对移动设备的样式融合进了框架的每个角落，而不是增加一个额外的文件。</p>
+							<a style="cursor: pointer;" onclick="clickMsg()" class="btn btn-default btn-sm pull-right active" role="button">回复</a>
+						</div>
+
+
+						<!--start reply  -->
+						<div class="panel-article reply-p">
+							<p>在 Bootstrap 2 中，我们对框架中的某些关键部分增加了对移动设备友好的样式。而在 Bootstrap 3 中，我们重写了整个框架，使其一开始就是对移动设备友好的。这次不是简单的增加一些可选的针对移动设备的样式，而是直接融合进了框架的内核中。也就是说，Bootstrap 是移动设备优先的。针对移动设备的样式融合进了框架的每个角落，而不是增加一个额外的文件。</p>
+						</div>
+							<p class="text-right">--username createTime</p>
+						<!--end reply  -->
+
+						<div id="msg-page" class="msg-page"></div>
+					</div>
+				</div>
+				<!-- 留言回复样例  -->
+				<!-- 分页 -->
+				<div class="panel-footer">
+					<div>
+						<#include "../common/paginationtojq.html"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- panel-body -->
+	</div>
+</body>
+</html>

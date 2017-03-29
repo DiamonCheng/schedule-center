@@ -9,8 +9,11 @@
 <script type="text/javascript" src="${ctx}/resources/js/common/jquery.js"></script>
 <script type="text/javascript" src="${ctx}/resources/layer-v3.0.3/layer/layer.js"></script>
 <script type="text/javascript" src="${ctx}/resources/layui/layui.js"></script>
-<script type="text/javascript" src="${ctx}/resources/js/index/aldum.js"></script>
+<script type="text/javascript" src="${ctx}/resources/js/index/album.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/fancybox/js/jquery.fancybox.js"></script>
+<script type="text/javascript" src="/resources/plugin/bootstrap-3.3.5-dist/js/bootstrap.js">
+</script>
+</script>
 <script>
 	window.ctx="${ctx}";
 	//注意：导航 依赖 element 模块，否则无法进行功能性操作
@@ -21,29 +24,45 @@
 <link href="${ctx}/resources/css/common/index-common.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/resources/css/account/index.css" rel="stylesheet" type="text/css" />
 <link href="${ctx}/resources/layui/css/layui.css" rel="stylesheet" type="text/css" />
-<link href="${ctx}/resources/css/account/album.css" rel="stylesheet" type="text/css"/>
-<link href="${ctx}/resources/js/fancybox/css/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
-<link href="/resources/bootstrap-3.3.5-dist/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<link href="${ctx}/resources/css/account/album.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/resources/js/fancybox/css/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+<link href="/resources/plugin/bootstrap-3.3.5-dist/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<link href="/resources/css/video/video-list.css" rel="stylesheet" type="text/css" />
+
 <title><sitemesh:write property='title' /></title>
 </head>
 <body>
+	<input id="userId" type="hidden" value="${user.id}">
 	<div class="index-body"></div>
-
+	<div class="index-body-mask"></div>
+	<ul class="nav nav-pills">
+		<li role="presentation" class="dropdown"><p class="navbar-text" style="font-size: 18px;]">COMMEMORATE CLASS 14</p></li>
+	</ul>
 	<div class="layui-header header header-index">
 		<div class="index-main ">
 			<div class="index-user">
-				<a id="user-a" href="#" class="index-user-a">${user.nickName}</a>
+				<a id="user-a" href="/front/index" style="color: #d2d2d2" class="index-user-a">首页</a>
 			</div>
-			<blockquote class="layui-elem-quote-black-index ">CLASS 14</blockquote>
+			<blockquote class="layui-elem-quote-black-index ">
+				<a style="color: #d2d2d2" href="/front/acc/action">${user.nickName}</a>
+			</blockquote>
 			<div class="layui-form component">
 				<select lay-search lay-filter="component">
 					<option>2333</option>
 				</select>
 			</div>
 			<ul class="layui-nav" pc>
-				<li class="layui-nav-item index-nav" pc><a href="">班级动态</a></li>
+				<li class="layui-nav-item index-nav" pc><a href="/front/acc/class">班级动态</a></li>
 				<li class="layui-nav-item index-nav" pc><a href="/front/album/index">相册</a></li>
-				<li class="layui-nav-item index-nav" pc><a href="">视频</a></li>
+				<li class="layui-nav-item index-nav" pc><a href="javascript:void(0)">视频</a>
+					<dl class="layui-nav-child layui-anim layui-anim-upbit">
+						<dd>
+							<a href="/front/video/outlist" >外链视频</a>
+						</dd>
+						<dd>
+							<a href="/front/video/uplist" >自传视频</a>
+						</dd>
+					</dl></li>
 				<li class="layui-nav-item index-nav" pc><a href="/loginOut">注销</a></li>
 			</ul>
 		</div>

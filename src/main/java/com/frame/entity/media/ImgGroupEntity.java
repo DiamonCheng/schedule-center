@@ -30,6 +30,7 @@ public class ImgGroupEntity extends BaseEntity{
 	private String imgGroupName;
 	private String previewPic;
 	private Long countImg;
+	private Long countMsg;
 	 /*
      * cascade：为级联操作，里面有级联保存，级联删除等，all为所有 
      * fetch：加载类型，有lazy和eager二种，
@@ -71,6 +72,12 @@ public class ImgGroupEntity extends BaseEntity{
 	}
 	public void setImgGroupName(String imgGroupName) {
 		this.imgGroupName = imgGroupName;
+	}
+	public Long getCountMsg() {
+		return countMsg;
+	}
+	public void setCountMsg(Long countMsg) {
+		this.countMsg = countMsg;
 	}
 	
 	

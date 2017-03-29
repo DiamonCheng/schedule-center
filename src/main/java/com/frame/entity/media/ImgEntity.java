@@ -25,11 +25,12 @@ public class ImgEntity extends BaseEntity{
 	 */
 	private static final long serialVersionUID = -8121453121086711618L;
 	@Column(length=63)
-	private String imgName;
+	private String imgName; //文件名
+	private String imgOriginalName; //源文件名
 	@Column(length=20)
 	private Long createUserKey;
-	private String  savePath;
-	private String  srcName;
+	private String  savePath;  //磁盘目录
+	private String  srcName;   //baseUrl 域名或者ip
 	@Column(length=20)
 	private Long imgGroupKey;
 	private Long count;
@@ -46,6 +47,12 @@ public class ImgEntity extends BaseEntity{
 	
 	public String getSrcName() {
 		return srcName;
+	}
+	public String getImgOriginalName() {
+		return imgOriginalName;
+	}
+	public void setImgOriginalName(String imgOriginalName) {
+		this.imgOriginalName = imgOriginalName;
 	}
 	public Long getCount() {
 		return count;
