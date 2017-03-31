@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import com.frame.core.dao.GeneralDao;
 import com.frame.entity.media.ImgEntity;
 import com.frame.entity.media.ImgGroupEntity;
-import com.frame.service.admin.adminImgService;
+import com.frame.service.admin.AdminImgService;
 import com.frame.utils.ImgDirConfig;
 import com.frame.utils.FileUtils;
 
@@ -19,7 +19,7 @@ import com.frame.utils.FileUtils;
  */
 @Service
 @org.springframework.transaction.annotation.Transactional(propagation = Propagation.REQUIRED)
-public class AdminImgServiceImpl implements adminImgService {
+public class AdminImgServiceImpl implements AdminImgService {
 	@Autowired
 	GeneralDao dao;
 

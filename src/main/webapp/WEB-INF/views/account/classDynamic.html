@@ -14,13 +14,13 @@
 		</div>
 		<div class="panel-body">
 			<div class="list-group">
-				<a class="list-group-item"><span class="badge">2017-03-28 00：00：00</span>Cras justo odio</a>
-				<a class="list-group-item"><span class="badge">2017-03-28 00：00：00</span>Dapibus ac faciasis in</a>
-				<a class="list-group-item"><span class="badge">2017-03-28 00：00：00</span>Morbi leo risus</a>
-				<a class="list-group-item"><span class="badge">2017-03-28 00：00：00</span>Porta ac consectetur ac</a>
-				<a class="list-group-item"><span class="badge">2017-03-28 00：00：00</span>Vestibulum at eros</a>
+			<#list page.list as list>
+				<a href="/front/acc/detail?id=${list.classDynamicId}"class="list-group-item"><span class="badge">${list.updateDateTime}</span>${list.title}</a>
+			</#list>
 			</div>
 			<div class="">
+				<#include "../common/paginationClassDy.html"/>
+				<@pagination page!""/>
 			</div>
 		</div>
 	</div>

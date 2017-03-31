@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../core/query/xml/definition/pageDefinition.xsd">
+	<queryDefinition showIndex="序号">
+		<mappedClass mappedClass="com.frame.entity.media.IndexShowEntity" alias="i">
+			<!-- <join type="LEFT" field="parent" as="p" /> -->
+		</mappedClass>
+		<mappedClass mappedClass="com.frame.core.entity.UserEntity" alias="u">
+			<!-- <join type="LEFT" field="parent" as="p" /> -->
+		</mappedClass>
+		<where>u.id=i.userId</where>
+		<sort>
+			<by field="createDateTime" fromAlias="i" order="DESC"></by>
+		</sort>
+
+		<columns>
+			<column header="ID" field="id" fromAlias="i" width="10%" editorType="CHECKBOX" sortable="true" hidden="false"></column>
+			<column header="创建 人" field="nickName" fromAlias="u" width="20%" sortable="true" hidden="false"></column>
+			<column header="标题" field="title" fromAlias="i" width="20%" sortable="false" hidden="false"></column>
+			<column header="状态" field="status" fromAlias="i" width="20%" sortable="false" hidden="false"></column>
+<!-- 			<column header="内容" field="content" fromAlias="c" width="20%" sortable="false" hidden="false"></column>
+	 -->	<column header="创建日期" field="createDateTime" fromAlias="i" width="20%" sortable="true" hidden="false"></column>
+			<!-- <column header="操作" width="10%" sortable="false" hidden="false" staticColumnData="删除"></column> -->
+		</columns>
+		<searchDefinition>
+			<condition alias="i" field="id" operator="=" displayText="ID" inputType="NUMBER"></condition>
+			<condition alias="i" field="userId" operator="LIKE" displayText="创建 人" inputType="SELECT" selectTextField="nickName" selectValueField="id" optionClass="com.frame.core.entity.UserEntity"></condition>
+			<condition alias="i" field="createDateTime" operator="&gt;" displayText="创建日期" inputType="DATEBOX"></condition>
+			<condition alias="i" field="createDateTime" operator="&lt;" displayText="至" inputType="DATEBOX"></condition>
+			<condition alias="i" field="title" operator="LIKE" displayText="标题" inputType="TEXT"></condition><!-- selectTextField="createUserKey" inputType="SELECT" -->
+		</searchDefinition>
+		<pageSize>10</pageSize>
+		<js>
+			<path>/resources/js/index/admin-index-manage-list.js</path>
+		</js>
+		<!-- <css><path>/a/b/c</path></css> -->
+	</queryDefinition>
+	<delete beforeDelete="beforeDelete"></delete>
+	<manage beforeManage="beforeUpdate">
+		<field field="title" inputId="edtitle" displayText="标题" ></field>
+		<field field="status" inputId="edstatus" displayText="是否禁用" inputType="SELECT" nullable="false">
+			<staticData>[{text:"是",value:"0"},{text:"否",value:"1"}]</staticData>
+		</field>
+		<field field="id" inputId="edid" hidden="true" displayText="" ></field>
+		<field field="content" inputId="edcontent" displayText="" inputType="TEXTAREA"></field>
+		<js>
+			<path>/resources/layer-v3.0.3/layer/layer.js</path>
+			<path>/resources/plugin/umeditor1_2_2-utf8-jsp/etpl 3-2-0.js</path>
+			<path>/resources/plugin/umeditor1_2_2-utf8-jsp/umeditor.config.js</path>
+			<path>/resources/plugin/umeditor1_2_2-utf8-jsp/umeditor.js</path>
+			<path>/resources/plugin/umeditor1_2_2-utf8-jsp/lang/zh-cn/zh-cn.js</path>
+			<path>/resources/js/index/index-manage.js</path>
+		</js>
+		<css>
+			<path>/resources/plugin/umeditor1_2_2-utf8-jsp/themes/default/css/umeditor-1-2-3.css</path>
+		</css>
+	</manage>
+</pageDefinition>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>相册-图片</title>
+</head>
+<body>
+	<div class="panel panel-self panel-default">
+		<div class="panel-heading">
+			<ol class=" breadcrumb" style="padding: 2px 15px; margin-bottom: 0px">
+				<li><a href="/front/index">Home</a></li>
+				<li ><a href="/front/acc/class">班级动态</a></li>
+				<li class="active">${detail.title}</li>
+			</ol>
+
+		</div>
+		<div class="panel-body">
+			<div class="page-header">
+
+				<h1>
+					${detail.title} <small>${detail.updateDateTime}</small>
+				</h1>
+			</div>
+			${detail.content}
+		</div>
+	</div>
+</body>
+</html>

@@ -50,11 +50,11 @@
     vertical-align: middle;
 }
 .index-body-intro{
-	position: fixed;
+	position: relative;
     color: #fff;
     height: 100%;
     width: 100%;
-    padding: 150px 280px;
+    padding: 20px 280px;
     background-repeat: no-repeat;
     background-position-x: center;
     z-index: -1000;

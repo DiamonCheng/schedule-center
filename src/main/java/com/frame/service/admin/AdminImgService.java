@@ -10,7 +10,7 @@ import com.frame.entity.media.ImgGroupEntity;
 * @version create time：2017年3月14日 下午10:13:36 
 * 类说明 ： 后台相册、图片处理 增删改查
 */
-public interface adminImgService {
+public interface AdminImgService {
 	/**
 	 *  新增
 	 * @param entity  

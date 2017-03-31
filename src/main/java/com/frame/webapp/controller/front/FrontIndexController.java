@@ -2,12 +2,15 @@ package com.frame.webapp.controller.front;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.frame.core.components.UserAuthoritySubject;
 import com.frame.core.entity.UserEntity;
+import com.frame.entity.media.IndexShowEntity;
+import com.frame.service.front.FrontIndexService;
 
 /** 
 * @author wowson
@@ -20,9 +23,12 @@ public class FrontIndexController {
 	public Object index(){
 		return "redirect:/front/index";
 	}*/
+	@Autowired
+	FrontIndexService service;
 	@RequestMapping({"/front/index"})
 	public Object index(HttpServletRequest request){
-		return "index/index.jsp";
+		IndexShowEntity entity= service.get();
+		return new ModelAndView("index/index").addObject("article",entity);
 	}
 	@RequestMapping({"/indexDecorator"})
 	public Object indexDecorator(HttpServletRequest request){

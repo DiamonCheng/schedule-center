@@ -23,7 +23,7 @@ import com.frame.core.entity.UserEntity;
 import com.frame.core.query.xml.GeneralController;
 import com.frame.core.query.xml.annoation.PageDefinition;
 import com.frame.entity.media.ImgEntity;
-import com.frame.service.admin.adminImgService;
+import com.frame.service.admin.AdminImgService;
 import com.frame.utils.ImgDirConfig;
 import com.frame.utils.FileUtils;
 
@@ -80,7 +80,7 @@ public class AdminImgUploadController extends GeneralController<ImgEntity> {
 	}
 
 	@Autowired
-	adminImgService imgService;
+	AdminImgService imgService;
 
 	// 图片信息保存
 	@RequestMapping("/addInfo")

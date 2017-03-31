@@ -13,11 +13,11 @@
 		</sort>
 
 		<columns>
-			<column header="ID" field="id" fromAlias="c" width="10%" sortable="true" hidden="false"></column>
+			<column header="ID" field="id" fromAlias="c" width="10%" editorType="CHECKBOX" sortable="true" hidden="false"></column>
 			<column header="创建 人" field="nickName" fromAlias="u" width="20%" sortable="true" hidden="false"></column>
 			<column header="标题" field="title" fromAlias="c" width="20%" sortable="false" hidden="false"></column>
-			<column header="内容" field="content" fromAlias="c" width="20%" sortable="false" hidden="false"></column>
-			<column header="创建日期" field="createDateTime" fromAlias="c" width="20%" sortable="true" hidden="false"></column>
+<!-- 			<column header="内容" field="content" fromAlias="c" width="20%" sortable="false" hidden="false"></column>
+	 -->		<column header="创建日期" field="createDateTime" fromAlias="c" width="20%" sortable="true" hidden="false"></column>
 			<!-- <column header="操作" width="10%" sortable="false" hidden="false" staticColumnData="删除"></column> -->
 		</columns>
 		<searchDefinition>
@@ -25,28 +25,28 @@
 			<condition alias="c" field="userId" operator="LIKE" displayText="创建 人" inputType="SELECT" selectTextField="nickName" selectValueField="id" optionClass="com.frame.core.entity.UserEntity"></condition>
 			<condition alias="c" field="createDateTime" operator="&gt;" displayText="创建日期" inputType="DATEBOX"></condition>
 			<condition alias="c" field="createDateTime" operator="&lt;" displayText="至" inputType="DATEBOX"></condition>
-			<condition alias="c" field="title" operator="LIKE" displayText="相册名称" inputType="TEXT"></condition><!-- selectTextField="createUserKey" inputType="SELECT" -->
+			<condition alias="c" field="title" operator="LIKE" displayText="标题" inputType="TEXT"></condition><!-- selectTextField="createUserKey" inputType="SELECT" -->
 		</searchDefinition>
 		<pageSize>10</pageSize>
 		<js>
-			<path>/resources/layer-v3.0.3/layer/layer.js</path>
-			<path>/resources/js/img/img-group-list.js</path>
 		</js>
 		<!-- <css><path>/a/b/c</path></css> -->
 	</queryDefinition>
 	<delete beforeDelete="beforeDelete"></delete>
 	<manage beforeManage="beforeUpdate">
-		<field field="title" displayText="标题"></field>
+		<field field="title" inputId="edtitle" displayText="标题" ></field>
+		<field field="id" inputId="edid" hidden="true" displayText="" ></field>
+		<field field="content" inputId="edcontent" displayText="" inputType="TEXTAREA"></field>
 		<js>
 			<path>/resources/layer-v3.0.3/layer/layer.js</path>
-			<path>/resources/plugin/UMeditor/etpl 3-2-0.js</path>
-			<path>/resources/plugin/UMeditor/umeditor.config.js</path>
-			<path>/resources/plugin/UMeditor/umeditor.js</path>
-			<path>/resources/plugin/UMeditor/lang/zh-cn/zh-cn.js</path>
+			<path>/resources/plugin/umeditor1_2_2-utf8-jsp/etpl 3-2-0.js</path>
+			<path>/resources/plugin/umeditor1_2_2-utf8-jsp/umeditor.config.js</path>
+			<path>/resources/plugin/umeditor1_2_2-utf8-jsp/umeditor.js</path>
+			<path>/resources/plugin/umeditor1_2_2-utf8-jsp/lang/zh-cn/zh-cn.js</path>
+			<path>/resources/js/account/class-dynamic.js</path>
 		</js>
 		<css>
-				<path>/resources/plugin/UMeditor/themes/default/css/umeditor.css</path>
-				<path></path>
+			<path>/resources/plugin/umeditor1_2_2-utf8-jsp/themes/default/css/umeditor-1-2-3.css</path>
 		</css>
 	</manage>
 </pageDefinition>

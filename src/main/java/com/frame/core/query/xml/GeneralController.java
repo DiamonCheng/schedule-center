@@ -85,7 +85,7 @@ public abstract class GeneralController <T extends BaseEntity>{
             if (authorityService.isAllowed(cRequestMapping,ADD_METHOD_URL,UserAuthoritySubject.<UserEntity>getAccountSubject()))
             	options.add(new NavigationOption("添加", "addRow()"));
             if (authorityService.isAllowed(cRequestMapping,EDIT_METHOD_URL,UserAuthoritySubject.<UserEntity>getAccountSubject()))
-            	options.add(new NavigationOption("修改", "manageRow()"));
+            	options.add(new NavigationOption("修改或查看", "manageRow()"));
         }
 		if(pageHolder.getPageDefinition().getDelete()!=null&&authorityService.isAllowed(cRequestMapping,DELETE_MAPPED_URL,UserAuthoritySubject.<UserEntity>getAccountSubject())) 
 			options.add(new NavigationOption("删除", "deleteRow()"));//权限

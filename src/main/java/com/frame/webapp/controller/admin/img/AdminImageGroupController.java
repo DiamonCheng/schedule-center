@@ -17,7 +17,7 @@ import com.frame.core.query.xml.GeneralController;
 import com.frame.core.query.xml.annoation.PageDefinition;
 import com.frame.entity.media.ImgEntity;
 import com.frame.entity.media.ImgGroupEntity;
-import com.frame.service.admin.adminImgService;
+import com.frame.service.admin.AdminImgService;
 import com.frame.utils.ImgDirConfig;
 import com.frame.utils.FileUtils;
 
@@ -38,7 +38,7 @@ public class AdminImageGroupController extends GeneralController<ImgGroupEntity>
 	}
 
 	@Autowired
-	adminImgService service;
+	AdminImgService service;
 
 	public boolean beforeDelete(ImgGroupEntity entity) {
 		boolean flag = true;
@@ -49,7 +49,7 @@ public class AdminImageGroupController extends GeneralController<ImgGroupEntity>
 	}
 
 	@Autowired
-	adminImgService imgService;
+	AdminImgService imgService;
 
 	@RequestMapping("/xhr/delete")
 	@ResponseBody

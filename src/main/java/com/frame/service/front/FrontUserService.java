@@ -9,4 +9,5 @@ import com.frame.core.entity.UserEntity;
 */
 public interface FrontUserService {
 	UserEntity selectUser(Long Id);
+	void update(UserEntity entity);
 }
