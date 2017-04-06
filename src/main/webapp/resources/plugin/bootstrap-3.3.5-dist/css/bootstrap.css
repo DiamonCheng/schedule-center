@@ -5857,7 +5857,8 @@ button.list-group-item-danger.active:focus {
   border: 0;
 }
 .embed-responsive-16by9 {
-  padding-bottom: 56.25%;
+     padding-bottom: 30.25%;
+    margin-left: 10%;
 }
 .embed-responsive-4by3 {
   padding-bottom: 75%;

@@ -1,6 +1,6 @@
-//提交回复
+//提交留言
 var submitMsg = function() {
-	var content = $('#msgContent').val();
+	var content = um.getContent();
 	var albumId = $('#albumId').val();
 	if (content == "")
 		return false;
@@ -16,6 +16,7 @@ var submitMsg = function() {
 			if (data.mssage = "成功") {
 				layer.msg("留言成功")
 				$('#msgContent').val("");
+				um.setContent('');
 			}
 			losdMsg();
 			console.log(data);
@@ -125,7 +126,7 @@ var clickMsg = function(messageId) {
 	$('#myModal').modal();
 }
 var submitReply = function() {
-	var replyContent = $('#replyContent').val();
+	var replyContent =reum.getContent();
 	var messageId = $('#messageId').val();
 	var userId = $('#userId').val();
 	if (replyContent == "")
@@ -144,6 +145,7 @@ var submitReply = function() {
 				layer.msg("回复成功")
 				$('#replyContent').val("");
 				$('#myModal').modal('hide')
+				reum.setContent('');
 			}
 			losdMsg();
 			console.log(data);
@@ -153,4 +155,18 @@ var submitReply = function() {
 }
 $(document).ready(function() {
 	losdMsg();
+	window.um = UM.getEditor('container', {
+		/* 传入配置参数,可配参数列表看umeditor.config.js */
+		toolbar : [ ' undo redo | bold italic underline strikethrough | superscript subscript | forecolor backcolor | removeformat |', 'insertorderedlist insertunorderedlist ',
+				'| emotion image ', 'link unlink | horizontal print preview fullscreen'],
+		autoHeightEnabled: false,
+		scaleEnabled:true
+	});
+	window.reum=UM.getEditor('replycontainer', {
+		/* 传入配置参数,可配参数列表看umeditor.config.js */
+		toolbar : [ ' undo redo | bold italic underline strikethrough | superscript subscript | forecolor backcolor | removeformat |', 'insertorderedlist insertunorderedlist ',
+				 'link unlink | emotion image | horizontal print preview fullscreen'],
+		autoHeightEnabled: false,
+		scaleEnabled:true
+	});
 })
