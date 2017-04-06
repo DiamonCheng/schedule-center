@@ -41,16 +41,17 @@ public class AdminIndexmanController extends GeneralController<IndexShowEntity> 
 			result.setMessage("麻烦你写点内容好吗！");
 			return result;
 		}
-		/*if (StringUtils.isEmpty(edstatus)) {
-			result.setCode("-1");
-			result.setMessage("选择是否禁用！");
-			return result;
-		}*/
+		/*
+		 * if (StringUtils.isEmpty(edstatus)) { result.setCode("-1");
+		 * result.setMessage("选择是否禁用！"); return result; }
+		 */
 		if (edstatus == 1)
 			if (service.countStautsIsTrue() > 0) {
-				result.setCode("-1");
-				result.setMessage("只能有一条描述在启用状态！这条就禁用吧");
-				return result;
+				if (service.get(edid).getStatus() != 1) {
+					result.setCode("-1");
+					result.setMessage("只能有一条描述在启用状态！这条就禁用吧");
+					return result;
+				}
 			}
 		IndexShowEntity entity = new IndexShowEntity();
 		UserEntity user = UserAuthoritySubject.getAccountSubject();
@@ -59,12 +60,8 @@ public class AdminIndexmanController extends GeneralController<IndexShowEntity> 
 		entity.setContent(content);
 		entity.setTitle(title);
 		entity.setUpdateDateTime(new Date());
-		if (StringUtils.isEmpty(edid)) {
-			service.save(entity);
-		} else {
-			entity.setId(edid);
-			service.update(entity);
-		}
+		entity.setId(edid);
+		service.update(entity);
 		result.setMessage("保存成功！");
 		return result;
 	}

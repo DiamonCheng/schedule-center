@@ -11,4 +11,5 @@ public interface AdminIndexShowService {
 	void save(IndexShowEntity entity);
 	int update(IndexShowEntity entity);
 	long countStautsIsTrue();
+	IndexShowEntity get(long  id);
 }

@@ -5,7 +5,10 @@
 <title>相册-图片</title>
 </head>
 <body>
-
+	<script type="text/javascript" src="/resources/plugin/umeditor1_2_2-utf8-jsp/umeditor.js"></script>
+	<script type="text/javascript" src="/resources/plugin/umeditor1_2_2-utf8-jsp/umeditor.config.js">
+	</script>
+	<link href="/resources/plugin/umeditor1_2_2-utf8-jsp/themes/default/css/umeditor.css" rel="stylesheet" type="text/css"/>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -19,7 +22,9 @@
 				<div class="modal-body">
 					<div id="replybox">
 						<input id="messageId" type="hidden" />
-						<textarea id="replyContent" class="form-control" rows="2"></textarea>
+							<script id="replycontainer" name="content" type="text/plain" style="width:568px;height:150px;"></script>
+						
+						<!-- <textarea id="replyContent" class="form-control" rows="2"></textarea> -->
 						<!-- 			<a id="reply-msg" style="cursor: pointer;" onclick="submitMsg()" class="btn btn-default btn-sm pull-right active" role="button">发送</a>
 				 -->
 					</div>
@@ -67,10 +72,11 @@
 		<div class="panel-body">
 			<div class="panel panel-default">
 				<div class="panel-heading">留言板</div>
-				<!-- 留言回复样例  start  -->
 				<div class="panel-body">
-					<textarea id="msgContent" class="form-control" rows="3"></textarea>
-					<a id="sub-msg" style="cursor: pointer;" onclick="submitMsg()" class="btn btn-default btn-sm pull-right active" role="button">说句话吧</a>
+				<script id="container" name="content" type="text/plain" style="width:998px;height:250px;"></script>
+			<!-- 		<textarea id="msgContent" class="form-control" rows="3"></textarea>
+ -->					<a id="sub-msg" style="cursor: pointer;" onclick="submitMsg()" class="btn btn-default btn-sm pull-right active" role="button">说句话吧</a>
+				<!-- 留言回复样例  start  -->
 					<div id="msgComment" class="panel-message">
 						<blockquote>
 							<p>username</p>

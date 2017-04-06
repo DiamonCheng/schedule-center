@@ -47,11 +47,11 @@
 					<p>${video.videoName} &nbsp&nbsp ${video.createDateTime}</p>
 					<div class="embed-responsive embed-responsive-16by9">
 					 <#if nav=="自传视频">
-					  <video class="embed-responsive-item" controls="controls" poster="" src="${video.savePath}${video.videoNewName}">您的浏览器不支持
+					  <video style="width:500px ;"class="embed-responsive-item" controls="controls" poster="" src="${video.savePath}${video.videoNewName}">您的浏览器不支持
 						video 标签。
 						</video>
 						<#else>
-						 <iframe class="embed-responsive-item" src="${video.httpLink}"></iframe>
+						 <iframe class="embed-responsive-item" style="width:50%"src="${video.httpLink}"></iframe>
 						 </#if>
 						</div>
 						<div style="padding:10px;border-bottom:1px solid #e3e3e3"></div>

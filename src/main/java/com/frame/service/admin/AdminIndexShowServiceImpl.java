@@ -37,4 +37,9 @@ public class AdminIndexShowServiceImpl implements AdminIndexShowService {
 		String hql ="select count(*) from IndexShowEntity where status = 1";
 		return dao.getUnique(hql);
 	}
+
+	@Override
+	public IndexShowEntity get(long id) {
+		return dao.getHibernateTemplate().get(IndexShowEntity.class, id);
+	}
 }
