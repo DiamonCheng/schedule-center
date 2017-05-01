@@ -1,10 +1,9 @@
 package com.frame.core.utils;
 
-import com.sun.istack.internal.Nullable;
+import java.lang.reflect.Method;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
-import java.lang.reflect.Method;
 
 /**
  * Created by Defferson.Cheng on 2017/1/8.
@@ -15,7 +14,7 @@ public class ReflectUtil {
         private  static final long serialVersionUID = -233333333333333L;
         ReflectException(Throwable t){super(t);}
     }
-    public static <T> T setValueByField( @NotNull T target, @NotNull String field, @Nullable Object value){
+    public static <T> T setValueByField( @NotNull T target, @NotNull String field, @Null Object value){
         String setMethodName="set"+upperCaseFirst(field);
         try {
             Method setMethod=null;
