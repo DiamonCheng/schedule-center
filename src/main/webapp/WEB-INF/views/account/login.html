@@ -102,10 +102,10 @@ layui.use('element', function(){
 				shade: [0.8, '#393D49'],
 				btn:['yes','no'],
 				yes:function(index,layero){
-						location.href="/admin/main";
+						location.href=ctx+"/admin/main";
 					},
 				btn2:function(index,layero){
-					location.href="/front/index";
+					location.href=ctx+"/front/index";
 					}
 			});
 			layer.style(index,{background:'rgba(255,255,255,0.5)'});
