@@ -7,7 +7,7 @@
 <title>MAIN</title>
 </head>
 <body>
-暂时没放什么信息MAIN1 ${ctx }   1 
+欢迎欢迎热烈欢迎${ctx }   1 
 	
 </body>
 </html>
