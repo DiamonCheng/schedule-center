@@ -1,3 +1,4 @@
+<#setting classic_compatible=true>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,20 +26,20 @@
 				<#assign inputId=c.inputId/>
 			</#if>
 			<#if c.inputType=="TEXT">
-				<input class="form-control" alias="${c.alias}" field="${c.field}" fieldType="${c.type.name}" operator="${c.operator}" id="${inputId}" type="text" value="${c.value!''}"/>
+				<input class="form-control" alias="${c.alias!''}" field="${c.field}" fieldType="${c.type.name}" operator="${c.operator}" id="${inputId!''}" type="text" value="${c.value!''}"/>
 				<#elseif c.inputType=="NUMBER"/>
-				<input class="form-control"  alias="${c.alias}" field="${c.field}" fieldType="${c.type.name}" operator="${c.operator}" id="${inputId}" type="number" value="${c.value!''}"/>
+				<input class="form-control"  alias="${c.alias!''}" field="${c.field}" fieldType="${c.type.name}" operator="${c.operator}" id="${inputId!''}" type="number" value="${c.value!''}"/>
 				<#elseif c.inputType=="SELECT"/>
-				<select class="form-control" alias="${c.alias}" field="${c.field}" fieldType="${c.type.name}" operator="${c.operator}" id="${inputId}" type="text" >
+				<select class="form-control" alias="${c.alias!''}" field="${c.field}" fieldType="${c.type.name}" operator="${c.operator}" id="${inputId}" type="text" >
 					<#if c.nullable>
 						<option value="" ${(c.value??)?string('selected','')}>-- 请选择 --</option>
 					</#if>
 					<#list c.parsedData as d>
-						<option value="${d.value}" ${(c.value??&&c.value?string == d.value?string)?string('selected','')}>${d.text}</option>
+						<option value="${d.value}" ${(c.value??&&c.value?string == d.value?string)?string('selected','')}>${d.text!''}</option>
 					</#list>
 				</select>
 				<#elseif c.inputType=="DATEBOX"/>
-				<input class="form-control datebox" alias="${c.alias}" field="${c.field}" fieldType="${c.type.name}" operator="${c.operator}" id="${inputId}" type="text" value="${c.value!''}"/>
+				<input class="form-control datebox" alias="${c.alias!''}" field="${c.field}" fieldType="${c.type.name}" operator="${c.operator!''}" id="${inputId!''}" type="text" value="${c.value!''}"/>
 			</#if>
 		</div>
 	</#list>
@@ -58,7 +59,7 @@
 			<th >${pageDefinition.queryDefinition.showIndex}</th>
 			</#if>
 			<#list columns as column>
-			<th field="${column.field}" fromAlias="${column.fromAlias}" ${(column.hidden)?string("hidden",(column.width??)?string("style=\"width:"+column.width+";\"",""))} ${column.sortable?string("sortable","")} ${mergedSort[column_index]}>${column.header!''}</th>
+			<th field="${column.field}" fromAlias="${column.fromAlias!''}" ${(column.hidden)?string("hidden",(column.width??)?string("style=\"width:"+column.width+";\"",""))} ${column.sortable?string("sortable","")} ${mergedSort[column_index]}>${column.header!''}</th>
 		</#list></tr>
 	</thead>
 	<tbody>

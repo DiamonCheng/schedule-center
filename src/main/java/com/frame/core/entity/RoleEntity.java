@@ -2,7 +2,6 @@ package com.frame.core.entity;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,7 +21,7 @@ public class RoleEntity extends BaseEntity {
 	private String name;
 	@Column(length=255)
 	private String description;
-	@ManyToMany(targetEntity=MenuEntity.class,fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToMany(targetEntity=MenuEntity.class,fetch=FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name="null"))
 	private Set<MenuEntity> alowMenus;
 	public String getCode() {

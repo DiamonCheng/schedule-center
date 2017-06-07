@@ -73,7 +73,10 @@ public class QueryHqlResolver {
 			if (!StringUtils.isEmpty(condition.getAlias())) sb.append(condition.getAlias()).append(".");
 			sb.append(condition.getField()).append(" ");
 			sb.append(condition.getOperator()==null?"=":condition.getOperator());
-			sb.append(" ? ");
+			if ("LIKE".equalsIgnoreCase(condition.getOperator())){
+				sb.append(" concat('%', ? ,'%' ) ");
+			}else
+				sb.append(" ? ");
 		}
 	}
 	public static void appendSort(StringBuilder sb, QueryDefinition definition, QueryConditions conditions){

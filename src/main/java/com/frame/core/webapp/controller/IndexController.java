@@ -34,6 +34,10 @@ public class IndexController extends BaseController{
 	@RequestMapping({"/decorator"})
 	public Object decorator(HttpServletRequest request){
 		String requestURI= (String) request.getAttribute(GeneralIntercepter.REQUEST_URI_REQUEST_KEY);
+		if (requestURI==null){
+			LOGGER.warn("requestURI is null. Please check the request header accept:"+request.getHeader("accept"));
+			return null;
+		}
 //		UserAuthoritySubject.getSession().setAttribute(GeneralIntercepter.REQUEST_URI_SESSION_KEY, null);
 		List<MenuEntity> menuLocation=authorityService.getMenuLocation(requestURI);
 		List<MenuEntity> menuList=authorityService.getMenuListWithRole(UserAuthoritySubject.<UserEntity>getAccountSubject());

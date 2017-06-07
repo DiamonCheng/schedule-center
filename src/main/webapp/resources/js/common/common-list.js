@@ -103,6 +103,7 @@ $(document).ready(function(){
 		submitQuery();
 	});
 	$('#submitQuery').on('click',function(){
+		$('#page').val(1);
         submitQuery();
 	});
 	$("#clearQuery").on("click",function(){

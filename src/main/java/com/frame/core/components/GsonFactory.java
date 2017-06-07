@@ -27,35 +27,30 @@ public class GsonFactory {
 			@Override
 			public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 					throws JsonParseException {
-				JsonParseException e=null;
+				JsonParseException e=new JsonParseException("日期类型 JSON："+json+"无法转化");
 				try {
 					return dateFormart2.parse(json.getAsString());
 				} catch (Exception ex) {
-					e=new JsonParseException("日期类型 JSON："+json+"无法转化");
 					e.addSuppressed(ex);
 				}
 				try {
 					return dateFormart1.parse(json.getAsString());
 				} catch (Exception ex) {
-					e=new JsonParseException("日期类型 JSON："+json+"无法转化");
 					e.addSuppressed(ex);
 				}
 				try {
 					return dateFormart4.parse(json.getAsString());
 				} catch (Exception ex) {
-					e=new JsonParseException("日期类型 JSON："+json+"无法转化");
 					e.addSuppressed(ex);
 				}
 				try {
 					return dateFormart3.parse(json.getAsString());
 				} catch (Exception ex) {
-					e=new JsonParseException("日期类型 JSON："+json+"无法转化");
 					e.addSuppressed(ex);
 				}
 				try {
 					return new Date(json.getAsLong());
 				} catch (Exception ex) {
-					e=new JsonParseException("日期类型 JSON："+json+"无法转化");
 					e.addSuppressed(ex);
 				}
 				throw e;
