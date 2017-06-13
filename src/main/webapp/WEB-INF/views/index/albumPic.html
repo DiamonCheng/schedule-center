@@ -12,6 +12,7 @@
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
+		<!-- 这里是声明 -->
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -23,10 +24,6 @@
 					<div id="replybox">
 						<input id="messageId" type="hidden" />
 							<script id="replycontainer" name="content" type="text/plain" style="width:568px;height:150px;"></script>
-						
-						<!-- <textarea id="replyContent" class="form-control" rows="2"></textarea> -->
-						<!-- 			<a id="reply-msg" style="cursor: pointer;" onclick="submitMsg()" class="btn btn-default btn-sm pull-right active" role="button">发送</a>
-				 -->
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -52,11 +49,11 @@
 			<#list listImg as list>
 			<div class="box-body-detail">
 				<div class="box-body-img-pic">
-					<input id="" type="hidden" value="" /> <a href="${list.srcName}/${list.savePath}${list.imgName}" data-fancybox="gallery"><img src="${list.srcName}/${list.savePath}${list.imgName}"   class="img-rounded img-responsive"/></a>
+					<input id="" type="hidden" value="" /> 
+					<a href="${list.srcName}/${list.savePath}${list.imgName}" data-fancybox="gallery">
+						<img src="${list.srcName}/${list.savePath}${list.imgName}"   class="img-rounded img-responsive"/>
+					</a>
 				</div>
-				<!-- 	<div class="box-body-detail-header">
-					<p>${list.imgName}</p>
-				</div> -->
 			</div>
 			</#list>
 			<!-- 分页pagnition -->

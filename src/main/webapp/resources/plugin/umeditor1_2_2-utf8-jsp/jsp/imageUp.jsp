@@ -9,7 +9,7 @@
     up.setSavePath("upload");
     String[] fileType = {".gif" , ".png" , ".jpg" , ".jpeg" , ".bmp"};
     up.setAllowFiles(fileType);
-    up.setMaxSize(10000); //单位KB
+    up.setMaxSize(20000); //单位KB
     up.upload();
 
     String callback = request.getParameter("callback");

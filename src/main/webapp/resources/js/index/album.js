@@ -5,5 +5,4 @@ $(document).ready(function(){
 		var id = $(this).find('input').val();
 		window.location.href='/front/album/pic?id='+id;
 	})
-	
 })
