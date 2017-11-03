@@ -91,7 +91,7 @@
 	<!-- 控制jsp:include的编码为utf-8 -->
 	<jsp-config>
 		<jsp-property-group>
-			<description></description>
+			<description>设置html编码为UTF-8</description>
 			<display-name>JSPConfiguration</display-name>
 			<url-pattern>*.html</url-pattern>
 			<el-ignored>true</el-ignored>

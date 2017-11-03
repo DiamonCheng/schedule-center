@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema id="component"
+           targetNamespace="com.dc.frame.core.components.component"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+    <xs:complexType name="Component" abstract="true"/>
+    <xs:complexType name="OtherType">
+        <xs:complexContent>
+            <xs:extension base="Component">
+                <xs:sequence maxOccurs="1" minOccurs="1">
+                    <xs:any namespace="##other" />
+                </xs:sequence>
+                <xs:attribute name="name"/>
+                <xs:attribute name="classpath"/>
+            </xs:extension>
+        </xs:complexContent>
+
+    </xs:complexType>
+</xs:schema>

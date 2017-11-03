@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema id="childComponent"
+           targetNamespace="com.dc.frame.core.components.childComponent"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:component="com.dc.frame.core.components.component"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="com.dc.frame.core.components.component component.xsd"
+>
+    <xs:import namespace="com.dc.frame.core.components.component" schemaLocation="component.xsd"/>
+    <xs:complexType name="ChildComponent" >
+        <xs:complexContent>
+            <xs:extension base="component:Component">
+                <xs:attribute name="attr1" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="child" type="ChildComponent"/>
+</xs:schema>

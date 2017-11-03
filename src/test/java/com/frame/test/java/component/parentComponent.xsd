@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema id="parentComponent"
+           targetNamespace="com.dc.frame.core.components.parentComponent"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:component="com.dc.frame.core.components.component"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="com.dc.frame.core.components.component component.xsd"
+>
+    <xs:import namespace="com.dc.frame.core.components.component" schemaLocation="component.xsd"/>
+    <xs:complexType name="ParentComponent" >
+        <xs:complexContent>
+            <xs:extension base="component:Component">
+                <xs:sequence minOccurs="1" maxOccurs="1">
+                    <xs:element minOccurs="1" maxOccurs="1" name="child" type="component:OtherType" />
+                </xs:sequence>
+                <xs:attribute name="name" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="parentComponent" type="ParentComponent"/>
+</xs:schema>

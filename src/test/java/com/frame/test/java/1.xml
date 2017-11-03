@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<parentComponent
+        xmlns="com.dc.frame.core.components.parentComponent"
+        xmlns:childComponent="com.dc.frame.core.components.childComponent"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="com.dc.frame.core.components.component component/component.xsd
+        com.dc.frame.core.components.childComponent component/childComponent.xsd"
+    name="12345"
+>
+    <child name="???" classpath="??">
+        <childComponent:ncname attr1="111"/>
+    </child>
+</parentComponent>
