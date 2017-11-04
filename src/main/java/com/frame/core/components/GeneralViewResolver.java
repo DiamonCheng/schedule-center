@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 
@@ -15,8 +15,10 @@ import org.springframework.web.servlet.ViewResolver;
  */
 public class GeneralViewResolver implements ViewResolver  {
     
-    private static Log LOGGER = LogFactory.getLog(GeneralViewResolver.class);
-
+    private static Logger LOGGER = LoggerFactory.getLogger(GeneralViewResolver.class);
+	GeneralViewResolver(){
+		LOGGER.info("GeneralViewResolver construct");
+	}
     public View resolveViewName(String viewName, Locale locale) throws Exception {
     	String suffix=viewNameSuffix(viewName);
     	if (suffix==null)

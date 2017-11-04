@@ -14,7 +14,10 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 public abstract class DaoSupport extends HibernateDaoSupport {
 	@Autowired
-	public void setSessionFactory2(SessionFactory sessionFactory){setSessionFactory(sessionFactory);}
+	public void setSessionFactory2(SessionFactory sessionFactory){
+		setSessionFactory(sessionFactory);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public <T> T getUnique(String hql,Object... params){
 		Query query = this.getSessionFactory().getCurrentSession().createQuery(hql);

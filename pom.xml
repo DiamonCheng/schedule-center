@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.dc</groupId>
-	<artifactId>frame</artifactId>
-	<version>1.0.release</version>
-	<name>frame</name>
+	<artifactId>frame-schedule</artifactId>
+	<version>1.0.snapshot</version>
+	<name>frame-schedule</name>
 	<packaging>war</packaging>
 	<properties>
 		<version>1.0-snapshot</version>
@@ -26,7 +26,7 @@
                 <db.driver>com.mysql.jdbc.Driver</db.driver>
                 <db.username>root</db.username>
                 <db.password></db.password>
-                <db.url>jdbc:mysql://127.0.0.1:3306/frame?useUnicode=true&amp;amp;characterEncoding=utf8</db.url>
+                <db.url>jdbc:mysql://127.0.0.1:3306/frame_schedule?useUnicode=true&amp;amp;characterEncoding=utf8</db.url>
 
                 <hibernate.dialect>org.hibernate.dialect.MySQL5Dialect</hibernate.dialect>
                 <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
@@ -40,7 +40,7 @@
                 <db.driver>com.mysql.jdbc.Driver</db.driver>
                 <db.username>root</db.username>
                 <db.password></db.password>
-                <db.url>jdbc:mysql://127.0.0.1:3306/frame</db.url>
+                <db.url>jdbc:mysql://127.0.0.1:3306/frame_schedule</db.url>
 
                 <hibernate.dialect>org.hibernate.dialect.MySQL5Dialect</hibernate.dialect>
                 <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
@@ -62,12 +62,11 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
-			<!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
-			</plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.4.2.RELEASE</version>
+            </plugin>
 		</plugins>
 		<!-- 规定工程中哪几个为资源文件夹（source folder） -->
 		<resources>
@@ -85,6 +84,10 @@
                     <include>**</include>
                 </includes>
 			</resource>
+            <resource>
+                <directory>${project.basedir}/src/main/webapp</directory>
+                <filtering>false</filtering>
+            </resource>
 		</resources>
 		<testResources>
 			<testResource>
@@ -95,18 +98,9 @@
 				<directory>${project.basedir}/src/test/resources</directory>
 				<filtering>true</filtering>
 			</testResource>
-			<testResource>
-				<directory>${project.basedir}/src/main/webapp</directory>
-				<filtering>false</filtering>
-			</testResource>
 		</testResources>
 	</build>
 	<dependencies>
-		<dependency><!-- JAVA EE API -->
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>7.0</version>
-		</dependency>
 		<dependency><!-- JSTL -->
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -181,33 +175,7 @@
 		    <version>3.3.0.Final</version>
 		</dependency>
 		
-		<dependency><!-- 日志接口 -->
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${slf4j-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>${log4j-version}</version>
-		</dependency>
-		<!--用于与slf4j保持桥接 -->
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>${log4j-version}</version>
-		</dependency>
-		<!--web工程需要包含log4j-web，非web工程不需要 -->
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-web</artifactId>
-			<version>${log4j-version}</version>
-		</dependency>
+
 		<dependency><!-- Junit单元测试框架 -->
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -223,5 +191,22 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.40</version>
 		</dependency>
+		<!--spring boot-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>1.4.2.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+            <version>1.4.2.RELEASE</version>
+        </dependency>
 	</dependencies>
 </project>

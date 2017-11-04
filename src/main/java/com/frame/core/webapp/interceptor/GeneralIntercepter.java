@@ -4,6 +4,7 @@ package com.frame.core.webapp.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.frame.core.webapp.controller.account.LoginController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,11 @@ public class GeneralIntercepter implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
-		String requestURI=request.getServletPath();
-		if (requestURI.startsWith("/resources/")) return true;
+        String requestURI=request.getRequestURI();
+		if (requestURI.startsWith("/resources/")
+				||requestURI.startsWith("/error")
+				||requestURI.contains("favicon.ico")
+				||requestURI.startsWith("/WEB-INF")) return true;
 		boolean flag=false;
 		if (!checkUser()&& !requestURI.contains("login")){//未登录 进入
 			if (HttpContextUtil.isAjaxRequest()){

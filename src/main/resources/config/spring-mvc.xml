@@ -41,8 +41,6 @@
 		
 	</mvc:annotation-driven>
 	<!-- 当上面要访问的静态资源不包括在上面的配置中时，则根据此配置来访问 -->
-	<mvc:default-servlet-handler />
-
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding">
@@ -60,29 +58,12 @@
         <property name="viewResolverMap">
             <map>
                 <entry>
-                    <key>    
-                    	<value>.html</value>
-                    </key>
-                    <ref bean="internalViewResolver"/>
-                </entry>
-                <entry>
-                    <key>
-                        <value>.jsp</value>
-                    </key>
-                    <ref bean="internalViewResolver"/>
-                </entry>
-                <entry>
                     <key><value>.ftl</value></key>
                     <ref bean="freemarkerViewResolver"/>
                 </entry>
             </map>
         </property>
     </bean>
-	<bean id="internalViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
-	    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-	    <property name="contentType" value="text/html; charset=utf-8" />
-		<property name="prefix" value="/WEB-INF/views/" />
-	</bean>  
 	<!-- 配置freeMarker视图解析器 -->
 	<bean id="freemarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 		<property name="viewClass"
@@ -94,7 +75,7 @@
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath">
-			<value>/WEB-INF/views/</value>
+			<value>classpath:/WEB-INF/views/</value>
 		</property>
 		<property name="freemarkerVariables">
 			<map>
@@ -112,7 +93,8 @@
 	</bean>
 	<mvc:interceptors>  
     <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->  
-    	<bean class="com.frame.core.webapp.interceptor.GeneralIntercepter"/>  
+    	<bean class="com.frame.core.webapp.interceptor.GeneralIntercepter"/>
+		<!--<bean class="org.springframework.orm.hibernate4.support.OpenSessionInViewInterceptor"/>-->
 	</mvc:interceptors>
 	<bean class="com.frame.core.webapp.listener.StartupListener"></bean>
 </beans>

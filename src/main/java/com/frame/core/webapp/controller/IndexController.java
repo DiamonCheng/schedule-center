@@ -26,7 +26,7 @@ public class IndexController extends BaseController{
 	@RequestMapping({"/main"})
 	public Object main(HttpServletRequest request){
 		request.setAttribute("a", "123");
-		return "main.jsp";
+		return "main";
 	}
 	@Autowired
 	private AuthorityService authorityService;

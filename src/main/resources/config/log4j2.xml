@@ -4,13 +4,13 @@
   
     <Appenders>  
         <Console name="console" target="SYSTEM_OUT">  
-        	<ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="%d %-5p (%F:%L) - %m%n" />  
+        	<ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d %-5p ([%t]%F:%L) - %m%n" />
         </Console>  
   
         <RollingRandomAccessFile name="frame_log_error" 
-                                 fileName="${sys:catalina.base}/logs/frame_log_error.log"  
-                                 filePattern="${sys:catalina.base}/logs/frame_log_error%d{yyyy-MM-dd}.log">  
+                                 fileName="logs/frame_log_error.log"
+                                 filePattern="logs/frame_log_error%d{yyyy-MM-dd}.log">
            <!--  <PatternLayout pattern="%d %-5p (%F:%L) - %m%n"/>   -->
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>  
             <Policies>  
@@ -21,8 +21,8 @@
             <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
         </RollingRandomAccessFile>  
         <RollingRandomAccessFile name="frame_log_common" 
-                                 fileName="${sys:catalina.base}/logs/frame_log_common.log"  
-                                 filePattern="${sys:catalina.base}/logs/frame_log_common%d{yyyy-MM-dd}.log">  
+                                 fileName="logs/frame_log_common.log"
+                                 filePattern="logs/frame_log_common%d{yyyy-MM-dd}.log">
            <!--  <PatternLayout pattern="%d %-5p (%F:%L) - %m%n"/>   -->
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>  
             <Policies>  
@@ -43,15 +43,17 @@
         </logger>  
         <logger name="org.springframework.context" level="info">  
         </logger>  
-        <logger name="org.springframework.web" level="info">  
-        </logger>  
-  
+       <!-- <logger name="org.springframework.web" level="info">
+        </logger>  -->
+        <logger name="org.hibernate.engine.internal.StatisticalLoggingSessionEventListener" level="warn">
+        </logger>
+
      <!--    <logger name="com.meituan.gct.shop.promo" level="error" includeLocation="true" additivity="false">  
             <appender-ref ref="ErrorLog"/>  
             <appender-ref ref="Console"/>  
         </logger>   -->
   
-        <root level="DEBUG" includeLocation="true">  
+        <root level="info" includeLocation="true">
             <appender-ref ref="console" />  
             <appender-ref ref="frame_log_error" />  
             <appender-ref ref="frame_log_common" />  
