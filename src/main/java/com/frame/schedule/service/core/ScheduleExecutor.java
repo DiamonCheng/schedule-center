@@ -14,12 +14,12 @@ public abstract class ScheduleExecutor<T extends Schedulable> implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        Schedulable schedulable =
-                (Schedulable) context.getMergedJobDataMap()
-                    .get(ScheduleOperator.JOB_MAP_DATA_KEY);
-        execute(schedulable);
+        Object obj=context.getMergedJobDataMap()
+                           .get(ScheduleOperator.JOB_MAP_DATA_KEY);
+        execute((T) obj);
+        
     }
 
-    public abstract void execute(Schedulable scheWdulable);
+    public abstract void execute(T scheWdulable);
 
 }

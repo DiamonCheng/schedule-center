@@ -1,0 +1,2 @@
+INSERT INTO frame_schedule.sys_role (create_date_time, init_id, update_date_time, version, code, name, roles_id, description) VALUES ('2017-02-24 18:11:46', null, '2017-11-04 21:36:14', 16, 'ADMIN', '管理员', null, '超级管理员');
+INSERT INTO frame_schedule.sys_role (create_date_time, init_id, update_date_time, version, code, name, roles_id, description) VALUES ('2017-02-27 11:59:23', null, '2017-02-27 11:59:23', 9, 'USER', '用户', null, '用户');

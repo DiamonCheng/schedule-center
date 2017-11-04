@@ -25,7 +25,7 @@ http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 	<!-- 切片时间统计 -->
 	<!-- <context:component-scan base-package="com.experian.aop" /> -->
 	<!-- <aop:aspectj-autoproxy proxy-target-class="true"/> -->
-	<bean id="defaultGson" class="com.frame.core.components.GsonFactory" factory-method="buildDefaultGson" scope="singleton"/>
+	<bean id="defaultGson" class="com.frame.core.components.GsonFactory"  factory-method="buildDefaultGson"/>
 
 	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"/>
 

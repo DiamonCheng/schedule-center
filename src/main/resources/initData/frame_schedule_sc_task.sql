@@ -1,0 +1,1 @@
+INSERT INTO frame_schedule.sc_task (create_date_time, init_id, update_date_time, version, taskCode, taskCron, taskName, execNum, status) VALUES ('2017-11-04 13:57:13', null, '2017-11-04 21:48:00', 327, 'test01', '0/10 * * * * ? *', 'test01', 331, 'WORKING');

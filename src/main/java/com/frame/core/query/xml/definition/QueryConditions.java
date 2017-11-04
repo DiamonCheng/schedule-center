@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class QueryConditions {
 	private String paramString;
-	private static final Gson gson=GsonFactory.buildDefaultGson();
+	private static final Gson gson=GsonFactory.getInstance().buildDefaultGson();
 	private List<QueryCondition> conditions;
 	private int page=1;
 	private Integer pageSize=10;

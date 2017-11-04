@@ -9,6 +9,7 @@
 			<by field="id" order="ASC"></by>
 		</sort>
 		<columns>
+			<column header="Id" field="id"  width="10%" sortable="true" hidden="false"></column>
 			<column header="任务编码" field="taskCode"  width="10%" sortable="true" hidden="false"></column>
 			<column header="任务名称" field="taskName" sortable="true" hidden="false"></column>
 			<column header="任务执行周期" field="taskCron" sortable="true" hidden="false"></column>

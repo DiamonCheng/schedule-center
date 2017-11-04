@@ -27,7 +27,7 @@ public class ScheduleOperator {
             return;  
         }  
   
-        logger.debug("addSchedule:{}",schedule);
+        logger.debug("addTask:{}",schedule);
         TriggerKey triggerKey = TriggerKey.triggerKey(schedule.getKey(), schedule.getGroup());
         CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);  
   
@@ -66,7 +66,7 @@ public class ScheduleOperator {
     public void deleteSchedule(Schedulable schedule) throws SchedulerException {
         JobKey jobKey = JobKey.jobKey(schedule.getKey(), schedule.getGroup());
         scheduler.deleteJob(jobKey);
-        logger.debug("deleteSchedule:{}",schedule);
+        logger.debug("deleteTask:{}",schedule);
     }  
   
     /** 

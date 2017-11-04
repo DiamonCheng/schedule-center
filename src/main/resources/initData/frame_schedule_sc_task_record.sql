@@ -1,0 +1,1 @@
+INSERT INTO frame_schedule.sc_task_record (create_date_time, init_id, update_date_time, version, finishDateTime, planStartDate, startDateTime, status, taskExecuteCode, task_id) VALUES ('2017-11-04 21:33:42', null, '2017-11-04 21:33:42', 0, null, '2017-11-04 21:40:01', null, 'SCHEDULED', 'taskCode', 1);

@@ -1,5 +1,6 @@
 package com.frame.schedule.service;
 
+import com.frame.core.utils.SpringWebContextUtil;
 import com.frame.schedule.entity.Schedulable;
 import com.frame.schedule.entity.TaskEntity;
 import com.frame.schedule.service.core.ScheduleExecutor;
@@ -13,7 +14,8 @@ import org.slf4j.LoggerFactory;
 public class TaskExecutor extends ScheduleExecutor<TaskEntity> {
     private static final Logger LOGGER= LoggerFactory.getLogger(TaskExecutor.class);
     @Override
-    public void execute(Schedulable schedulable) {
+    public void execute(TaskEntity schedulable) {
+        SpringWebContextUtil.getBean(TaskService.class).executeTask(schedulable);
         LOGGER.warn("A task executed,"+schedulable);
     }
 }

@@ -20,4 +20,8 @@ public class SpringWebContextUtil {
 	public static Object getBean(String id){
 		return webApplicationContext.getBean(id);
 	}
+	
+	public static void setWebApplicationContext(WebApplicationContext webApplicationContext) {
+		SpringWebContextUtil.webApplicationContext = webApplicationContext;
+	}
 }

@@ -4,7 +4,10 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,35 +20,29 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 public class GsonFactory {
-	private static SimpleDateFormat dateFormart1=new SimpleDateFormat("yyyy-MM-dd");
-	private static SimpleDateFormat dateFormart2=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	private static SimpleDateFormat dateFormart3=new SimpleDateFormat("yyyy/MM/dd");
-	private static SimpleDateFormat dateFormart4=new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	private static GsonFactory instance;
+	public GsonFactory(){
+		if (instance==null) instance=this;
+	}
+	
+	private List<String> dateFomartPatternList=new ArrayList<>(Arrays.asList("yyyy-MM-dd","yyyy-MM-dd HH:mm:ss","yyyy/MM/dd","yyyy/MM/dd HH:mm:ss"));
+	private String defaultOutputDateFomart="yyyy-MM-dd HH:mm:ss";
+	
 	public static Gson buildDefaultGson(){
+	    if (instance==null) new GsonFactory();
+	    return instance.buildGson();
+    }
+	
+	public Gson buildGson(){
 		return new GsonBuilder().registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
 			
 			@Override
 			public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 					throws JsonParseException {
 				JsonParseException e=new JsonParseException("日期类型 JSON："+json+"无法转化");
-				try {
-					return dateFormart2.parse(json.getAsString());
-				} catch (Exception ex) {
-					e.addSuppressed(ex);
-				}
-				try {
-					return dateFormart1.parse(json.getAsString());
-				} catch (Exception ex) {
-					e.addSuppressed(ex);
-				}
-				try {
-					return dateFormart4.parse(json.getAsString());
-				} catch (Exception ex) {
-					e.addSuppressed(ex);
-				}
-				try {
-					return dateFormart3.parse(json.getAsString());
-				} catch (Exception ex) {
+				for (String pattern:dateFomartPatternList)  try{
+					return new SimpleDateFormat(pattern).parse(json.getAsString());
+				}catch (Exception ex) {
 					e.addSuppressed(ex);
 				}
 				try {
@@ -58,7 +55,7 @@ public class GsonFactory {
 		}).registerTypeAdapter(Date.class, new JsonSerializer<Date>() {
 			@Override
 			public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
-				return new JsonPrimitive(dateFormart2.format(src));
+				return new JsonPrimitive(new SimpleDateFormat(defaultOutputDateFomart).format(src));
 			}
 		}).registerTypeAdapter(Class.class, new JsonSerializer<Class<?>>() {
 			@Override
@@ -87,10 +84,26 @@ public class GsonFactory {
 			}
 		}).create();
 	}
-	public static SimpleDateFormat getDateFormart1() {
-		return dateFormart1;
-	}
-	public static SimpleDateFormat getDateFormart2() {
-		return dateFormart2;
-	}
+    
+    public static GsonFactory getInstance() {
+        return instance;
+    }
+    
+    public List<String> getDateFomartPatternList() {
+        return dateFomartPatternList;
+    }
+    
+    public String getDefaultOutputDateFomart() {
+        return defaultOutputDateFomart;
+    }
+    
+    public GsonFactory setDateFomartPatternList(List<String> dateFomartPatternList) {
+        this.dateFomartPatternList = dateFomartPatternList;
+        return this;
+    }
+    
+    public GsonFactory setDefaultOutputDateFomart(String defaultOutputDateFomart) {
+        this.defaultOutputDateFomart = defaultOutputDateFomart;
+        return this;
+    }
 }

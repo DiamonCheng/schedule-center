@@ -1,0 +1,2 @@
+INSERT INTO frame_schedule.sys_user_copy (create_date_time, init_id, update_date_time, version, nickName, userLoginVerification, userPassword) VALUES ('2017-01-08 20:54:24', 1, '2017-01-08 20:54:24', 6, 'DC', 'DC', 'B0996B5F7B2C2F3EA67701C590DE7A199B777EDF');
+INSERT INTO frame_schedule.sys_user_copy (create_date_time, init_id, update_date_time, version, nickName, userLoginVerification, userPassword) VALUES ('2017-02-10 17:46:28', null, '2017-02-10 17:46:28', 6, '1123', 'woson', '2C367CFB6A396D5A4AA327B18BC384EA4BC1F407');

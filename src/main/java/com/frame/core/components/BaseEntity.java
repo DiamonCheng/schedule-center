@@ -13,6 +13,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  * @author DeffersonCheng
@@ -45,15 +46,15 @@ public abstract class BaseEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     protected Date createDateTime;
-
+    
     /**
      * 最后修改时间
      */
     @Column(name = "update_date_time")
     @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
+    @UpdateTimestamp
     protected Date updateDateTime;
-
+    
     /**
      * 用于鉴别初始化数据
      */

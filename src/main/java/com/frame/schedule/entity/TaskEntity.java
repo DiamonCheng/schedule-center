@@ -27,7 +27,7 @@ public class TaskEntity extends BaseEntity implements Schedulable {
     @NotNull
     private String taskCron;
     
-    private Long execNum=0L;
+    private Long execNum;
     
     private String status;
     
