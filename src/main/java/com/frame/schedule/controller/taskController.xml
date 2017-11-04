@@ -22,6 +22,11 @@
 			<condition field="taskName" operator="LIKE" displayText="任务名称" inputType="TEXT"></condition>
 		</searchDefinition>
 		<pageSize>10</pageSize>
+        <js>
+            <path>/resources/js/schedule/task-list.js</path>
+        </js>
+        <css>
+        </css>
 	</queryDefinition>
 	<delete></delete>
 	<manage>

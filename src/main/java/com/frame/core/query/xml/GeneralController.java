@@ -116,38 +116,10 @@ public abstract class GeneralController <T extends BaseEntity>{
 	@ResponseBody
 	public Object delete(Long id){
     	T entity=service.get(targetClass,id);
-		if (pageHolder.getPageDefinition().getDelete().getBeforeDelete()!=null){
-			Method toInvoke=pageHolder.getPageDefinition().getDelete().getBeforeDeleteMethod();
-			Object[] args=new Object[toInvoke.getParameterTypes().length];
-			if (pageHolder.getPageDefinition().getDelete().getInjectIndex()!=null){
-				args[pageHolder.getPageDefinition().getDelete().getInjectIndex()]=entity;
-			}
-			try {
-                toInvoke.setAccessible(true);
-				if ((Boolean)toInvoke.invoke(this,args)) service.delete(entity);
-				UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
-			} catch (Exception e) {
-				throw new GeneralControllerExcuteException(e);
-			}
-		}else{
-            service.delete(entity);
-            UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
-        }
-		if (pageHolder.getPageDefinition().getDelete().getAfterDelete()!=null){
-			Method toInvoke=pageHolder.getPageDefinition().getDelete().getAfterDeleteMethod();
-			Object[] args=new Object[toInvoke.getParameterTypes().length];
-			for (int i=0;i<args.length;i++){
-				if (BaseEntity.class.isAssignableFrom(toInvoke.getParameterTypes()[i]))
-					args[i]=entity;
-			}
-			try {
-                toInvoke.setAccessible(true);
-				toInvoke.invoke(this,args);
-				afterDelete(entity);
-			} catch (Exception e) {
-				throw new GeneralControllerExcuteException(e);
-			}
-		}
+    	beforeDelete(entity);
+        service.delete(entity);
+        UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
+        afterDelete(entity);
 		return new AjaxResult();
 	}
     public boolean beforeDelete(T entity){return true;}

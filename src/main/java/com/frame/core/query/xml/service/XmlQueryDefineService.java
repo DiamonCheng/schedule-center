@@ -222,8 +222,10 @@ public class XmlQueryDefineService {
 		T entity =gson.fromJson(paramString,targetClass);
 		T toSave=null;
         List<ManageField> manageFields=pageHolder.getPageDefinition().getManage().getField();
+        boolean isAdd=false;
         if (entity.getId()==null){
             toSave=entity;
+            isAdd=true;
         }else{
             toSave=get(targetClass,entity.getId());
             for(ManageField manageField:manageFields){
@@ -265,42 +267,8 @@ public class XmlQueryDefineService {
             }
         }
         c.beforeUpdate(entity);
-        if (pageHolder.getPageDefinition().getManage().getBeforeManage()!=null){
-            Method toInvoke=pageHolder.getPageDefinition().getManage().getBeforeManageMethod();
-            Class<?>[] argsType=toInvoke.getParameterTypes();
-            Object[] args=new Object[argsType.length];
-            for(int i=0;i<argsType.length;i++){
-                if (argsType[i].isAssignableFrom(targetClass)){
-                    args[i]=toSave;
-                }
-            }
-            try {
-                toInvoke.setAccessible(true);
-                if ((Boolean)toInvoke.invoke(c,args)) saveOrUpdate(toSave);
-                else return null;
-            } catch (Exception e) {
-                throw new GeneralController.GeneralControllerExcuteException(e);
-            }
-        }else{
-            saveOrUpdate(toSave);
-        }
-        if (pageHolder.getPageDefinition().getManage().getAfterManage()!=null){
-        	Method toInvoke=pageHolder.getPageDefinition().getManage().getAfterManageMethod();
-        	Class<?>[] argsType=toInvoke.getParameterTypes();
-            Object[] args=new Object[argsType.length];
-            for(int i=0;i<argsType.length;i++){
-                if (argsType[i].isAssignableFrom(targetClass)){
-                    args[i]=toSave;
-                }
-            }
-            try {
-                toInvoke.setAccessible(true);
-                toInvoke.invoke(c,args);
-            } catch (Exception e) {
-                throw new GeneralController.GeneralControllerExcuteException(e);
-            }
-        }
-        c.afterUpdate(toSave,entity.getId()==null);
+        saveOrUpdate(toSave);
+        c.afterUpdate(toSave,isAdd);
         return toSave;
     }
     public void saveOrUpdate(BaseEntity entity){

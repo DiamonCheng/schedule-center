@@ -13,32 +13,12 @@ import java.util.List;
  */
 public class Manage {
     private List<ManageField> field;
-    private String beforeManage;
-    private Method beforeManageMethod;
-    private String AfterManage;
-    private Method AfterManageMethod;
 
     public List<ManageField> getField() {
         return field;
     }
     public void setField(List<ManageField> field) {
         this.field = field;
-    }
-    @XmlAttribute
-    public String getBeforeManage() {
-        return beforeManage;
-    }
-
-    public void setBeforeManage(String beforeManage) {
-        this.beforeManage = beforeManage;
-    }
-    @XmlTransient
-    public Method getBeforeManageMethod() {
-        return beforeManageMethod;
-    }
-
-    public void setBeforeManageMethod(Method beforeManageMethod) {
-        this.beforeManageMethod = beforeManageMethod;
     }
     public List<ManageField> cloneFields() throws CloneNotSupportedException {
         ArrayList<ManageField> res=new ArrayList<ManageField>(field.size());
@@ -64,19 +44,5 @@ public class Manage {
 	}
 	public void setRequiredCssPath(List<String> requiredCssPath) {
 		this.requiredCssPath = requiredCssPath;
-	}
-	@XmlAttribute
-	public String getAfterManage() {
-		return AfterManage;
-	}
-	public void setAfterManage(String afterManage) {
-		AfterManage = afterManage;
-	}
-	@XmlTransient
-	public Method getAfterManageMethod() {
-		return AfterManageMethod;
-	}
-	public void setAfterManageMethod(Method afterManageMethod) {
-		AfterManageMethod = afterManageMethod;
 	}
 }

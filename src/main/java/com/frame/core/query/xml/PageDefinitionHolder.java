@@ -81,107 +81,28 @@ public class PageDefinitionHolder {
      */
 	@SuppressWarnings("rawtypes")
 	private void initAfterLoad(GeneralController c) throws NoSuchMethodException {
-	    if (page.getQueryDefinition().getQueryConditionDefines()!=null)
-	        for (QueryConditionDefine q:page.getQueryDefinition().getQueryConditionDefines()) {
-                Class<?> type = null;
-                for (MappedClassEntry mappedClass : page.getQueryDefinition().getMappedClass()) {
-                    if (StringUtils.isEmpty(mappedClass.getAlias()) && StringUtils.isEmpty(q.getAlias()) || mappedClass.getAlias() != null && mappedClass.getAlias().equals(q.getAlias())) {
-                        type = ReflectUtil.resolveFieldClass(mappedClass.getMappedClass(), q.getField());
-                        break;
-                    }
-                    if (mappedClass.getJoin() != null) for (JoinEntry joinEntry : mappedClass.getJoin()) {
-                        if (StringUtils.isEmpty(joinEntry.getAs()) && StringUtils.isEmpty(q.getAlias()) || joinEntry.getAs() != null && joinEntry.getAs().equals(q.getAlias())) {
-                            Class<?> optionClass = ReflectUtil.resolveFieldClass(mappedClass.getMappedClass(), joinEntry.getField());
-                            if (q.getOptionClass() == null) q.setOptionClass(optionClass);
-                            type = ReflectUtil.resolveFieldClass(optionClass, q.getField());
-                            break;
-                        }
-                    }
-                    if (type != null) break;
-                }
-                if (type != null) q.setType(type);
-                else
-                    throw new PageDefinitionLoadException("No such field found in queryDedination! alias:" + q.getAlias() + " field:" + q.getField());
-            }
-		if (page.getDelete()!=null&&page.getDelete().getBeforeDelete()!=null){
-			String beforeDeleteMethodName=page.getDelete().getBeforeDelete();
-			Method beforeDeleteMethod=null;
-			for(Method method:c.getClass().getDeclaredMethods()){
-				if (method.getName().equals(beforeDeleteMethodName)){
-					beforeDeleteMethod=method;
-					break;
+	    if (page.getQueryDefinition().getQueryConditionDefines()!=null) {
+			for (QueryConditionDefine q : page.getQueryDefinition().getQueryConditionDefines()) {
+				Class<?> type = null;
+				for (MappedClassEntry mappedClass : page.getQueryDefinition().getMappedClass()) {
+					if (StringUtils.isEmpty(mappedClass.getAlias()) && StringUtils.isEmpty(q.getAlias()) || mappedClass.getAlias() != null && mappedClass.getAlias().equals(q.getAlias())) {
+						type = ReflectUtil.resolveFieldClass(mappedClass.getMappedClass(), q.getField());
+						break;
+					}
+					if (mappedClass.getJoin() != null) for (JoinEntry joinEntry : mappedClass.getJoin()) {
+						if (StringUtils.isEmpty(joinEntry.getAs()) && StringUtils.isEmpty(q.getAlias()) || joinEntry.getAs() != null && joinEntry.getAs().equals(q.getAlias())) {
+							Class<?> optionClass = ReflectUtil.resolveFieldClass(mappedClass.getMappedClass(), joinEntry.getField());
+							if (q.getOptionClass() == null) q.setOptionClass(optionClass);
+							type = ReflectUtil.resolveFieldClass(optionClass, q.getField());
+							break;
+						}
+					}
+					if (type != null) break;
 				}
+				if (type != null) q.setType(type);
+				else
+					throw new PageDefinitionLoadException("No such field found in queryDedination! alias:" + q.getAlias() + " field:" + q.getField());
 			}
-			if (beforeDeleteMethod==null) for(Method method:c.getClass().getMethods()){
-				if (method.getName().equals(beforeDeleteMethodName)){
-					beforeDeleteMethod=method;
-					break;
-				}
-			}
-			if (beforeDeleteMethod==null) throw new NoSuchMethodException(c.getClass().getName()+"."+beforeDeleteMethodName);
-			else page.getDelete().setBeforeDeleteMethod(beforeDeleteMethod);
-			Class<?>[] paramTypes=beforeDeleteMethod.getParameterTypes();
-			for (int i=0;i<paramTypes.length;i++){
-				if(paramTypes[i].isAssignableFrom(c.getTargetClass())){
-					page.getDelete().setInjectIndex(i);
-					break;
-				}
-			}
-			
-		}
-		if (page.getDelete()!=null&&page.getDelete().getAfterDelete()!=null){
-			String afterDeleteMethodName=page.getDelete().getAfterDelete();
-			Method afterDeleteMethod=null;
-			for(Method method:c.getClass().getDeclaredMethods()){
-				if (method.getName().equals(afterDeleteMethodName)){
-					afterDeleteMethod=method;
-					break;
-				}
-			}
-			if (afterDeleteMethod==null) for(Method method:c.getClass().getMethods()){
-				if (method.getName().equals(afterDeleteMethodName)){
-					afterDeleteMethod=method;
-					break;
-				}
-			}
-			if (afterDeleteMethod==null) throw new NoSuchMethodException(c.getClass().getName()+"."+afterDeleteMethodName);
-			else page.getDelete().setAfterDeleteMethod(afterDeleteMethod);
-		}
-		if (page.getManage()!=null&&page.getManage().getBeforeManage()!=null){
-            String beforeManageMethodName=page.getManage().getBeforeManage();
-            Method beforeManageMethod=null;
-            for(Method method:c.getClass().getDeclaredMethods()){
-                if (method.getName().equals(beforeManageMethodName)){
-                    beforeManageMethod=method;
-                    break;
-                }
-            }
-            if (beforeManageMethod==null) for(Method method:c.getClass().getMethods()){
-				if (method.getName().equals(beforeManageMethodName)){
-					beforeManageMethod=method;
-					break;
-				}
-			}
-            if (beforeManageMethod==null) throw new NoSuchMethodException(c.getClass().getName()+"."+beforeManageMethodName);
-            else page.getManage().setBeforeManageMethod(beforeManageMethod);
-        }
-		if (page.getManage()!=null&&page.getManage().getAfterManage()!=null){
-			String afterManageMethodName=page.getManage().getAfterManage();
-            Method afterManageMethod=null;
-            for(Method method:c.getClass().getDeclaredMethods()){
-            	if (method.getName().equals(afterManageMethodName)){
-            		afterManageMethod=method;
-            		break;
-            	}
-            }
-            if (afterManageMethod==null) for(Method method:c.getClass().getMethods()){
-            	if (method.getName().equals(afterManageMethodName)){
-            		afterManageMethod=method;
-            		break;
-            	}
-            }
-            if (afterManageMethod==null) throw new NoSuchMethodException(c.getClass().getName()+"."+afterManageMethodName);
-            else page.getManage().setAfterManageMethod(afterManageMethod);
 		}
 	}
 	/**

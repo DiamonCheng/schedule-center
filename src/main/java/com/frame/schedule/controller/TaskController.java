@@ -39,9 +39,9 @@ public class TaskController extends GeneralController<TaskEntity>{
     }
     
     @Override
-    public boolean beforeDelete(TaskEntity entity) {
+    public void afterDelete(TaskEntity entity) {
         taskService.deleteSchedule(entity);
-        return true;
+        super.afterDelete(entity);
     }
     
     @Override

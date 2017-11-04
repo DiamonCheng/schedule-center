@@ -125,8 +125,6 @@
 			<xs:element maxOccurs="1" minOccurs="0" name="js" type="jscssType"/>
 			<xs:element maxOccurs="1" minOccurs="0" name="css" type="jscssType"/>
 		</xs:sequence>
-		<xs:attribute name="beforeManage" default="beforeManage" />
-		<xs:attribute name="afterManage" default="afterManage" />
 	</xs:complexType>
 	<xs:complexType name="jscssType">
 		<xs:sequence minOccurs="1">
@@ -144,8 +142,6 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="deleteType">
-		<xs:attribute name="beforeDelete" default="beforeDelete"/>
-		<xs:attribute name="afterDelete" default="afterDelete"/>
 	</xs:complexType>
 	<xs:complexType name="manageFieldType">
 		<xs:sequence>
