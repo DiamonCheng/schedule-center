@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageDefinition  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				 xsi:noNamespaceSchemaLocation="/pageDefinition.xsd">
+	<queryDefinition>
+		<mappedClass mappedClass="com.frame.schedule.entity.TaskEntity">
+		</mappedClass>
+		<where></where>
+		<sort>
+			<by field="id" order="ASC"></by>
+		</sort>
+		<columns>
+			<column header="任务编码" field="taskCode"  width="10%" sortable="true" hidden="false"></column>
+			<column header="任务名称" field="taskName" sortable="true" hidden="false"></column>
+			<column header="任务执行周期" field="taskCron" sortable="true" hidden="false"></column>
+			<column header="执行次数" field="execNum" sortable="true" hidden="false"></column>
+			<column header="状态" field="status" sortable="true" hidden="false"></column>
+			<column header="创建时间" field="createDateTime" sortable="true" hidden="false"></column>
+			<column header="更新时间" field="updateDateTime" sortable="true" hidden="false"></column>
+		</columns>
+		<searchDefinition>
+			<condition field="taskCode" operator="LIKE" displayText="任务编码" inputType="TEXT"></condition>
+			<condition field="taskName" operator="LIKE" displayText="任务名称" inputType="TEXT"></condition>
+		</searchDefinition>
+		<pageSize>10</pageSize>
+	</queryDefinition>
+	<delete></delete>
+	<manage>
+		<field field="taskName" displayText="任务名称"></field>
+		<field field="taskCode" displayText="任务编码"></field>
+		<field field="taskCron" displayText="任务执行周期"></field>
+	</manage>
+</pageDefinition>

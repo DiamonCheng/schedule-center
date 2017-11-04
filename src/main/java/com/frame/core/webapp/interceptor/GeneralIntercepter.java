@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,6 +18,9 @@ import com.frame.core.components.UserAuthoritySubject;
 import com.frame.core.dao.GeneralDao;
 import com.frame.core.entity.UserEntity;
 import com.frame.core.utils.HttpContextUtil;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class GeneralIntercepter implements HandlerInterceptor {
 	private final static Logger LOGGER=LoggerFactory.getLogger(GeneralIntercepter.class);

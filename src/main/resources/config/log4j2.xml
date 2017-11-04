@@ -5,7 +5,7 @@
     <Appenders>  
         <Console name="console" target="SYSTEM_OUT">  
         	<ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="%d %-5p ([%t]%F:%L) - %m%n" />
+            <PatternLayout pattern="%d %-5p [%t] (%F:%L) - %m%n" />
         </Console>  
   
         <RollingRandomAccessFile name="frame_log_error" 

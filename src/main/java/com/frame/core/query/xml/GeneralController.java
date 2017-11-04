@@ -138,11 +138,12 @@ public abstract class GeneralController <T extends BaseEntity>{
 			Object[] args=new Object[toInvoke.getParameterTypes().length];
 			for (int i=0;i<args.length;i++){
 				if (BaseEntity.class.isAssignableFrom(toInvoke.getParameterTypes()[i]))
-					args[i]=service.get(targetClass,id);
+					args[i]=entity;
 			}
 			try {
                 toInvoke.setAccessible(true);
 				toInvoke.invoke(this,args);
+				afterDelete(entity);
 			} catch (Exception e) {
 				throw new GeneralControllerExcuteException(e);
 			}
@@ -150,7 +151,7 @@ public abstract class GeneralController <T extends BaseEntity>{
 		return new AjaxResult();
 	}
     public boolean beforeDelete(T entity){return true;}
-    public void afterDelete(){}
+    public void afterDelete(T entity){}
     private static final String ADD_METHOD_URL="/add";
     private static final String EDIT_METHOD_URL="/edit";
     @RequestMapping(value={ADD_METHOD_URL,EDIT_METHOD_URL},method = RequestMethod.GET)
@@ -175,6 +176,7 @@ public abstract class GeneralController <T extends BaseEntity>{
     	return res;
 	}
 	public boolean beforeUpdate(T entity){return true;}
+	public void afterUpdate(T entity,boolean isAdd){}
 	//TODO 这里做这可Controller能够出现的异常。
 	@ExceptionHandler(value=Throwable.class)
 	public Object handleException(Throwable e,HttpServletRequest request,HttpServletResponse response) throws Throwable{

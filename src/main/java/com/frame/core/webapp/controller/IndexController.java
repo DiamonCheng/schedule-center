@@ -46,7 +46,7 @@ public class IndexController extends BaseController{
 				.addObject("navigation", menuLocation)
 				.addObject("options", options)
 				.addObject("menuList", menuList)
-				.addObject("currentLocation", menuLocation.size()>0?menuLocation.get(menuLocation.size()-1):new MenuEntity());
+				.addObject("currentLocation", menuLocation.size()>0?menuLocation.get(menuLocation.size()-1):new MenuEntity(){{setId(-1L);}});
 	}
 	  
 }

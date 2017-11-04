@@ -99,4 +99,9 @@ public abstract class BaseEntity implements Serializable {
     	}else
     		return false;
     }
+    
+    @Override
+    public int hashCode() {
+        return id==null? -1: id.hashCode();
+    }
 }

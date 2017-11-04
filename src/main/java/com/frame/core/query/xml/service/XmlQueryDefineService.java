@@ -194,8 +194,8 @@ public class XmlQueryDefineService {
                     if (manageField.getValue()!=null&&!BaseEntity.class.isAssignableFrom(manageField.getValue().getClass())){
                     	manageField.setValue(null);
                     }
-//                    if (manageField.getValue()!=null&&BaseEntity.class.isAssignableFrom(manageField.getValue().getClass()))
-//                        manageField.setValue(ReflectUtil.getValueByField(manageField.getValue(),manageField.getSelectValueField()));
+                    if (manageField.getValue()!=null&&BaseEntity.class.isAssignableFrom(manageField.getValue().getClass()))
+                        manageField.setValue(ReflectUtil.getValueByField(manageField.getValue(),manageField.getSelectValueField()));
                 }else if(Collection.class.isAssignableFrom(fieldClass)){
                 	if (manageField.getValue()!=null&&!Collection.class.isAssignableFrom(manageField.getValue().getClass())){
                     	manageField.setValue(null);
@@ -218,9 +218,9 @@ public class XmlQueryDefineService {
     @SuppressWarnings("unchecked")
     public <T extends BaseEntity> T saveManage(String paramString,GeneralController<T> c){
 	    Class<T> targetClass=c.getTargetClass();
-        PageDefinitionHolder pageHolder=c.getPageHolder();
-        T entity =gson.fromJson(paramString,targetClass);
-        T toSave=null;
+		PageDefinitionHolder pageHolder=c.getPageHolder();
+		T entity =gson.fromJson(paramString,targetClass);
+		T toSave=null;
         List<ManageField> manageFields=pageHolder.getPageDefinition().getManage().getField();
         if (entity.getId()==null){
             toSave=entity;
@@ -264,6 +264,7 @@ public class XmlQueryDefineService {
 				}
             }
         }
+        c.beforeUpdate(entity);
         if (pageHolder.getPageDefinition().getManage().getBeforeManage()!=null){
             Method toInvoke=pageHolder.getPageDefinition().getManage().getBeforeManageMethod();
             Class<?>[] argsType=toInvoke.getParameterTypes();
@@ -299,6 +300,7 @@ public class XmlQueryDefineService {
                 throw new GeneralController.GeneralControllerExcuteException(e);
             }
         }
+        c.afterUpdate(toSave,entity.getId()==null);
         return toSave;
     }
     public void saveOrUpdate(BaseEntity entity){

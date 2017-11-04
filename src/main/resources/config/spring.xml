@@ -26,5 +26,11 @@ http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 	<!-- <context:component-scan base-package="com.experian.aop" /> -->
 	<!-- <aop:aspectj-autoproxy proxy-target-class="true"/> -->
 	<bean id="defaultGson" class="com.frame.core.components.GsonFactory" factory-method="buildDefaultGson" scope="singleton"/>
-		
+
+	<bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"/>
+
+	<bean id="staticScheduleOperator" class="com.frame.schedule.service.core.ScheduleOperator">
+		<property name="scheduler" ref="schedulerFactoryBean"/>
+		<property name="scheduleExecutorClass" value="com.frame.schedule.service.TaskExecutor"/>
+	</bean>
 </beans>

@@ -15,7 +15,6 @@
 	<!-- 自动扫描controller包下的所有类，使其认为spring mvc的控制器 -->
 	<context:component-scan base-package="com.**.controller" />
 	<aop:aspectj-autoproxy proxy-target-class="true"/>
-	
 	<!-- 配置多语言地区设置 //deffersoncheng-->
 	<!-- <bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
@@ -97,4 +96,5 @@
 		<!--<bean class="org.springframework.orm.hibernate4.support.OpenSessionInViewInterceptor"/>-->
 	</mvc:interceptors>
 	<bean class="com.frame.core.webapp.listener.StartupListener"></bean>
+
 </beans>

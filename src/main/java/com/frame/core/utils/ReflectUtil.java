@@ -1,5 +1,7 @@
 package com.frame.core.utils;
 
+import org.springframework.beans.BeanUtils;
+
 import java.lang.reflect.Method;
 
 import javax.validation.constraints.NotNull;
@@ -54,5 +56,15 @@ public class ReflectUtil {
     public static Class<?> resolveFieldClass(Class<?> cls,String field) {
         String methodName="get"+upperCaseFirst(field);
         return getMethodByName(cls,methodName).getReturnType();
+    }
+    public static <T> T cloneObject(T entity){
+        try {
+            T entity2 = (T) entity.getClass().newInstance();
+            BeanUtils.copyProperties(entity,entity2);
+            return entity2;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        
     }
 }

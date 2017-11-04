@@ -13,8 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.servlet.ModelAndView;
-
 /**
  * 这里面写异常处理的逻辑，
  * 1.进行一些通用的异常处理，比如SQL异常，乐观锁异常什么的。
@@ -28,18 +26,10 @@ import org.springframework.web.servlet.ModelAndView;
 public abstract class BaseController {
 	protected final Logger LOGGER=LoggerFactory.getLogger(this.getClass()); 
 	
-	
-	private static final String DEFAULT_ERROR_VIEW = "error";
-	@ExceptionHandler(value = Exception.class)
-	public ModelAndView defaultErrorHandler(HttpServletRequest request, HttpServletResponse response, Exception e) throws Exception {
+	@ExceptionHandler(value=Throwable.class)
+	public Object handleException(Throwable e,HttpServletRequest request,HttpServletResponse response) throws Throwable{
 		LOGGER.error("Control层捕获到异常。",e);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("error", e);
-		mav.addObject("URL", request.getRequestURL());
-		mav.addObject("status",response.getStatus());
-		mav.addObject("timestamp",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()));
-		mav.setViewName(DEFAULT_ERROR_VIEW);
-		return mav;
+		throw e;
 	}
 	SimpleDateFormat dateFormat1=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	SimpleDateFormat dateFormat2=new SimpleDateFormat("yyyy-MM-dd");
