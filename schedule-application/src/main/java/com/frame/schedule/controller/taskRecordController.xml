@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageDefinition  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				 xsi:noNamespaceSchemaLocation="/pageDefinition.xsd">
+	<queryDefinition>
+		<mappedClass mappedClass="com.frame.schedule.entity.TaskRecordEntity"
+			alias="r" >
+			<join type="LEFT" field="task" as="t" />
+		</mappedClass>
+		<where></where>
+		<sort>
+			<by field="id" order="ASC"/>
+		</sort>
+		<columns>
+			<column header="Id" field="id" fromAlias="r" width="10%" sortable="true" hidden="false"/>
+			<column header="任务名称" field="taskName" fromAlias="t" width="10%" sortable="true" hidden="false"/>
+			<column header="执行编码" field="taskExecuteCode" fromAlias="r" width="10%" sortable="true" hidden="false"/>
+			<column header="计划开始时间" field="planStartDate" fromAlias="r" sortable="true" hidden="false"/>
+			<column header="实际开始时间" field="startDateTime" fromAlias="r" sortable="true" hidden="false"/>
+			<column header="实际结束时间" field="finishDateTime" fromAlias="r" sortable="true" hidden="false"/>
+			<column header="状态" field="status" fromAlias="r" sortable="true" hidden="false"/>
+			<column header="创建时间" field="createDateTime" fromAlias="r" sortable="true" hidden="false"/>
+			<column header="更新时间" field="updateDateTime" fromAlias="r" sortable="true" hidden="false"/>
+		</columns>
+
+		<searchDefinition>
+            <condition alias="t" field="taskName" operator="LIKE" displayText="任务名称" inputType="TEXT"/>
+            <condition alias="r" field="taskExecuteCode" operator="LIKE" displayText="执行编码" inputType="TEXT"/>
+            <condition alias="r" field="planStartDate" operator="&gt;" displayText="计划开始时间" inputType="DATEBOX"/>
+            <condition alias="r" field="planStartDate" operator="&lt;" displayText="到----" inputType="DATEBOX"/>
+            <condition alias="t" field="id" operator="=" displayText="静态任务" selectTextField="taskName"
+                       inputType="SELECT"/>
+		</searchDefinition>
+		<pageSize>10</pageSize>
+        <js>
+        </js>
+        <css>
+        </css>
+	</queryDefinition>
+	<delete></delete>
+	<manage>
+		<field field="taskExecuteCode" displayText="执行码"/>
+	</manage>
+</pageDefinition>

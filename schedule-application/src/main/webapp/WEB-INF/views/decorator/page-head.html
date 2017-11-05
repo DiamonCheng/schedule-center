@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="${ctx}/resources/css/common/page-head.css"/>
+<script src="${ctx}/resources/js/common/page-head.js"></script>
+<div class="head-wrap" ng-controller="pageHead">
+	<div class="head-dashboard">
+		<div class="head-dashboard-content">
+			<div class="board-title">FRAME DASHBOARD</div>
+		</div>
+	</div>
+	<div class="navigation-bar-wrap">
+		<div class="navigation-bar">
+			<ul id="navigations" class="navigations">
+				<#list navigation as menuEntity>
+				<li url="${menuEntity.requestURI!''}">${menuEntity.displayName!''}</li>
+				<#if menuEntity_has_next><split></split></#if>
+				</#list>
+			</ul>
+			<#if options??>
+			<ul class="tools" id="tools">
+				<#list options as option>
+				<li onclick="${option.callback}">${option.name}</li>
+				</#list>
+			</ul>
+			</#if>
+		</div>
+	</div>
+</div>
