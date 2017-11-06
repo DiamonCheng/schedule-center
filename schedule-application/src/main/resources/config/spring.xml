@@ -14,6 +14,6 @@ http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 
 
 	<!-- 引入属性文件 -->
-	<context:property-placeholder location="classpath:config/dbconfig.properties" />
+	<context:property-placeholder location="${config.location}" />
 
 </beans>

@@ -5,6 +5,7 @@ import com.frame.core.utils.ReflectUtil;
 import com.frame.schedule.entity.TaskEntity;
 import com.frame.schedule.entity.TaskRecordEntity;
 import com.frame.schedule.service.core.ScheduleOperator;
+import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.quartz.JobExecutionContext;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class TaskService {
     
     @Autowired
     private GeneralDao generalDao;
+    
+    @Autowired
+    private DefaultMQProducer defaultMQProducer;
     
     @PostConstruct
     public void startup() throws SchedulerException {
@@ -91,5 +95,6 @@ public class TaskService {
                         .setStatus(TaskRecordEntity.Status.SCHEDULED.toString())
                         .setStartDateTime(new Date())
         );
+        generalDao.getHibernateTemplate().getSessionFactory().getCurrentSession().flush();
     }
 }

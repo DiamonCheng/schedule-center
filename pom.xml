@@ -30,23 +30,6 @@
         <project.build.jdk.version>1.7</project.build.jdk.version>
     </properties>
     <profiles>
-        <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <db.driver>com.mysql.jdbc.Driver</db.driver>
-                <db.username>root</db.username>
-                <db.password></db.password>
-                <db.url>jdbc:mysql://127.0.0.1:3306/frame_schedule?useUnicode=true&amp;amp;characterEncoding=utf8
-                </db.url>
-                <hibernate.dialect>org.hibernate.dialect.MySQL5Dialect</hibernate.dialect>
-                <hibernate.hbm2ddl.auto>update</hibernate.hbm2ddl.auto>
-                <hibernate.format_sql>false</hibernate.format_sql>
-                <hibernate.show_sql>true</hibernate.show_sql>
-            </properties>
-        </profile>
     </profiles>
     <build>
         <plugins>

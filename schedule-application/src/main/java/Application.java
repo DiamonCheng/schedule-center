@@ -20,7 +20,7 @@ import org.springframework.web.servlet.DispatcherServlet;
  */
 @SpringBootApplication
 @Configuration
-@ImportResource({"classpath*:config/spring-service.xml", "classpath:config/spring.xml", "classpath:config/spring-mvc.xml"})
+@ImportResource({"classpath*:config/spring*.xml"})
 @ComponentScan("com.frame.notexist")
 @ControllerAdvice
 public class Application extends SpringBootServletInitializer {
