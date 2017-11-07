@@ -16,6 +16,8 @@ import com.frame.core.query.xml.annoation.PageDefinition;
 import com.frame.entity.media.IndexShowEntity;
 import com.frame.service.admin.AdminIndexShowService;
 
+import javax.annotation.Resource;
+
 /**
  * @author wowson
  * @version create time：2017年3月30日 上午10:10:56 类说明 ：
@@ -24,8 +26,8 @@ import com.frame.service.admin.AdminIndexShowService;
 @RequestMapping("/admin/index/mana")
 @PageDefinition("indexManageDefinetion.xml")
 public class AdminIndexmanController extends GeneralController<IndexShowEntity> {
-	@Autowired
-	AdminIndexShowService service;
+	@Resource
+	private  AdminIndexShowService service;
 
 	@RequestMapping("/custsaveOrUpdate")
 	@ResponseBody

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -79,11 +80,11 @@ public class AdminImgUploadController extends GeneralController<ImgEntity> {
 		return result;
 	}
 
-	@Autowired
-	AdminImgService imgService;
+	@Resource
+	private AdminImgService imgService;
 
 	// 图片信息保存
-	@RequestMapping("/addInfo")
+	@RequestMapping(value="/addInfo",produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public Object addImgInfo(HttpServletRequest request, Long imgGroupKey, String imgName,String imgOriginalName) {
 		AjaxResult result = new AjaxResult();

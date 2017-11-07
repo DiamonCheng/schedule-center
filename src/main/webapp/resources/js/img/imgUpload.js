@@ -83,6 +83,5 @@
 		$('.tools li:first-child').attr('onclick', 'saveInfo()');// 重置保存onclick事件
 		$('#imgOriginalName').attr("type", "hidden");
 		$('#imgName').attr("type", "hidden");
-		$('#imgupload').attr("type", "hidden");
-		$('#imgupload').after('<form id=' + '"my-awesome-dropzone"' + 'action=' + '"/admin/img/imgUpload/target"' + 'class=' + '"dropzone needsclick dz-clickable">' + '</form>');
+		$('#imgupload').attr("type", "hidden").after('<form id=' + '"my-awesome-dropzone"' + 'action=' + '"/admin/img/imgUpload/target"' + 'class=' + '"dropzone needsclick dz-clickable">' + '</form>');
 	})

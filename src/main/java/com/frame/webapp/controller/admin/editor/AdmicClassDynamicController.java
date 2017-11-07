@@ -16,6 +16,8 @@ import com.frame.core.query.xml.annoation.PageDefinition;
 import com.frame.entity.media.ClassDynamicEntity;
 import com.frame.service.admin.AdminClassDynamicService;
 
+import javax.annotation.Resource;
+
 /** 
 * @author wowson
 * @version create time：2017年3月29日 上午10:05:33 
@@ -34,8 +36,8 @@ public class AdmicClassDynamicController extends GeneralController<ClassDynamicE
 	public boolean beforeDelete(){
 		return true;
 	}
-	@Autowired
-	AdminClassDynamicService service;
+	@Resource
+	private AdminClassDynamicService service;
 	@RequestMapping("/custsaveOrUpdate")
 	@ResponseBody
 	public Object customizeSave(String title,String content,String edid){

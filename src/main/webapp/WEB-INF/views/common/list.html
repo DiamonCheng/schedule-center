@@ -1,102 +1,117 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="${ctx}/resources/css/common/common-list.css"/>
-<#if pageDefinition.queryDefinition.requiredCssPath??><#list pageDefinition.queryDefinition.requiredCssPath as path>
-<link rel="stylesheet" href="${ctx}${path}"/>
-</#list></#if>
-<script type="text/javascript" src="${ctx}/resources/js/common/common-list.js"></script>
-<script type="text/javascript" src="${ctx}/resources/js/datePicker/WdatePicker.js"></script>
-<#if pageDefinition.queryDefinition.requiredJsPath??><#list pageDefinition.queryDefinition.requiredJsPath as path>
-<script type="text/javascript" src="${ctx}${path}"></script>
-</#list></#if>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="${ctx}/resources/css/common/common-list.css"/>
+    <#if pageDefinition.queryDefinition.requiredCssPath??>
+        <#list pageDefinition.queryDefinition.requiredCssPath as path>
+            <link rel="stylesheet" href="${ctx}${path}"/>
+        </#list>
+    </#if>
+    <script type="text/javascript" src="${ctx}/resources/js/common/common-list.js"></script>
+    <script type="text/javascript" src="${ctx}/resources/js/datePicker/WdatePicker.js"></script>
+    <#if pageDefinition.queryDefinition.requiredJsPath??>
+        <#list pageDefinition.queryDefinition.requiredJsPath as path>
+            <script type="text/javascript" src="${ctx}${path}"></script>
+        </#list>
+    </#if>
 </head>
 <body>
 <div class="main-panel">
-<div class="query-panel">
-	<#assign conditions =queryConditions.conditions/>
-	<#assign showSubmit=conditions?size gt 0/>
-	<#list conditions as c>
-		<div class="col-half">
-			<label class="form-label">${c.displayText}</label>
-			<#assign inputId=""/>
-			<#if c.inputId??>
-				<#assign inputId=c.inputId/>
-			</#if>
-			<#if c.inputType=="TEXT">
-				<input class="form-control" alias="${c.alias}" field="${c.field}" fieldType="${c.type.name}" operator="${c.operator}" id="${inputId}" type="text" value="${c.value!''}"/>
-				<#elseif c.inputType=="NUMBER"/>
-				<input class="form-control"  alias="${c.alias}" field="${c.field}" fieldType="${c.type.name}" operator="${c.operator}" id="${inputId}" type="number" value="${c.value!''}"/>
-				<#elseif c.inputType=="SELECT"/>
-				<select class="form-control" alias="${c.alias}" field="${c.field}" fieldType="${c.type.name}" operator="${c.operator}" id="${inputId}" type="text" >
-					<#if c.nullable>
-						<option value="" ${(c.value??)?string('selected','')}>-- 请选择 --</option>
-					</#if>
-					<#list c.parsedData as d>
-						<option value="${d.value}" ${(c.value??&&c.value?string == d.value?string)?string('selected','')}>${d.text}</option>
-					</#list>
-				</select>
-				<#elseif c.inputType=="DATEBOX"/>
-				<input class="form-control datebox" alias="${c.alias}" field="${c.field}" fieldType="${c.type.name}" operator="${c.operator}" id="${inputId}" type="text" value="${c.value!''}"/>
-			</#if>
-		</div>
-	</#list>
-	<#if showSubmit>
-		<div class="submit-container button-group align-right">
-			<div class="button-default" id="submitQuery">查询</div>
-			<div class="button-default" id="clearQuery">清空</div>
-		</div>
-	</#if>
-</div>
-<div class="data-panel">
-	<!--  <#--	private String header;
-	private String field;
-	private String fromAlias;
-	private String width;
-	private String sortable;
-	private boolean hidden=false;
-	private String staticColumnData;
-	private Class<?> filter;
-	private String callback;-->-->
-<#assign columns=pageDefinition.queryDefinition.columns/>
-<table  border="0" cellspacing="0" cellpadding="0">
-	<thead>
-		<tr>
-			<#if pageDefinition.queryDefinition.showIndex??>
-			<th >${pageDefinition.queryDefinition.showIndex}</th>
-			</#if>
-			<#list columns as column>
-			<th field="${column.field}" fromAlias="${column.fromAlias}" ${(column.hidden)?string("hidden",(column.width??)?string("style=\"width:"+column.width+";\"",""))} ${column.sortable?string("sortable","")} ${mergedSort[column_index]}>${column.header!''}</th>
-		</#list></tr>
-	</thead>
-	<tbody>
-		<#list pageList as strarr>
-		<tr id="${strarr[0]}">
-			<#if pageDefinition.queryDefinition.showIndex??>
-			<td>${strarr_index+1}</td>
-			</#if>
-			<#list strarr as str>
-			<#if str_index gt 0>
-			<td>${str}</td>
-			</#if>
-			</#list>
-		</tr>
-		</#list>
-	</tbody>
-</table>
-<#if pageList?size==0><div class="list-empty" colspan="255">列表空空如也、</div></#if>
-<div id="pagerbar" class="pagerbar">
-<gofrist class="${(queryConditions.page>1)?string('','disabled')}"></gofrist>
-<goprev class="${(queryConditions.page>1)?string('','disabled')}"></goprev>
-<input id="jump" type="number" value="${queryConditions.page}"/>/${totalPageCount}
-<gonext class="${(queryConditions.page<totalPageCount)?string('','disabled')}"></gonext>
-<golast class="${(queryConditions.page<totalPageCount)?string('','disabled')}"></golast>
-<input type="hidden" id="totalPageCount" value="${totalPageCount}"/>
-<input type="hidden" id="page" value="${queryConditions.page}"/>
-<input type="hidden" id="pageSize" value="${queryConditions.pageSize}"/>
-</div>
-</div>
+    <div class="query-panel">
+        <#assign conditions =queryConditions.conditions/>
+        <#assign showSubmit=conditions?size gt 0/>
+        <#list conditions as c>
+            <div class="col-half">
+                <label class="form-label">${c.displayText}</label>
+                <#assign inputId=""/>
+                <#if c.inputId??>
+                    <#assign inputId=c.inputId/>
+                </#if>
+                <#if c.inputType=="TEXT">
+                    <input class="form-control" alias="${c.alias}" field="${c.field}" fieldType="${c.type.name}"
+                           operator="${c.operator?html}" id="${inputId}" type="text" value="${c.value!''}"/>
+                    <#elseif c.inputType=="NUMBER"/>
+                    <input class="form-control" alias="${c.alias}" field="${c.field}" fieldType="${c.type.name}"
+                           operator="${c.operator?html}" id="${inputId}" type="number" value="${c.value!''}"/>
+                    <#elseif c.inputType=="SELECT"/>
+                    <select class="form-control" alias="${c.alias}" field="${c.field}" fieldType="${c.type.name}"
+                            operator="${c.operator?html}" id="${inputId}" type="text">
+                        <#if c.nullable>
+                            <option value="" ${(c.value??)?string(
+                            'selected','')}>-- 请选择 --</option>
+                        </#if>
+                        <#list c.parsedData as d>
+                            <option value="${d.value}" ${(c.value??&&c.value?string== d.value?string)?string(
+                            'selected','')}>${d.text}</option>
+                        </#list>
+                    </select>
+                    <#elseif c.inputType=="DATEBOX"/>
+                    <input class="form-control datebox" alias="${c.alias}" field="${c.field}" fieldType="${c.type.name}"
+                           operator="${c.operator?html}" id="${inputId}" type="text" value="${c.value!''}"/>
+                </#if>
+            </div>
+        </#list>
+        <#if showSubmit>
+            <div class="submit-container button-group align-right">
+                <div class="button-default" id="submitQuery">查询</div>
+                <div class="button-default" id="clearQuery">清空</div>
+            </div>
+        </#if>
+    </div>
+    <div class="data-panel">
+        <!--  <#--	private String header;
+        private String field;
+        private String fromAlias;
+        private String width;
+        private String sortable;
+        private boolean hidden=false;
+        private String staticColumnData;
+        private Class<?> filter;
+        private String callback;-->-->
+        <#assign columns=pageDefinition.queryDefinition.columns/>
+        <table border="0" cellspacing="0" cellpadding="0">
+            <thead>
+            <tr>
+                <#if pageDefinition.queryDefinition.showIndex??>
+                    <th>${pageDefinition.queryDefinition.showIndex}</th>
+                </#if>
+                <#list columns as column>
+                    <th field="${column.field}" fromAlias="${column.fromAlias}" ${(column.hidden)?string(
+                    "hidden",(column.width??)?string("style=\"width:"+column.width+";\"",""))}
+                    ${column.sortable?string("sortable","")} ${mergedSort[column_index]}>${column.header!''}</th>
+                </#list>
+            </tr>
+            </thead>
+            <tbody>
+            <#list pageList as strarr>
+                <tr id="${strarr[0]}">
+                    <#if pageDefinition.queryDefinition.showIndex??>
+                        <td>${strarr_index+1}</td>
+                    </#if>
+                    <#list strarr as str>
+                        <#if str_index gt 0>
+                            <td>${str}</td>
+                        </#if>
+                    </#list>
+                </tr>
+            </#list>
+            </tbody>
+        </table>
+        <#if pageList?size==0>
+            <div class="list-empty" colspan="255">列表空空如也、</div>
+        </#if>
+        <div id="pagerbar" class="pagerbar">
+            <gofrist class="${(queryConditions.page>1)?string('','disabled')}"></gofrist>
+            <goprev class="${(queryConditions.page>1)?string('','disabled')}"></goprev>
+            <input id="jump" type="number" value="${queryConditions.page}"/>/${totalPageCount}
+            <gonext class="${(queryConditions.page<totalPageCount)?string('','disabled')}"></gonext>
+            <golast class="${(queryConditions.page<totalPageCount)?string('','disabled')}"></golast>
+            <input type="hidden" id="totalPageCount" value="${totalPageCount}"/>
+            <input type="hidden" id="page" value="${queryConditions.page}"/>
+            <input type="hidden" id="pageSize" value="${queryConditions.pageSize}"/>
+        </div>
+    </div>
 </div>
 </body>
 </html>

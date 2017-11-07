@@ -112,6 +112,14 @@
 			</props>
 		</property>
 	</bean>
+
+	<bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter" >
+		<property name = "supportedMediaTypes">
+			<list>
+				<value>text/plain;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
 	<mvc:interceptors>  
     <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->  
     	<bean class="com.frame.core.webapp.interceptor.GeneralIntercepter"/>  
