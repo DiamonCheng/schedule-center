@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean class="com.frame.schedule.mq.listener.TaskFinishMqListener" id="taskFinishMqListener"/>
+    <bean class="org.apache.rocketmq.client.consumer.DefaultMQPushConsumer" init-method="start" destroy-method="shutdown">
+        <constructor-arg value="${mq.consumer.group}"/>
+        <property name="namesrvAddr" value="${mq.nameserv.addr}"/>
+        <property name="subscription">
+            <map>
+                <entry key="task.finish.topic" value="*"/>
+            </map>
+        </property>
+        <property name="messageListener" ref="taskFinishMqListener"/>
+    </bean>
+</beans>

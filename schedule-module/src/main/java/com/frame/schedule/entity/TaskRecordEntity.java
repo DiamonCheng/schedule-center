@@ -1,6 +1,7 @@
 package com.frame.schedule.entity;
 
 import com.frame.core.components.BaseEntity;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -16,6 +17,15 @@ import java.util.Date;
         uniqueConstraints = @UniqueConstraint(columnNames = "taskExecuteCode"))
 @Entity
 public class TaskRecordEntity extends BaseEntity implements Schedulable {
+    public String getTaskExecuteParam() {
+        return taskExecuteParam;
+    }
+    
+    public TaskRecordEntity setTaskExecuteParam(String taskExecuteParam) {
+        this.taskExecuteParam = taskExecuteParam;
+        return this;
+    }
+    
     public enum Status{
         SCHEDULED,EXECUTEING,SUCCESS,WAIT_RETRY,FAILED;
     }
@@ -26,6 +36,10 @@ public class TaskRecordEntity extends BaseEntity implements Schedulable {
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name="null"))
     private TaskEntity task;
+    
+    @Column
+    @Type(type = "text")
+    private String taskExecuteParam;
     
     private Date planStartDate;
     
@@ -111,5 +125,25 @@ public class TaskRecordEntity extends BaseEntity implements Schedulable {
     public TaskRecordEntity setStatus(String status) {
         this.status = status;
         return this;
+    }
+    
+    /**
+     * toString
+     */
+    @Override
+    public String toString() {
+        return "TaskRecordEntity{" +
+                       "taskExecuteCode='" + taskExecuteCode + '\'' +
+                       ", task=" + task +
+                       ", taskExecuteParam='" + taskExecuteParam + '\'' +
+                       ", planStartDate=" + planStartDate +
+                       ", startDateTime=" + startDateTime +
+                       ", finishDateTime=" + finishDateTime +
+                       ", status='" + status + '\'' +
+                       ", id=" + id +
+                       ", version=" + version +
+                       ", createDateTime=" + createDateTime +
+                       ", updateDateTime=" + updateDateTime +
+                       '}';
     }
 }

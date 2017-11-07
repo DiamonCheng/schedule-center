@@ -3,7 +3,10 @@ package com.frame.schedule.entity;
 import com.frame.core.components.BaseEntity;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -14,8 +17,20 @@ import javax.validation.constraints.NotNull;
         uniqueConstraints = @UniqueConstraint(columnNames = "taskCode"))
 @Entity
 public class TaskEntity extends BaseEntity implements Schedulable {
+    public String getTaskType() {
+        return taskType;
+    }
+    
+    public TaskEntity setTaskType(String taskType) {
+        this.taskType = taskType;
+        return this;
+    }
+    
     public enum Status{
-        PAUSED,WORKING;
+        PAUSED,WORKING
+    }
+    public enum TaskType{
+        STATIC,DYNAMIC
     }
     
     @NotNull
@@ -31,6 +46,14 @@ public class TaskEntity extends BaseEntity implements Schedulable {
     
     @Type(type="text")
     private String paramTemplate;//TODO 预留字段，用于渲染参数
+    
+    @NotNull
+    private String taskTopic;
+    
+    @NotNull
+    private String taskTag;
+    
+    private String taskType=TaskType.STATIC.toString();
     
     public String getTaskCode() {
         return taskCode;
@@ -109,6 +132,24 @@ public class TaskEntity extends BaseEntity implements Schedulable {
         return this;
     }
     
+    public String getTaskTopic() {
+        return taskTopic;
+    }
+    
+    public TaskEntity setTaskTopic(String taskTopic) {
+        this.taskTopic = taskTopic;
+        return this;
+    }
+    
+    public String getTaskTag() {
+        return taskTag;
+    }
+    
+    public TaskEntity setTaskTag(String taskTag) {
+        this.taskTag = taskTag;
+        return this;
+    }
+    
     /**
      * toString
      */
@@ -121,6 +162,9 @@ public class TaskEntity extends BaseEntity implements Schedulable {
                        ", execNum=" + execNum +
                        ", status='" + status + '\'' +
                        ", paramTemplate='" + paramTemplate + '\'' +
+                       ", taskTopic='" + taskTopic + '\'' +
+                       ", taskTag='" + taskTag + '\'' +
+                       ", taskType='" + taskType + '\'' +
                        ", id=" + id +
                        ", version=" + version +
                        ", createDateTime=" + createDateTime +

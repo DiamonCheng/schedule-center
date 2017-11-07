@@ -21,5 +21,5 @@ $(function(){
     var $option=$('<li id="optionToggleStatus"></li>')
         .hide()
         .click(toggleStatus);
-    $('#tools').append($option);
+    $('#tools').prepend($option);
 });

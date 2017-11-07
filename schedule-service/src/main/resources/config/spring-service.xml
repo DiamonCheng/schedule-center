@@ -74,7 +74,7 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd
 
 	<bean id="staticScheduleOperator" class="com.frame.schedule.service.core.ScheduleOperator">
 		<property name="scheduler" ref="schedulerFactoryBean"/>
-		<property name="scheduleExecutorClass" value="com.frame.schedule.service.TaskExecutor"/>
+		<property name="scheduleExecutorClass" value="com.frame.schedule.service.impl.TaskExecutor"/>
 	</bean>
 
 

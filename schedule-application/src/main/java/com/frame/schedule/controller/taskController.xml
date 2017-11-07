@@ -4,7 +4,7 @@
 	<queryDefinition>
 		<mappedClass mappedClass="com.frame.schedule.entity.TaskEntity">
 		</mappedClass>
-		<where></where>
+		<where>taskType='STATIC'</where>
 		<sort>
 			<by field="id" order="ASC"/>
 		</sort>
@@ -32,7 +32,9 @@
 	<delete></delete>
 	<manage>
 		<field field="taskName" displayText="任务名称"/>
+		<field field="taskTag" displayText="任务标签"/>
 		<field field="taskCode" displayText="任务编码"/>
 		<field field="taskCron" displayText="任务执行周期"/>
+		<field field="paramTemplate" displayText="任务参数模板" inputType="TEXTAREA"/>
 	</manage>
 </pageDefinition>

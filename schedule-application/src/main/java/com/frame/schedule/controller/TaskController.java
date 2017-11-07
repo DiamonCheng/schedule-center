@@ -7,6 +7,7 @@ import com.frame.schedule.entity.TaskEntity;
 import com.frame.schedule.service.TaskService;
 import org.quartz.CronExpression;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +25,10 @@ import java.text.ParseException;
 public class TaskController extends GeneralController<TaskEntity> {
     @Autowired
     private TaskService taskService;
+    
+    @Value("${task.default.topic}")
+    private String defaultTopic;
+    
     @Override
     public boolean beforeUpdate(TaskEntity entity) {
         try {
@@ -32,6 +37,9 @@ public class TaskController extends GeneralController<TaskEntity> {
                 taskService.updateCron(entity);
             }else{
                 entity.setStatus(TaskEntity.Status.WORKING.toString()).setExecNum(0L);
+                if (entity.getTaskTopic()==null){
+                    entity.setTaskTopic(defaultTopic);
+                }
             }
         } catch (ParseException e) {
             throw new ValidationException(e.getMessage());

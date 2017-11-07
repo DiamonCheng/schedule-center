@@ -139,11 +139,12 @@ public abstract class GeneralController <T extends BaseEntity>{
     @ResponseBody
 	public Object saveManage(String paramString) throws NoSuchMethodException {
 		T entity;
-	    if (null!=(entity=service.saveManage(paramString,this)))
-	    	UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
-	    AjaxResult res=new AjaxResult();
-	    res.setData(entity.getId());
-    	return res;
+		AjaxResult res=new AjaxResult();
+		if (null!=(entity=service.saveManage(paramString,this))) {
+			UserAuthoritySubject.getSession().setAttribute("success", "操作成功！");
+			res.setData(entity.getId());
+		}
+		return res;
 	}
 	public boolean beforeUpdate(T entity){return true;}
 	public void afterUpdate(T entity,boolean isAdd){}

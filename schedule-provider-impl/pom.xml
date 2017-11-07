@@ -14,6 +14,27 @@
     <description>
         MQ 放 Listener，MessageConsumer
         以及provider-impl。provider 对外提供，这个不对外提供
+        该子模块的主要功能为对内部对象和外部对象进行转换，
+        ！不要在这个项目里面写业务逻辑代码！
+        如果增删改查代码会影响业务核心代码的易于理解性的话，
+        可以在这个项目里面编写增删改查代码（由Hibernate特殊性决定），
+        但是请写整齐了，不要东一块西一块！
     </description>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.dc.scheduleddf</groupId>
+            <artifactId>schedule-service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dc.scheduleddf</groupId>
+            <artifactId>schedule-provider</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

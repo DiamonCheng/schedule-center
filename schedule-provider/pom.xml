@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
    
     <description>
-        放提供对外的接口
+        放提供对外的接口,一般是增删改查的RPC接口
     </description>
 
 </project>

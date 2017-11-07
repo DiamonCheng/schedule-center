@@ -248,10 +248,13 @@ public class XmlQueryDefineService {
 				}
             }
         }
-        c.beforeUpdate(entity);
-        saveOrUpdate(toSave);
-        c.afterUpdate(toSave,isAdd);
-        return toSave;
+        if (c.beforeUpdate(entity)){
+            saveOrUpdate(toSave);
+            c.afterUpdate(toSave,isAdd);
+            return toSave;
+        }else{
+            return null;
+        }
     }
     public void saveOrUpdate(BaseEntity entity){
 	    if (entity.getId()==null){

@@ -12,7 +12,7 @@
                                  fileName="logs/frame_log_error.log"
                                  filePattern="logs/frame_log_error%d{yyyy-MM-dd}.log">
            <!--  <PatternLayout pattern="%d %-5p (%F:%L) - %m%n"/>   -->
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>  
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss z} %-5level %class{36} %name %F:%L %M - %msg%xEx%n"/>
             <Policies>  
                 <TimeBasedTriggeringPolicy/>  
                 <SizeBasedTriggeringPolicy size="10 MB"/>  
@@ -24,7 +24,7 @@
                                  fileName="logs/frame_log_common.log"
                                  filePattern="logs/frame_log_common%d{yyyy-MM-dd}.log">
            <!--  <PatternLayout pattern="%d %-5p (%F:%L) - %m%n"/>   -->
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>  
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss z} %-5level %class{36} %name %F:%L %M - %msg%xEx%n"/>
             <Policies>  
                 <TimeBasedTriggeringPolicy/>  
                 <SizeBasedTriggeringPolicy size="10 MB"/>  
@@ -45,8 +45,7 @@
         </logger>  
        <!-- <logger name="org.springframework.web" level="info">
         </logger>  -->
-        <logger name="org.hibernate.engine.internal.StatisticalLoggingSessionEventListener" level="warn">
-        </logger>
+        <logger name="RocketmqRemoting" level="warn" />
 
      <!--    <logger name="com.meituan.gct.shop.promo" level="error" includeLocation="true" additivity="false">  
             <appender-ref ref="ErrorLog"/>  
