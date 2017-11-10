@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 
 public class QueryCondition implements Cloneable{
-	private static final Gson gson=GsonFactory.getInstance().buildDefaultGson();
+	private static final Gson gson=GsonFactory.buildDefaultGson();
 	private String field;
 	private String alias;
 	private Class<?> type;

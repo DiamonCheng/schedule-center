@@ -17,21 +17,14 @@ import java.util.Date;
         uniqueConstraints = @UniqueConstraint(columnNames = "taskExecuteCode"))
 @Entity
 public class TaskRecordEntity extends BaseEntity implements Schedulable {
-    public String getTaskExecuteParam() {
-        return taskExecuteParam;
-    }
-    
-    public TaskRecordEntity setTaskExecuteParam(String taskExecuteParam) {
-        this.taskExecuteParam = taskExecuteParam;
-        return this;
-    }
-    
     public enum Status{
         SCHEDULED,EXECUTEING,SUCCESS,WAIT_RETRY,FAILED;
     }
     
     @NotNull
     private String taskExecuteCode;
+    
+    private String executeInstanceId;
     
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(foreignKey = @ForeignKey(name="null"))
@@ -126,6 +119,23 @@ public class TaskRecordEntity extends BaseEntity implements Schedulable {
         this.status = status;
         return this;
     }
+    public String getTaskExecuteParam() {
+        return taskExecuteParam;
+    }
+    
+    public TaskRecordEntity setTaskExecuteParam(String taskExecuteParam) {
+        this.taskExecuteParam = taskExecuteParam;
+        return this;
+    }
+    
+    public String getExecuteInstanceId() {
+        return executeInstanceId;
+    }
+    
+    public TaskRecordEntity setExecuteInstanceId(String executeInstanceId) {
+        this.executeInstanceId = executeInstanceId;
+        return this;
+    }
     
     /**
      * toString
@@ -134,6 +144,7 @@ public class TaskRecordEntity extends BaseEntity implements Schedulable {
     public String toString() {
         return "TaskRecordEntity{" +
                        "taskExecuteCode='" + taskExecuteCode + '\'' +
+                       ", executeInstanceId='" + executeInstanceId + '\'' +
                        ", task=" + task +
                        ", taskExecuteParam='" + taskExecuteParam + '\'' +
                        ", planStartDate=" + planStartDate +

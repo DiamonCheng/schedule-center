@@ -86,20 +86,26 @@ public class PageDefinitionHolder {
 						type = ReflectUtil.resolveFieldClass(mappedClass.getMappedClass(), q.getField());
 						break;
 					}
-					if (mappedClass.getJoin() != null) for (JoinEntry joinEntry : mappedClass.getJoin()) {
-						if (StringUtils.isEmpty(joinEntry.getAs()) && StringUtils.isEmpty(q.getAlias()) || joinEntry.getAs() != null && joinEntry.getAs().equals(q.getAlias())) {
-							Class<?> optionClass = ReflectUtil.resolveFieldClass(mappedClass.getMappedClass(), joinEntry.getField());
-							if (q.getOptionClass() == null) q.setOptionClass(optionClass);
-							type = ReflectUtil.resolveFieldClass(optionClass, q.getField());
-							break;
+					if (mappedClass.getJoin() != null)
+						for (JoinEntry joinEntry : mappedClass.getJoin()) {
+							if (StringUtils.isEmpty(joinEntry.getAs()) && StringUtils.isEmpty(q.getAlias()) || joinEntry.getAs() != null && joinEntry.getAs().equals(q.getAlias())) {
+								Class<?> optionClass = ReflectUtil.resolveFieldClass(mappedClass.getMappedClass(), joinEntry.getField());
+								if (q.getOptionClass() == null) {
+								    q.setOptionClass(optionClass);
+                                }
+								type = ReflectUtil.resolveFieldClass(optionClass, q.getField());
+								break;
+							}
 						}
-					}
 					if (type != null) break;
 				}
-				if (type != null) q.setType(type);
-				else
-					throw new PageDefinitionLoadException("No such field found in queryDedination! alias:" + q.getAlias() + " field:" + q.getField());
+				if (type != null) {
+				    q.setType(type);
+                } else {
+                    throw new PageDefinitionLoadException("No such field found in queryDefinition! alias:" + q.getAlias() + " field:" + q.getField());
+                }
 			}
+			
 		}
 	}
 	/**

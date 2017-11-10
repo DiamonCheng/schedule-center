@@ -6,23 +6,25 @@
 		</mappedClass>
 		<where></where>
 		<sort>
-			<by field="id" fromAlias="u" order="ASC"></by>
+			<by field="id" fromAlias="u" order="ASC"/>
 		</sort>
 		<columns>
-			<column header="用户名" field="userLoginVerification" fromAlias="u" width="40%" sortable="true" hidden="false"></column>
-			<column header="昵称" field="nickName" fromAlias="u" width="40%" sortable="true" hidden="false"></column>
+			<column header="用户名" field="userLoginVerification" fromAlias="u" width="40%" sortable="true"
+					hidden="false"/>
+			<column header="昵称" field="nickName" fromAlias="u" width="40%" sortable="true" hidden="false"/>
 		</columns>
 		<searchDefinition>
-			<condition alias="u" field="userLoginVerification" operator="LIKE" displayText="用户名" inputType="TEXT"></condition>
-			<condition alias="u" field="nickName" operator="LIKE" displayText="昵称" inputType="TEXT"></condition>
+			<condition alias="u" field="userLoginVerification" operator="LIKE" displayText="用户名" inputType="TEXT"/>
+			<condition alias="u" field="nickName" operator="LIKE" displayText="昵称" inputType="TEXT"/>
 		</searchDefinition>
 		<pageSize>10</pageSize>
 	</queryDefinition>
 	<manage beforeManage="beforeUpdate">
-		<field field="userLoginVerification" displayText="用户名"></field>
-		<field field="nickName" displayText="昵称"></field>
-		<field field="roles" displayText="拥有角色" inputType="CHECKBOX" optionClass="com.frame.com.frame.core.entity.RoleEntity" selectTextField="name" selectValeField="id"></field>
+		<field field="userLoginVerification" displayText="用户名"/>
+		<field field="nickName" displayText="昵称"/>
+		<field field="roles" displayText="拥有角色" inputType="CHECKBOX"
+			   optionClass="com.frame.com.frame.core.entity.RoleEntity" selectTextField="name" selectValeField="id"/>
 		<!-- <field field="file" displayText="附件" inputType="file"></field> -->
 	</manage>
-	<delete beforeDelete="beforeDelete"></delete>
+	<delete/>
 </pageDefinition>

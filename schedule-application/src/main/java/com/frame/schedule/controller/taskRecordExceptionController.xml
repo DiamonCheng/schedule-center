@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageDefinition  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				 xsi:noNamespaceSchemaLocation="/pageDefinition.xsd">
+	<queryDefinition>
+		<mappedClass mappedClass="com.frame.schedule.entity.TaskExceptionEntity"
+			alias="e" >
+			<join type="LEFT" field="taskRecordEntity" as="r" />
+		</mappedClass>
+		<where></where>
+		<sort>
+			<by field="id" order="ASC"/>
+		</sort>
+		<columns>
+			<column header="Id" field="id" fromAlias="r" width="10%" sortable="true" hidden="false"/>
+			<column header="执行编码" field="taskExecuteCode" fromAlias="r" width="10%" sortable="true" hidden="false"/>
+			<column header="记录执行次数" field="recordExecuteCount" fromAlias="e" sortable="true" hidden="false"/>
+			<column header="创建时间" field="createDateTime" fromAlias="r" sortable="true" hidden="false"/>
+		</columns>
+
+		<searchDefinition>
+			<condition alias="r" field="createDateTime" operator="&gt;" displayText="发生时间" inputType="DATEBOX"/>
+			<condition alias="r" field="createDateTime" operator="&lt;" displayText="--到--" inputType="DATEBOX"/>
+			<condition alias="r" field="taskExecuteCode" operator="LIKE" displayText="执行编码" inputType="TEXT"/>
+		</searchDefinition>
+		<pageSize>10</pageSize>
+        <js>
+        </js>
+        <css>
+        </css>
+	</queryDefinition>
+	<delete></delete>
+	<manage>
+		<field field="id" displayText="ID"/>
+		<field field="recordExecuteCount" displayText="记录执行次数"/>
+		<field field="createDateTime" displayText="创建时间"/>
+		<field field="content" displayText="详细信息" inputType="TEXTAREA"/>
+
+		<js>
+			<path>/resources/js/schedule/task-exception-manage.js</path>
+		</js>
+	</manage>
+</pageDefinition>

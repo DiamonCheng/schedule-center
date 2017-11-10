@@ -16,6 +16,7 @@ public class QueryConditionDefine extends  QueryCondition {
     private Object parsedData;
     private String selectTextField;
     private String selectValueField="id";
+    
     private Class<?> optionClass;
     @XmlAttribute
     public String getDefaultValue() {
