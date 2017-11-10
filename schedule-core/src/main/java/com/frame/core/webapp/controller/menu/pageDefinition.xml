@@ -36,7 +36,7 @@
 			<staticData>[{text:"是",value:"true"},{text:"否",value:"false"}]</staticData>
 		</field>
 		<field field="parent" displayText="父级菜单" inputType="SELECT"
-			   optionClass="com.frame.com.frame.core.entity.MenuEntity233"
+			   optionClass="com.frame.core.entity.MenuEntity"
 			   selectTextField="displayName" selectValeField="id">
 		</field>
 	</manage>

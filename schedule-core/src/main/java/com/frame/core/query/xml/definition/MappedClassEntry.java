@@ -1,5 +1,8 @@
 package com.frame.core.query.xml.definition;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -7,6 +10,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public class MappedClassEntry extends XmlAdapter<String,Class<? extends Serializable>>{
+	private static final Logger LOGGER= LoggerFactory.getLogger(MappedClassEntry.class);
+	
 	private Class<? extends Serializable> mappedClass;
 	private String alias;
 	private List<JoinEntry> join;
@@ -38,7 +43,12 @@ public class MappedClassEntry extends XmlAdapter<String,Class<? extends Serializ
 	@SuppressWarnings("unchecked")
 	@Override
 	public Class<? extends Serializable> unmarshal(String v) throws Exception {
-		return (Class<? extends Serializable>) Class.forName(v);
+		try {
+			return (Class<? extends Serializable>) Class.forName(v);
+		} catch (ClassNotFoundException e) {
+			LOGGER.error("An exception occurred when lock for class name:"+v,e);
+			throw e;
+		}
 	}
 	public List<JoinEntry> getJoin() {
 		return join;

@@ -23,7 +23,7 @@
 		<field field="userLoginVerification" displayText="用户名"/>
 		<field field="nickName" displayText="昵称"/>
 		<field field="roles" displayText="拥有角色" inputType="CHECKBOX"
-			   optionClass="com.frame.com.frame.core.entity.RoleEntity" selectTextField="name" selectValeField="id"/>
+			   optionClass="com.frame.core.entity.RoleEntity" selectTextField="name" selectValeField="id"/>
 		<!-- <field field="file" displayText="附件" inputType="file"></field> -->
 	</manage>
 	<delete/>

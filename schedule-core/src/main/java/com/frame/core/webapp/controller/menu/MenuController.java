@@ -6,10 +6,6 @@ import com.frame.core.query.xml.annoation.PageDefinition;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-
 @Controller
 @RequestMapping("/menu")
 @PageDefinition("pageDefinition.xml")
@@ -20,10 +16,4 @@ public class MenuController extends GeneralController <MenuEntity>{
 		return true;
 	}
 	
-	public static void main(String[] args) throws JAXBException {
-		JAXBContext context = JAXBContext.newInstance(com.frame.core.query.xml.definition.PageDefinition.class);
-		Unmarshaller unmarshaller = context.createUnmarshaller();
-		com.frame.core.query.xml.definition.PageDefinition page= (com.frame.core.query.xml.definition.PageDefinition) unmarshaller.unmarshal(MenuController.class.getResourceAsStream("pageDefinition.xml"));
-		System.out.println(page);
-	}
 }
