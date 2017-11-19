@@ -31,7 +31,7 @@ public class GsonFactory {
 			@Override
 			public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 					throws JsonParseException {
-				JsonParseException e=new JsonParseException("日期类型 JSON："+json+"无法转化");
+				JsonParseException e=new JsonParseException("Date type JSON："+json+", can not parse!");
 				for (String pattern:dateFomartPatternList)  try{
 					return new SimpleDateFormat(pattern).parse(json.getAsString());
 				}catch (Exception ex) {

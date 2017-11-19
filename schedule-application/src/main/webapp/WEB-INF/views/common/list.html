@@ -9,9 +9,6 @@
 </#list></#if>
 <script type="text/javascript" src="${ctx}/resources/js/common/common-list.js"></script>
 <script type="text/javascript" src="${ctx}/resources/js/datePicker/WdatePicker.js"></script>
-<#if pageDefinition.queryDefinition.requiredJsPath??><#list pageDefinition.queryDefinition.requiredJsPath as path>
-<script type="text/javascript" src="${ctx}${path}"></script>
-</#list></#if>
 </head>
 <body>
 <div class="main-panel">
@@ -90,5 +87,8 @@
 </div>
 </div>
 </div>
+<#if pageDefinition.queryDefinition.requiredJsPath??><#list pageDefinition.queryDefinition.requiredJsPath as path>
+	<script type="text/javascript" src="${ctx}${path}"></script>
+</#list></#if>
 </body>
 </html>

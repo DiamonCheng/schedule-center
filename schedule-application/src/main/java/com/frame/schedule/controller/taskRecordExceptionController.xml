@@ -23,8 +23,9 @@
 			<condition alias="r" field="taskExecuteCode" operator="LIKE" displayText="执行编码" inputType="TEXT"/>
 		</searchDefinition>
 		<pageSize>10</pageSize>
-        <js>
-        </js>
+		<js>
+			<path>/resources/js/schedule/task-exception-list.js</path>
+		</js>
         <css>
         </css>
 	</queryDefinition>

@@ -6,9 +6,6 @@
 	</#list></#if>
     <script src="${ctx}/resources/js/common/common-manage.js"></script>
     <script type="text/javascript" src="${ctx}/resources/js/datePicker/WdatePicker.js"></script>
-    <#if manage.requiredJsPath??><#list manage.requiredJsPath as path>
-	<script type="text/javascript" src="${ctx}${path}"></script>
-	</#list></#if>
 </head>
 <body>
 <div class="main-panel entity-manage">
@@ -59,5 +56,8 @@
 </#list>
 <div class="foot-block"></div>
 </div>
+<#if manage.requiredJsPath??><#list manage.requiredJsPath as path>
+    <script type="text/javascript" src="${ctx}${path}"></script>
+</#list></#if>
 </body>
 </html>

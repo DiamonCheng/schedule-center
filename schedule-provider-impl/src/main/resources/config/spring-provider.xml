@@ -8,7 +8,7 @@
         <property name="namesrvAddr" value="${mq.nameserv.addr}"/>
         <property name="subscription">
             <map>
-                <entry key="task.finish.topic" value="*"/>
+                <entry key="${task.finish.topic}" value="*"/>
             </map>
         </property>
         <property name="messageListener" ref="taskFinishMqListener"/>

@@ -46,6 +46,7 @@
        <!-- <logger name="org.springframework.web" level="info">
         </logger>  -->
         <logger name="RocketmqRemoting" level="warn" />
+        <logger name="RocketmqClient" level="warn" />
 
      <!--    <logger name="com.meituan.gct.shop.promo" level="error" includeLocation="true" additivity="false">  
             <appender-ref ref="ErrorLog"/>  
