@@ -96,7 +96,7 @@ TODO-继续编写收到  scheduleTaskMessage对其进行处理的逻辑（即更
 修复昨天出的BUG，原因是XML中的类无法找到，异常未被显示。 DeffersonCheng 
 
 2017年11月19日18:20:07
-
+编写客户端支持，测试类, 微调调度的策略
 
 
 

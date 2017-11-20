@@ -35,7 +35,7 @@ public abstract class AbstractScheduleListener{
                     try {
                         processTask(scheduleTaskMessage.clone());
                         scheduleTaskMessage.setSuccess(true);
-                    } catch (Exception e) {
+                    } catch (Throwable e) {
                         logger.error("A task execute failed. "+ scheduleTaskMessage,e);
                         scheduleTaskMessage.setSuccess(false);
                     } finally {
@@ -65,7 +65,7 @@ public abstract class AbstractScheduleListener{
         throw ex;
     }
     
-    public abstract void processTask(ScheduleTaskMessage scheduleTaskMessage);
+    public abstract void processTask(ScheduleTaskMessage scheduleTaskMessage) throws Throwable;
     
     
     public AbstractScheduleListener setProducer(DefaultMQProducer producer) {

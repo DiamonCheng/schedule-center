@@ -22,10 +22,10 @@ public class MessageTransferUtil {
         try(ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
                 ObjectOutputStream objectOutputStream=new ObjectOutputStream(byteArrayOutputStream)){
             objectOutputStream.writeObject(scheduleTaskMessage);
+            return byteArrayOutputStream.toByteArray();
         }catch (Exception e){
             throw new RuntimeException(e);
         }
-        return null;
     }
     
     public ScheduleTaskMessage getScheduleTaskMessage(byte[] messageBody){

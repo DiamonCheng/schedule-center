@@ -12,11 +12,10 @@
 			<column header="Id" field="id" width="10%" sortable="true" hidden="false"/>
 			<column header="任务编码" field="taskCode" width="10%" sortable="true" hidden="false"/>
 			<column header="任务名称" field="taskName" sortable="true" hidden="false"/>
+			<column header="任务标签" field="taskTag " sortable="true" hidden="false"/>
 			<column header="任务执行周期" field="taskCron" sortable="true" hidden="false"/>
 			<column header="执行次数" field="execNum" sortable="true" hidden="false"/>
 			<column header="状态" field="status" sortable="true" hidden="false"/>
-			<column header="创建时间" field="createDateTime" sortable="true" hidden="false"/>
-			<column header="更新时间" field="updateDateTime" sortable="true" hidden="false"/>
 		</columns>
 		<searchDefinition>
 			<condition field="taskCode" operator="LIKE" displayText="任务编码" inputType="TEXT"/>

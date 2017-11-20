@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+  
+<Configuration status="OFF" monitorInterval="1800">  
+  
+    <Appenders>  
+        <Console name="console" target="SYSTEM_OUT">  
+        	<ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d %-5p [%t] (%F:%L) - %m%n" />
+        </Console>  
+    </Appenders>
+  
+    <Loggers>  
+        <!-- 3rdparty Loggers -->  
+        <logger name="org.springframework.core" level="info">  
+        </logger>  
+        <logger name="org.springframework.beans" level="info">  
+        </logger>  
+        <logger name="org.springframework.context" level="info">  
+        </logger>  
+       <!-- <logger name="org.springframework.web" level="info">
+        </logger>  -->
+        <logger name="RocketmqRemoting" level="warn" />
+        <logger name="RocketmqClient" level="warn" />
+
+     <!--    <logger name="com.meituan.gct.shop.promo" level="error" includeLocation="true" additivity="false">  
+            <appender-ref ref="ErrorLog"/>  
+            <appender-ref ref="Console"/>  
+        </logger>   -->
+  
+        <root level="info" includeLocation="true">
+            <appender-ref ref="console" />  
+        </root>
+    </Loggers>  
+</Configuration> 

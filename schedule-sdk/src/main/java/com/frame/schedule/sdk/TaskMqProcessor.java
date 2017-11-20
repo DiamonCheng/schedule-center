@@ -57,9 +57,9 @@ public class TaskMqProcessor {
             for (String tag:tagListenerMap.keySet()){
                 sb.append(tag).append("||");
             }
-            sb.substring(0,sb.length()-1);
+            String tags=sb.substring(0,sb.length()-2);
             Map<String,String> subscription=new HashMap<>();
-            subscription.put(startTaskTopic,sb.toString());
+            subscription.put(startTaskTopic,tags);
             consumer.setSubscription(subscription);
             if (defaultMessageListener==null){
                 defaultMessageListener=new DefaultMessageListener();

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="gson" class="com.frame.core.components.GsonFactory" factory-method="buildDefaultGson"/>
+
+    <bean class="com.dc.frame.schedule.test.sdk.TaskExcutor" id="taskExecutor"/>
+    <bean class="com.frame.schedule.sdk.listener.DefaultScheduleListener" id="scheduleListener1">
+        <constructor-arg ref="taskExecutor"/>
+        <constructor-arg value="execute1"/>
+        <property name="gson" ref="gson"/>
+    </bean>
+    <bean class="com.frame.schedule.sdk.TaskMqProcessor">
+        <property name="producerGroup" value="testProducerGroup"/>
+        <property name="consumerGroup" value="testConsumerGroup"/>
+        <property name="nameServAddr" value="localhost:9876"/>
+        <property name="tagListenerMap">
+            <map>
+                <entry key="test" value-ref="scheduleListener1"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>

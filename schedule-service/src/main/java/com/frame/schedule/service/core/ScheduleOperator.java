@@ -51,11 +51,11 @@ public class ScheduleOperator {
             // 按新的trigger重新设置job执行  
             scheduler.rescheduleJob(triggerKey, trigger); 
         }
-        if(schedule.isPaused()){
-            JobKey jobKey = JobKey.jobKey(schedule.getKey(), schedule.getGroup());
-            scheduler.pauseJob(jobKey);
-        }
-     
+//        if(schedule.isPaused()){
+//            JobKey jobKey = JobKey.jobKey(schedule.getKey(), schedule.getGroup());
+//            scheduler.pauseJob(jobKey);
+//        }
+    
     }
     
     /** 
